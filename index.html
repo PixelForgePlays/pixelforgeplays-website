@@ -3,31 +3,61 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pixel Forge Plays - Waitlist</title>
+  <title>Pixel Forge Plays • Waitlist</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-zinc-950 text-white">
-  <div class="max-w-2xl mx-auto px-6 py-16">
-    <h1 class="text-4xl font-bold mb-4">Pixel Forge Plays</h1>
-    <p class="text-xl text-zinc-400 mb-8">No bullshit. Fully transparent. Verified CLV.</p>
+  <div class="max-w-xl mx-auto px-6 py-16">
+    
+    <!-- Header -->
+    <div class="text-center mb-10">
+      <h1 class="text-4xl font-bold tracking-tight">Pixel Forge Plays</h1>
+      <p class="text-xl text-zinc-400 mt-3">No bullshit. Fully transparent. Verified CLV.</p>
+    </div>
 
-    <div class="bg-zinc-900 p-8 rounded-2xl">
+    <!-- Form -->
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
       <h2 class="text-2xl font-semibold mb-6">Join the Waitlist</h2>
       
-      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-4">
-        <input type="email" name="email" placeholder="Your email" required 
-               class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3">
+      <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5">
         
-        <button type="submit" 
-                class="w-full bg-white text-black font-semibold py-3 rounded-lg hover:bg-zinc-200 transition">
+        <!-- Email -->
+        <div>
+          <input type="email" name="email" placeholder="Your email address" required
+                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500">
+        </div>
+
+        <!-- Sport Preference -->
+        <div>
+          <label class="block text-sm text-zinc-400 mb-2">Which sport interests you most?</label>
+          <select name="sport" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white">
+            <option value="">Select one (optional)</option>
+            <option value="MLB">MLB</option>
+            <option value="Tennis">Tennis</option>
+            <option value="Both">Both</option>
+          </select>
+        </div>
+
+        <!-- Why Joining -->
+        <div>
+          <label class="block text-sm text-zinc-400 mb-2">Why are you joining? (optional)</label>
+          <textarea name="why" rows="3" placeholder="What are you hoping to get from Pixel Forge Plays?"
+                    class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500"></textarea>
+        </div>
+
+        <button type="submit"
+                class="w-full bg-white hover:bg-zinc-200 transition text-black font-semibold py-3 rounded-lg mt-2">
           Join Waitlist
         </button>
       </form>
     </div>
 
-    <p class="text-center text-zinc-500 mt-8 text-sm">
-      Launching September 2026
-    </p>
+    <!-- Footer Info -->
+    <div class="text-center mt-8 text-sm text-zinc-500">
+      Launching September 2026<br>
+      <span class="text-zinc-400">Every pick posted. Every result tracked.</span>
+    </div>
+
   </div>
 </body>
 </html>
