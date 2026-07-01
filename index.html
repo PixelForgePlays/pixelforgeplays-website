@@ -15,21 +15,22 @@
       <p class="text-xl text-zinc-400 mt-3">No bullshit. Fully transparent. Verified CLV.</p>
     </div>
 
-    <!-- Form -->
-    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8">
-      <h2 class="text-2xl font-semibold mb-6">Join the Waitlist</h2>
+    <!-- Form Card -->
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 mb-8">
+      <div class="flex items-center justify-between mb-6">
+        <h2 class="text-2xl font-semibold">Join the Waitlist</h2>
+        <span class="text-sm bg-zinc-800 px-3 py-1 rounded-full text-zinc-400">187 joined</span>
+      </div>
       
       <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" class="space-y-5">
         
         <!-- Email -->
-        <div>
-          <input type="email" name="email" placeholder="Your email address" required
-                 class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500">
-        </div>
+        <input type="email" name="email" placeholder="Your email address" required
+               class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500">
 
         <!-- Sport Preference -->
         <div>
-          <label class="block text-sm text-zinc-400 mb-2">Which sport interests you most?</label>
+          <label class="block text-sm text-zinc-400 mb-1.5">Which sport interests you most?</label>
           <select name="sport" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white">
             <option value="">Select one (optional)</option>
             <option value="MLB">MLB</option>
@@ -40,8 +41,8 @@
 
         <!-- Why Joining -->
         <div>
-          <label class="block text-sm text-zinc-400 mb-2">Why are you joining? (optional)</label>
-          <textarea name="why" rows="3" placeholder="What are you hoping to get from Pixel Forge Plays?"
+          <label class="block text-sm text-zinc-400 mb-1.5">Why are you joining? (optional)</label>
+          <textarea name="why" rows="3" placeholder="What are you hoping to get from this?"
                     class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 focus:outline-none focus:border-purple-500"></textarea>
         </div>
 
@@ -52,8 +53,18 @@
       </form>
     </div>
 
-    <!-- Footer Info -->
-    <div class="text-center mt-8 text-sm text-zinc-500">
+    <!-- Discord Section -->
+    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 text-center">
+      <h3 class="font-semibold mb-2">Join the early community</h3>
+      <p class="text-zinc-400 text-sm mb-4">Discord access coming soon for waitlist members</p>
+      <button disabled 
+              class="bg-zinc-800 text-zinc-400 px-6 py-2 rounded-lg text-sm cursor-not-allowed">
+        Coming Soon
+      </button>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-10 text-sm text-zinc-500">
       Launching September 2026<br>
       <span class="text-zinc-400">Every pick posted. Every result tracked.</span>
     </div>
