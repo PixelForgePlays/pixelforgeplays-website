@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Standard — Pixel Forge Plays</title>
+  <meta property="og:title" content="The Standard — Pixel Forge Plays">
+  <meta property="og:description" content="How Pixel Forge Plays decides which betting models are worth paying for, and what happens to the ones that are not. Published before any model races against it.">
+  <meta property="og:url" content="https://www.pixelforgeplays.com/standard.html">
+  <meta property="og:image" content="https://pixelforgeplays.github.io/pixel-forge/assets/WebsiteImage.png">
+  <meta property="og:type" content="article">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="The Standard — Pixel Forge Plays">
+  <meta name="twitter:site" content="@PixelForgePlays">
+  <meta name="twitter:description" content="How Pixel Forge Plays decides which betting models are worth paying for, and what happens to the ones that are not.">
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-zinc-950 text-white">
+  <div class="max-w-3xl mx-auto px-6 py-16">
+    <a href="/" class="text-sm text-zinc-400 hover:text-white">&larr; Back to waitlist</a>
+
+    <h1 class="text-3xl sm:text-4xl font-bold tracking-tight text-white mb-6">The Standard</h1>
+    <p class="text-zinc-300 leading-relaxed mb-4">This page explains how Pixel Forge Plays decides which betting models are worth paying for, and what happens to the ones that are not.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The standard below is published before any model races against it, and it does not change during a race. Models move against the standard constantly. The standard itself does not move.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>This page lives in a public repository and its full edit history is linked at the bottom.</strong> If we ever changed a number in the middle of a race, the commit log would show it, with the date. You do not have to take our word for any of this.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">What this is</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">Pixel Forge Plays is a public lab. We build betting models, run them in the open, and score every one of them against a standard we wrote down in advance.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We do not know yet whether we have an edge. That is the honest answer, and it is the reason the lab exists rather than a sales page.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Watching is free and always will be. The only thing we sell is the picks of a model that has cleared the standard below.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">Ponds</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">A pond is one sport and one market. MLB totals is a pond. MLB moneyline is a different pond. A model that prices run totals is not competing with a model that prices who wins, so they do not race each other.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Every pond carries the identical standard. We do not lower the bar for a quiet market.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Most ponds are empty, and empty is the expected state rather than a stage on the way somewhere.</strong> The standard is deliberately hard to clear. If it were easy, clearing it would not tell you anything. A pond that sits empty for an entire season is the system working, not the system stalling.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">The entry gate</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">A model enters a pond by clearing four conditions at once. Falling short on any one of them is not clearing.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>1. Sample.</strong> At least 100 decided picks.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>2. Beat the close on average.</strong> Mean closing line value of at least +1.5 points.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>3. Beat the close often.</strong> At least 55% of picks priced better than the closing line.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>4. Spread across time.</strong> At least 30 distinct days. A model cannot qualify on three hot afternoons.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The fourth condition exists because picks made on the same day are not independent evidence. Twenty picks on one slate tell you far less than twenty picks across twenty days, and a standard that ignored this would be easy to game by accident.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">How we measure the close</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">This is the part everything else rests on, so here is exactly what we do, including the parts that are imperfect.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The published price.</strong> When a pick goes out we record the price we published it at. That is the best number we could find across the books we track, which includes DraftKings, FanDuel, BetMGM, BetRivers, PointsBet, William Hill and Unibet. It is a price you could have taken at that moment.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The close.</strong> We then try to record the price again within 90 minutes of first pitch. The 90 minute window matters: a price taken four hours out is not a closing line, it is just an earlier price.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The two are not always from the same book.</strong> Our closing prices come from DraftKings and FanDuel, because those are the closes we can obtain reliably. If a pick was published at the best price across a wider set of books, the comparison is between that price and a DraftKings or FanDuel close. We are telling you this rather than presenting one clean number, because the difference is real and you should know it is there.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>We do not always succeed.</strong> Some picks never get a close recorded at all. So we publish our capture rate, which is the share of picks where we successfully recorded one. That number is the foundation under every other number on this page. A grading system whose measurement is invisible would be the exact thing this page exists to refuse, and the capture rate is how you check ours.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Our capture rate is not good enough yet.</strong> At the time of writing it sits around a third. We are publishing it anyway, and publishing the rule below that suspends a model when it drops, because a number you only show when it flatters you is not a measurement.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">Why the field size matters</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">Race enough models and one of them clears any bar by luck alone. That is arithmetic, not cynicism.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">So the size of the field is fixed and published before a season starts, and the bar is set with that number already accounted for. A larger field means a higher bar for everyone in it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>No model may enter after the season has started.</strong> A model that appears in week three races next season. Letting one in mid-race would make the published bar a fiction, and we would rather lose a good model for a quarter than publish a number that is not true.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">Staying in</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">Clearing the gate is not permanent. A model in a pond is re-evaluated every 50 decided picks against a standing condition: rolling closing line value must stay positive.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A model that fails the standing condition is evicted from the pond. We stop selling it that day.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Eviction is not hidden. We post it, with the numbers that caused it, and the model goes on a public list that only ever grows.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Suspension and eviction are the standard being applied, not the standard being changed. The rules stay put. Models move against them.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">When our own measurement breaks</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">If we fail to capture a closing price for more than 10% of a model's picks in an evaluation window, we suspend that model until the measurement is fixed.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">This rule is aimed at us, not at the model. A model cannot be graded on picks we failed to measure, and a standard that quietly scored the ones that happened to work would be worthless.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We would rather suspend a model that might be fine than publish a number built on the picks that were easy to check.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">What is a rule and what is a machine</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">Every rule above is a rule we hold ourselves to. <strong>Most of them are not yet automated.</strong> There is no piece of software that admits a model to a pond, counts down to the next evaluation, or evicts anything on its own. We do that, on the schedule written here, using the numbers published on the dashboard.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We are telling you this because the alternative is implying a machine that does not exist, and you would eventually find out.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">What makes the rules checkable is not automation. It is that the inputs are public. Every pick, every price, every close and the capture rate are on the dashboard. If we ever quietly skipped an evaluation or kept selling a model that should have been evicted, the published numbers would not match the published rules, and anyone could see it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">As pieces get automated we will say so here, and the commit log will show when.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">What closing line value is</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">When we publish a pick, we record the price. When the game starts, we record where that price ended up.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">If we published a team at +150 and it closed at +120, we got a better number than the market settled on. That is positive closing line value, and it is true whether the bet won or lost.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We grade models on this rather than on win rate because win rate on its own means nothing. A team at -300 is supposed to win 75% of the time. Going 7-3 on heavy favorites is not skill, it is arithmetic working normally.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">What closing line value is not</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">It is not a promise that you make money.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A model can beat the close for a month and still lose money that month. Over a long enough run those two things converge, but "long enough" is longer than most people expect, and anyone who tells you otherwise is selling something.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Clearing this standard is a statement about process, not about outcome.</strong> It says a model has been pricing games better than the market settled on. It does not say its next ten picks win, and we will not present it as though it does.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">It is also not one number. We publish the price we recorded when a pick was posted, which is the price you could have taken at that moment. It is not the price you get if you act three hours later.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We report both, and we do not average away the difference.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">What we score</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Every evaluation a model makes at or above the pond's edge threshold, once the game is decided.</strong> That includes picks we published and picks we scored but never published.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Our models evaluate far more games than they publish. All of them are logged in advance, timestamped, and scored against the same closes.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">This is stricter than scoring only the published picks, not looser. If we graded ourselves solely on what we chose to publish, we would be grading ourselves on a set we selected. Scoring the unpublished ones too makes that impossible.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">One condition applies only to published picks: the price a subscriber could actually have taken. Unpublished evaluations have no subscriber price, so that condition is measured only where it means something.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">There is exactly one rule that removes a pick from scoring, and it is the next section. There are no others, and we will not add one mid-season.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">The one rule that removes picks</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">When a model's edge on a game comes mainly from a large starting pitcher mismatch, we do not publish that pick and it does not count toward a gate.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We measured that slice before writing this rule. Twenty-three decided picks at roughly minus 43 percent, against roughly plus 3.5 percent for everything else at the same edge threshold, on a higher average edge. The model's most confident pattern is also its worst one.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We would rather say that in public than quietly let it into a paid pond.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Two things about how this rule is applied.</strong> It is applied by what is recorded on the pick, not by what we meant at the time. Picks published before this rule existed stay in the scoring set. Eighteen picks are in that category. We published them, and a pick cannot be unpublished.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">And the rule is frozen for the season. If we ever change what it excludes, that starts a new season rather than restating an old one. Otherwise the denominator moves under the numbers, and the commit log at the bottom of this page would be worth nothing.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">A note on the order we did this in</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">We decided what counts toward a gate before we measured how well we capture closing lines on that set.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The definition we settled on produces a better capture number than the narrower one we had been using, roughly a third rather than roughly a quarter. We are telling you the order because otherwise it looks like we picked the definition that flattered us.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The commit log for this page shows when each was written. That is the point of publishing it here rather than announcing it later.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">What we do not claim</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">We do not claim our models win.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We do not claim past results predict future ones.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We do not delete anything. Losing picks stay up. Bad months stay up. Our first model lost money over four months and that record is frozen and public.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">When we get something wrong in our own numbers, we post the correction rather than quietly fixing it.</p>
+    <hr class="border-zinc-800 my-10">
+    <h2 class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4">Season 1</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">Season 1 races in one pond: MLB totals.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">MLB moneyline is shown and stays empty. An empty pond is not a gap in the display. It is what the standard looks like when nothing has cleared it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The field is announced on opening day. The gate numbers above are the numbers that field races against.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The first verdict will take months, not weeks. The standard requires a real sample spread across real time, and there is no honest way to shorten that. It is entirely possible that nothing clears in Season 1. That outcome would be a result, and we would publish it the same way we would publish a success.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The eviction list ships empty. It will not stay that way forever.</p>
+    <hr class="border-zinc-800 my-10">
+    <p class="text-zinc-500 text-sm mt-10"><em>Standard last changed: August 11, 2026. Full history: <a href="https://github.com/PixelForgePlays/pixelforgeplays-website/commits/main/standard.html" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">commit log</a>.</em></p>
+    <p class="text-zinc-500 text-sm mt-4">Gamble responsibly. 21+. 1-800-GAMBLER, ncpgambling.org</p>
+
+  </div>
+</body>
+</html>
