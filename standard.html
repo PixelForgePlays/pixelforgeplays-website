@@ -17,6 +17,13 @@
 </head>
 <body class="bg-zinc-950 text-white">
   <div id="top" class="max-w-3xl mx-auto px-6 py-16">
+    <nav aria-label="Pixel Forge Plays sites" class="flex justify-between sm:justify-start sm:gap-7 font-mono text-xs uppercase tracking-wider text-zinc-400 whitespace-nowrap border-b border-zinc-800 pb-3 mb-8">
+      <a href="https://www.pixelforgeplays.com/" class="hover:text-white">Home</a>
+      <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html" class="hover:text-white">Lab</a>
+      <a href="https://pixelforgeplays.github.io/pfp-tools/rules/" class="hover:text-white">Rules</a>
+      <a href="https://pixelforgeplays.github.io/pfp-tools/" class="hover:text-white">Tools</a>
+      <a href="https://www.pixelforgeplays.com/standard.html" class="text-white" aria-current="page">Standard</a>
+    </nav>
     <p class="text-sm text-zinc-400 mb-6"><a href="/" class="hover:text-white">&larr; Waitlist</a>
       &middot; <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#race" class="hover:text-white">The race</a>
       &middot; <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#receipts" class="hover:text-white">Every pick</a>
@@ -30,7 +37,7 @@
         <li>We grade on closing line value: did the price we recorded beat the price the market closed at. Not on wins.</li>
         <li>To enter a paid pond a model needs all four: 100 decided picks, each with a verified closing price. Mean closing line value of at least +1.5 points. At least 55% of moved picks priced better than the closing line, with ties shown beside the rate. Picks spread over at least 30 distinct days.</li>
         <li>Miss one and nothing is sold. Clear all four and a model can still be publicly evicted if it stops clearing.</li>
-        <li>Nothing has cleared. Our first model lost money, 50-50-2 at -9.7%, and that record is <a href="https://pixelforgeplays.github.io/pixel-forge/data/v6_FrozenRecord.json" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">a file you can download</a>.</li>
+        <li>Nothing has cleared. Our first model lost money, 50-50-2 at -9.7%, and that record is <a href="https://pixelforgeplays.github.io/pixel-forge/data/v6_FrozenRecord.json" class="text-zinc-400 hover:text-white underline underline-offset-2">a file you can download</a>.</li>
         <li>A lab rule can be declared into a pond with no open season. Its count starts from zero on the day it is declared.</li>
         <li>The standard does not change during a race. We do not delete anything. Watching is free and always will be.</li>
       </ul>
@@ -285,9 +292,9 @@
     <hr class="border-zinc-800 my-10">
     <h2 id="rules-and-machines" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">What is a rule and what is a machine</h2>
     <p class="text-zinc-300 leading-relaxed mb-4">Every rule above is a rule we hold ourselves to. Most of them are not yet automated.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">There is no piece of software that admits a model to a pond, counts down to the next evaluation, or evicts anything on its own. We do that, on the schedule written here, using the numbers published on <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#receipts" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">every pick</a>.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">There is no piece of software that admits a model to a pond, counts down to the next evaluation, or evicts anything on its own. We do that, on the schedule written here, using the numbers published on <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#receipts" class="text-zinc-400 hover:text-white underline underline-offset-2">every pick</a>.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We are telling you this because the alternative is implying a machine that does not exist, and you would eventually find out.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">What makes the rules checkable is not automation. It is that the inputs are public. Every pick, every price, every close and the capture rate are on <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#receipts" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">every pick</a>.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">What makes the rules checkable is not automation. It is that the inputs are public. Every pick, every price, every close and the capture rate are on <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#receipts" class="text-zinc-400 hover:text-white underline underline-offset-2">every pick</a>.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">If we ever quietly skipped an evaluation or kept selling a model that should have been evicted, the published numbers would not match the published rules, and anyone could see it.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">As pieces get automated we will say so here, and the commit log will show when.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
@@ -360,7 +367,7 @@
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Lab rule.</strong> A simple betting rule, frozen before its first game, racing in public on the dashboard.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Entry.</strong> A lab rule's recorded selection on a game. A lab entry is not a pick.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
-    <p class="text-zinc-500 text-sm mt-10"><em>Standard last changed: October 2, 2026. Full history: <a href="https://github.com/PixelForgePlays/pixelforgeplays-website/commits/main/standard.html" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">commit log</a>. Shadow ledger: <a href="https://pixelforgeplays.github.io/pixel-forge/data/shadow-ledger.json" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">shadow-ledger.json</a>. Correction, Sep 22, 2026: <a href="https://pixelforgeplays.github.io/pixel-forge/docs/2026-09-22-close-validity-correction.md" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">closing-price correction</a>.</em></p>
+    <p class="text-zinc-500 text-sm mt-10"><em>Standard last changed: October 2, 2026. Full history: <a href="https://github.com/PixelForgePlays/pixelforgeplays-website/commits/main/standard.html" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">commit log</a>. Shadow ledger: <a href="https://pixelforgeplays.github.io/pixel-forge/data/shadow-ledger.json" class="text-zinc-400 hover:text-white underline underline-offset-2">shadow-ledger.json</a>. Correction, Sep 22, 2026: <a href="https://pixelforgeplays.github.io/pixel-forge/docs/2026-09-22-close-validity-correction.md" class="text-zinc-400 hover:text-white underline underline-offset-2">closing-price correction</a>.</em></p>
     <p class="text-zinc-500 text-sm mt-4">Gamble responsibly. 21+. 1-800-GAMBLER, ncpgambling.org</p>
 
   </div>
