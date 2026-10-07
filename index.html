@@ -227,41 +227,61 @@
     if (String(flag).toUpperCase() === 'UNDECIDED') return 'Not decided yet';
     return String(flag);
   }
-  function fmtEastern(iso) {
+  function fmtClock(iso, options) {
     var d = new Date(iso);
     if (isNaN(d.getTime())) return null;
     try {
-      return new Intl.DateTimeFormat('en-US', {
-        timeZone: 'America/New_York',
-        month: 'short',
-        day: 'numeric',
-        year: 'numeric',
-        hour: 'numeric',
-        minute: '2-digit',
-        hour12: true,
-        timeZoneName: 'short'
-      }).format(d);
+      if (typeof Intl === 'undefined' || typeof Intl.DateTimeFormat !== 'function') return null;
+      var text = new Intl.DateTimeFormat('en-US', options).format(d);
+      if (!text || text.indexOf('Invalid') !== -1) return null;
+      return text;
     } catch (e) { return null; }
   }
-  function n5Rule(lab) {
-    var ponds = Array.isArray(lab.ponds) ? lab.ponds : [];
-    for (var i = 0; i < ponds.length; i++) {
-      var rules = Array.isArray(ponds[i].rules) ? ponds[i].rules : [];
+  function fmtEastern(iso) {
+    return fmtClock(iso, {
+      timeZone: 'America/New_York',
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+      timeZoneName: 'short'
+    });
+  }
+  function fmtViewer(iso) {
+    return fmtClock(iso, {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+      timeZoneName: 'short'
+    });
+  }
+  function standardRacingRules(lab) {
+    if (!lab || !Array.isArray(lab.ponds)) return null;
+    var out = [];
+    for (var i = 0; i < lab.ponds.length; i++) {
+      var pond = lab.ponds[i];
+      if (!pond || pond.seasonState !== 'racing') continue;
+      var rules = Array.isArray(pond.rules) ? pond.rules : [];
       for (var j = 0; j < rules.length; j++) {
-        var r = rules[j];
-        if (!r) continue;
-        if (r.id === 'nhl_n5_overnight_move') return r;
-        if (/^N5\b/.test(String(r.name || ''))) return r;
+        var rule = rules[j];
+        if (!rule || rule.status !== 'racing') continue;
+        out.push(rule);
       }
     }
-    return null;
+    return out;
   }
   function fill(lab) {
     var t = Date.parse(lab && lab.generatedUtc || '');
     if (isNaN(t) || ((Date.now() - t) / 36e5) > 24) return false;
     var horses = laneHorses(lab);
     if (!horses) return false;
-    var asof = fmtEastern(lab.generatedUtc);
+    var asof = fmtViewer(lab.generatedUtc);
+    if (!asof) asof = fmtEastern(lab.generatedUtc);
     if (!asof) return false;
     var ruleCount = horses.length;
     var picks = sumNum(horses, 'entries');
@@ -276,19 +296,24 @@
       beatEl.textContent = fmtInt(beatN) + ' of ' + fmtInt(beatOf);
       beatPctEl.textContent = ((beatN / beatOf) * 100).toFixed(1) + '%';
     }
-    var rule = n5Rule(lab);
-    if (!rule || !has(rule.entries) || !isFinite(Number(rule.entries))) {
+    var racing = standardRacingRules(lab);
+    if (!racing) {
       n5El.textContent = '--';
       n5DetailEl.textContent = '--';
       n5StatusEl.textContent = '--';
     } else {
-      var n = Number(rule.entries);
-      var short = 'N5';
-      var cut = String(rule.name || '').split(' - ')[0];
-      if (cut && cut.length <= 8) short = cut;
-      n5El.textContent = short + ': ' + fmtInt(n);
-      n5DetailEl.textContent = (n === 1 ? 'entry' : 'entries') + ' so far';
-      n5StatusEl.textContent = plainStatus(rule.waterLevel);
+      var k = racing.length;
+      n5El.textContent = fmtInt(k) + ' ' + (k === 1 ? 'rule' : 'rules');
+      var posted = sumNum(racing, 'entries');
+      n5DetailEl.textContent = posted === null ? '--' : (fmtInt(posted) + ' ' + (posted === 1 ? 'pick' : 'picks') + ' so far');
+      var verdict = '--';
+      if (k > 0) {
+        verdict = plainStatus(racing[0].waterLevel);
+        for (var ri = 1; ri < racing.length; ri++) {
+          if (plainStatus(racing[ri].waterLevel) !== verdict) { verdict = '--'; break; }
+        }
+      }
+      n5StatusEl.textContent = verdict;
     }
     asofEl.textContent = 'As of ' + asof;
     return true;
