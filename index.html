@@ -7,19 +7,26 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-title" content="PFP">
-  <title>Pixel Forge Plays — betting models tested in public</title>
-  <meta property="og:title" content="Pixel Forge Plays — betting models tested in public">
+  <title>Pixel Forge Plays: betting rules, tested in public</title>
+  <meta property="og:title" content="Pixel Forge Plays: betting rules, tested in public">
   <meta property="og:description" content="We don't know yet whether we have an edge. We're finding out in public. Every pick posted before the game. Every result tracked.">
   <meta property="og:url" content="https://www.pixelforgeplays.com/">
   <meta property="og:image" content="https://pixelforgeplays.github.io/pixel-forge/assets/og-card.png">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pixel Forge Plays — betting models tested in public">
+  <meta name="twitter:title" content="Pixel Forge Plays: betting rules, tested in public">
   <meta name="twitter:site" content="@PixelForgePlays">
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .pfp-glow{background:radial-gradient(60% 50% at 50% 0%,rgba(139,61,255,.28),transparent 70%)}
+    .pfp-btn{display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 1.25rem;border-radius:.75rem;font-weight:700;text-align:center;transition:background .15s}
+    .pfp-card{display:block;min-height:44px;background:#16141f;border:1px solid #27243a;border-radius:1rem;padding:1rem 1.25rem;transition:border-color .15s}
+    .pfp-card:hover{border-color:#8B3DFF}
+  </style>
 </head>
-<body class="bg-zinc-950 text-white">
-  <div class="max-w-xl mx-auto px-6 py-16">
+<body class="text-white" style="background:#0B0A10">
+  <div class="pfp-glow">
+  <div class="max-w-xl mx-auto px-5 pt-10 pb-16">
     <nav aria-label="Pixel Forge Plays sites" class="flex justify-between sm:justify-start sm:gap-7 font-mono text-xs uppercase tracking-wider text-zinc-400 whitespace-nowrap border-b border-zinc-800 pb-3 mb-8">
       <a href="https://www.pixelforgeplays.com/" class="text-white" aria-current="page">Home</a>
       <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html" class="hover:text-white">Lab</a>
@@ -27,22 +34,46 @@
       <a href="https://pixelforgeplays.github.io/pfp-tools/" class="hover:text-white">Tools</a>
       <a href="https://www.pixelforgeplays.com/standard.html" class="hover:text-white">Standard</a>
     </nav>
-    
-    <!-- Header -->
-    <div class="text-center mb-10">
-      <h1 class="text-4xl font-bold tracking-tight">Pixel Forge Plays</h1>
-      <p class="text-xl text-zinc-400 mt-3">We don't know yet whether we have an edge. We're finding out in public.</p>
-      <p class="text-xl text-zinc-400 mt-3">Every pick posted before the game. Every result tracked.</p>
-      <p class="text-xl text-zinc-400 mt-3"><a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#race" class="text-zinc-400 hover:text-white underline underline-offset-2">The race</a> — Season 1 field, live</p>
-      <p class="text-xl text-zinc-400 mt-3"><a href="standard.html" class="text-zinc-400 hover:text-white underline underline-offset-2">The Standard</a> — the rules we published before we needed them</p>
-      <p class="text-xl text-zinc-400 mt-3"><a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#receipts" class="text-zinc-400 hover:text-white underline underline-offset-2">Every pick</a> — every result, posted before the game</p>
-      <p class="text-xl text-zinc-400 mt-3"><a href="https://pixelforgeplays.github.io/pixel-forge/how-this-started.html" class="text-zinc-400 hover:text-white underline underline-offset-2">How this started</a></p>
-    </div>
+
+    <!-- Hero -->
+    <header class="text-center mt-6 mb-14">
+      <img src="/apple-touch-icon.png" width="96" height="96" alt="Pixel Forge Plays" class="mx-auto rounded-2xl">
+      <h1 class="mt-6 text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.02]">Betting rules, <span style="color:#A8E008">tested</span> <span style="color:#8B3DFF">in public.</span></h1>
+      <p class="mt-5 text-lg text-zinc-300">Every pick is posted before the game and graded against the closing line. We don't know yet if we have an edge. You'll see either way.</p>
+      <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
+        <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#race" class="pfp-btn text-black" style="background:#A8E008">See the live race</a>
+        <a href="#lab-notes" class="pfp-btn border border-zinc-600 text-white hover:bg-zinc-800">Get the lab notes</a>
+      </div>
+    </header>
+
+    <!-- Hook -->
+    <p class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-center mb-14">We don't grade ourselves. <span style="color:#8B3DFF">The closing line does.</span></p>
+
+    <!-- How it works -->
+    <section class="mb-14" aria-labelledby="how">
+      <h2 id="how" class="font-mono text-xs uppercase tracking-wider text-zinc-400 mb-4">How it works</h2>
+      <ol class="space-y-3">
+        <li class="pfp-card"><span class="font-bold" style="color:#A8E008">1. Lock the rule.</span> <span class="text-zinc-300">Each rule is frozen before its first game.</span></li>
+        <li class="pfp-card"><span class="font-bold" style="color:#A8E008">2. Post every pick.</span> <span class="text-zinc-300">Before the game, losses included.</span></li>
+        <li class="pfp-card"><span class="font-bold" style="color:#A8E008">3. Let the close decide.</span> <span class="text-zinc-300">A rule is only sold if it beats the closing line, by a bar we published first.</span></li>
+      </ol>
+    </section>
+
+    <!-- Links -->
+    <section class="mb-14" aria-label="Explore">
+      <div class="grid gap-3">
+        <a class="pfp-card" href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#race"><span class="font-semibold">The race: Season 1, live</span></a>
+        <a class="pfp-card" href="standard.html"><span class="font-semibold">The Standard: the bar we published before we needed it</span></a>
+        <a class="pfp-card" href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#receipts"><span class="font-semibold">Every pick: every result, posted before the game</span></a>
+        <a class="pfp-card" href="https://pixelforgeplays.github.io/pixel-forge/how-this-started.html"><span class="font-semibold">How this started</span></a>
+      </div>
+    </section>
 
     <!-- Form -->
-    <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-8 mb-8">
-      <h2 class="text-2xl font-semibold mb-6">Join the Waitlist</h2>
-      
+    <div id="lab-notes" class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 mb-8 scroll-mt-6" style="border-top:3px solid #8B3DFF">
+      <h2 class="text-2xl font-bold mb-2">Get the lab notes</h2>
+      <p class="text-zinc-300 mb-6">Short notes when something changes, and first in line if a rule ever clears the bar. No spam.</p>
+
       <form action="https://formspree.io/f/xgojneno" method="POST" class="space-y-5">
         
         <!-- Email -->
@@ -74,20 +105,21 @@
 
         <button type="submit"
                 class="w-full bg-white hover:bg-zinc-200 transition text-black font-semibold py-3 rounded-lg mt-2">
-          Join Waitlist
+          Get the lab notes
         </button>
       </form>
     </div>
 
     <!-- Discord Section -->
     <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 text-center">
-      <h3 class="font-semibold mb-2">Join the early community</h3>
-      <p class="text-zinc-400 text-sm mb-4">The Discord is open now — no waitlist required.</p>
+      <h3 class="font-semibold mb-2">The Discord is open now. No waitlist needed.</h3>
       <a href="https://discord.gg/MXnsWJQVCA" target="_blank" rel="noopener"
-         class="inline-block bg-zinc-800 hover:bg-zinc-700 transition text-white px-6 py-2 rounded-lg text-sm">
+         class="inline-flex items-center justify-center min-h-[44px] mt-2 bg-zinc-800 hover:bg-zinc-700 transition text-white px-6 rounded-lg text-sm">
         Join the Discord
       </a>
     </div>
+
+    <p class="text-center text-sm text-zinc-400 mt-8">Run by Casey in Denver, CO.</p>
 
     <!-- Footer -->
     <div class="text-center mt-10 text-sm text-zinc-500">
@@ -97,6 +129,7 @@
       <a href="privacy.html" class="text-zinc-400 hover:text-white underline underline-offset-2 mt-2 inline-block">Privacy Policy</a>
     </div>
 
+  </div>
   </div>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cc8971f3f9114b059946b39b5b3bf605"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
