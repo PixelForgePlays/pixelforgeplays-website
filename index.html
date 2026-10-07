@@ -26,6 +26,16 @@
     .pfp-btn{display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 1.25rem;border-radius:.75rem;font-weight:700;text-align:center;transition:background .15s}
     .pfp-card{display:block;min-height:44px;background:#16141f;border:1px solid #27243a;border-radius:1rem;padding:1rem 1.25rem;transition:border-color .15s}
     .pfp-card:hover{border-color:#8B3DFF}
+    .live-lab-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem;margin-top:1rem}
+    .live-tile{min-width:0;background:#16141f;border:1px solid #27243a;border-radius:1rem;padding:.75rem .8rem}
+    .live-k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#a1a1aa}
+    .live-v{margin-top:.4rem;font-size:1.2rem;font-weight:800;line-height:1.2;color:#A8E008;overflow-wrap:break-word}
+    .live-s{margin-top:.25rem;font-size:.8rem;line-height:1.3;color:#a1a1aa;overflow-wrap:break-word}
+    @media (min-width:640px){
+      .live-lab-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
+      .live-k{font-size:.62rem}
+      .live-v{font-size:1rem}
+    }
   </style>
 </head>
 <body class="text-white" style="background:#0B0A10">
@@ -48,6 +58,31 @@
         <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#race" class="pfp-btn text-black" style="background:#A8E008">See the live race</a>
         <a href="#lab-notes" class="pfp-btn border border-zinc-600 text-white hover:bg-zinc-800">Get the lab notes</a>
       </div>
+      <section id="live-lab" class="mt-8 text-left" hidden aria-label="Live from the lab">
+        <p class="font-mono text-xs uppercase tracking-wider text-zinc-400">Live from the lab</p>
+        <p id="live-asof" class="mt-1 text-sm text-zinc-500"></p>
+        <div class="live-lab-grid">
+          <div class="live-tile">
+            <p class="live-k">Rules racing</p>
+            <p id="live-rules" class="live-v">--</p>
+          </div>
+          <div class="live-tile">
+            <p class="live-k">Picks posted</p>
+            <p id="live-picks" class="live-v">--</p>
+          </div>
+          <div class="live-tile">
+            <p class="live-k">Beat the close</p>
+            <p id="live-beat" class="live-v">--</p>
+            <p id="live-beat-pct" class="live-s">--</p>
+          </div>
+          <div class="live-tile">
+            <p class="live-k">Racing for the Standard</p>
+            <p id="live-n5" class="live-v">--</p>
+            <p id="live-n5-detail" class="live-s">--</p>
+            <p id="live-n5-status" class="live-s">--</p>
+          </div>
+        </div>
+      </section>
     </header>
 
     <!-- Hook -->
@@ -138,6 +173,145 @@
 
   </div>
   </div>
+<script>
+(function () {
+  var section = document.getElementById('live-lab');
+  if (!section) return;
+  var rulesEl = document.getElementById('live-rules');
+  var picksEl = document.getElementById('live-picks');
+  var beatEl = document.getElementById('live-beat');
+  var beatPctEl = document.getElementById('live-beat-pct');
+  var n5El = document.getElementById('live-n5');
+  var n5DetailEl = document.getElementById('live-n5-detail');
+  var n5StatusEl = document.getElementById('live-n5-status');
+  var asofEl = document.getElementById('live-asof');
+
+  function has(v) { return v !== null && v !== undefined && v !== ''; }
+  function fmtInt(v) {
+    var n = Number(v);
+    if (!isFinite(n)) return '--';
+    return n.toLocaleString('en-US');
+  }
+  function sumNum(list, key) {
+    var total = 0;
+    for (var i = 0; i < list.length; i++) {
+      var v = list[i][key];
+      if (!has(v)) return null;
+      var n = Number(v);
+      if (!isFinite(n)) return null;
+      total += n;
+    }
+    return total;
+  }
+  function laneHorses(lab) {
+    if (!lab || !Array.isArray(lab.horses) || !Array.isArray(lab.fields)) return null;
+    var byId = {};
+    lab.horses.forEach(function (h) {
+      if (h && has(h.id)) byId[String(h.id)] = h;
+    });
+    var out = [];
+    var seen = {};
+    lab.fields.forEach(function (f) {
+      var ids = (f && Array.isArray(f.horses)) ? f.horses : [];
+      ids.forEach(function (id) {
+        var key = String(id);
+        if (seen[key] || !byId[key]) return;
+        seen[key] = true;
+        out.push(byId[key]);
+      });
+    });
+    return out;
+  }
+  function plainStatus(flag) {
+    if (!has(flag)) return 'Not decided yet';
+    if (String(flag).toUpperCase() === 'UNDECIDED') return 'Not decided yet';
+    return String(flag);
+  }
+  function fmtEastern(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return null;
+    try {
+      return new Intl.DateTimeFormat('en-US', {
+        timeZone: 'America/New_York',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true,
+        timeZoneName: 'short'
+      }).format(d);
+    } catch (e) { return null; }
+  }
+  function n5Rule(lab) {
+    var ponds = Array.isArray(lab.ponds) ? lab.ponds : [];
+    for (var i = 0; i < ponds.length; i++) {
+      var rules = Array.isArray(ponds[i].rules) ? ponds[i].rules : [];
+      for (var j = 0; j < rules.length; j++) {
+        var r = rules[j];
+        if (!r) continue;
+        if (r.id === 'nhl_n5_overnight_move') return r;
+        if (/^N5\b/.test(String(r.name || ''))) return r;
+      }
+    }
+    return null;
+  }
+  function fill(lab) {
+    var t = Date.parse(lab && lab.generatedUtc || '');
+    if (isNaN(t) || ((Date.now() - t) / 36e5) > 24) return false;
+    var horses = laneHorses(lab);
+    if (!horses) return false;
+    var asof = fmtEastern(lab.generatedUtc);
+    if (!asof) return false;
+    var ruleCount = horses.length;
+    var picks = sumNum(horses, 'entries');
+    var beatN = sumNum(horses, 'beatCloseN');
+    var beatOf = sumNum(horses, 'beatCloseOf');
+    rulesEl.textContent = fmtInt(ruleCount);
+    picksEl.textContent = picks === null ? '--' : fmtInt(picks);
+    if (beatN === null || beatOf === null || beatOf < 1) {
+      beatEl.textContent = '--';
+      beatPctEl.textContent = '--';
+    } else {
+      beatEl.textContent = fmtInt(beatN) + ' of ' + fmtInt(beatOf);
+      beatPctEl.textContent = ((beatN / beatOf) * 100).toFixed(1) + '%';
+    }
+    var rule = n5Rule(lab);
+    if (!rule || !has(rule.entries) || !isFinite(Number(rule.entries))) {
+      n5El.textContent = '--';
+      n5DetailEl.textContent = '--';
+      n5StatusEl.textContent = '--';
+    } else {
+      var n = Number(rule.entries);
+      var short = 'N5';
+      var cut = String(rule.name || '').split(' - ')[0];
+      if (cut && cut.length <= 8) short = cut;
+      n5El.textContent = short + ': ' + fmtInt(n);
+      n5DetailEl.textContent = (n === 1 ? 'entry' : 'entries') + ' so far';
+      n5StatusEl.textContent = plainStatus(rule.waterLevel);
+    }
+    asofEl.textContent = 'As of ' + asof;
+    return true;
+  }
+
+  var ctl = new AbortController();
+  var timer = setTimeout(function () { ctl.abort(); }, 5000);
+  fetch('https://pixelforgeplays.github.io/pixel-forge/data/lab.json', { cache: 'no-store', signal: ctl.signal })
+    .then(function (res) {
+      if (!res.ok) throw new Error('status');
+      return res.json();
+    })
+    .then(function (lab) {
+      clearTimeout(timer);
+      if (!fill(lab)) return;
+      section.hidden = false;
+    })
+    .catch(function () {
+      clearTimeout(timer);
+      section.hidden = true;
+    });
+})();
+</script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cc8971f3f9114b059946b39b5b3bf605"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>
