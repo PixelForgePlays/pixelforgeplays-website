@@ -103,10 +103,10 @@
 
     <!-- Form -->
     <div id="lab-notes" class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 mb-8 scroll-mt-6" style="border-top:3px solid #8B3DFF">
-      <h2 class="text-2xl font-bold mb-2">Get the lab notes</h2>
-      <p class="text-zinc-300 mb-6">Short notes when something changes. If a rule ever clears the bar, you're first in line at founders' pricing. Seats will be limited. No spam.</p>
+      <h2 id="lab-title" class="text-2xl font-bold mb-2">Get the lab notes</h2>
+      <p id="lab-intro" class="text-zinc-300 mb-6">Short notes when something changes. If a rule ever clears the bar, you're first in line at founders' pricing. Seats will be limited. No spam.</p>
 
-      <form action="https://formspree.io/f/xgojneno" method="POST" class="space-y-5">
+      <form id="lab-form" action="https://formspree.io/f/xgojneno" method="POST" class="space-y-5">
         
         <!-- Email -->
         <input type="email" name="email" placeholder="Your email address" required
@@ -137,7 +137,13 @@
                 class="w-full bg-white hover:bg-zinc-200 transition text-black font-semibold py-3 rounded-lg mt-2">
           Get the lab notes
         </button>
+        <p id="lab-error" class="text-sm text-zinc-300" role="alert" hidden>That didn't go through. Try again in a minute.</p>
       </form>
+      <div id="lab-thanks" hidden>
+        <h2 id="lab-thanks-title" tabindex="-1" class="text-2xl font-bold mb-2">You're in.</h2>
+        <p class="text-zinc-300 mb-6">We'll write when something changes. Until then, the race is live.</p>
+        <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#race" class="pfp-btn text-black" style="background:#A8E008">See the live race</a>
+      </div>
     </div>
 
     <!-- Links -->
@@ -333,6 +339,36 @@
       clearTimeout(timer);
       section.hidden = true;
     });
+})();
+</script>
+<script>
+(function () {
+  var form = document.getElementById('lab-form');
+  if (!form || typeof fetch !== 'function' || typeof FormData === 'undefined') return;
+  var button = form.querySelector('button[type="submit"]');
+  var errorEl = document.getElementById('lab-error');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (button.disabled) return;
+    button.disabled = true;
+    errorEl.hidden = true;
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function (res) {
+      if (!res.ok) throw new Error('status');
+      document.getElementById('lab-title').hidden = true;
+      document.getElementById('lab-intro').hidden = true;
+      form.hidden = true;
+      document.getElementById('lab-thanks').hidden = false;
+      document.getElementById('lab-thanks-title').focus();
+    }).catch(function () {
+      errorEl.hidden = false;
+    }).then(function () {
+      button.disabled = false;
+    });
+  });
 })();
 </script>
 <!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cc8971f3f9114b059946b39b5b3bf605"}'></script><!-- End Cloudflare Web Analytics -->
