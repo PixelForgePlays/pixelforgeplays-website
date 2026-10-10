@@ -8,6 +8,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-title" content="PFP">
   <title>Pixel Forge Plays: Betting rules, tested in public.</title>
+  <meta name="description" content="Betting rules, tested in public. Every pick posted before the game and graded against the closing line.">
   <meta property="og:title" content="Pixel Forge Plays: Betting rules, tested in public.">
   <meta property="og:description" content="Every pick is posted before the game and graded against the closing line. We don't know yet if we have an edge. You'll see either way.">
   <meta property="og:url" content="https://www.pixelforgeplays.com/">
@@ -65,17 +66,18 @@
         <p id="live-asof" class="mt-1 text-sm text-zinc-500"></p>
         <div class="live-lab-grid">
           <div class="live-tile">
-            <p class="live-k">Rules racing</p>
+            <p class="live-k">Rules in the lab</p>
             <p id="live-rules" class="live-v">--</p>
           </div>
           <div class="live-tile">
-            <p class="live-k">Picks posted</p>
+            <p class="live-k">Entries posted</p>
             <p id="live-picks" class="live-v">--</p>
           </div>
           <div class="live-tile">
             <p class="live-k">Beat the close</p>
             <p id="live-beat" class="live-v">--</p>
             <p id="live-beat-pct" class="live-s">--</p>
+            <p id="live-beat-tie" class="live-s">--</p>
           </div>
           <div class="live-tile">
             <p class="live-k">Racing for the Standard</p>
@@ -185,6 +187,7 @@
   var picksEl = document.getElementById('live-picks');
   var beatEl = document.getElementById('live-beat');
   var beatPctEl = document.getElementById('live-beat-pct');
+  var beatTieEl = document.getElementById('live-beat-tie');
   var n5El = document.getElementById('live-n5');
   var n5DetailEl = document.getElementById('live-n5-detail');
   var n5StatusEl = document.getElementById('live-n5-status');
@@ -290,16 +293,18 @@
     var ruleCount = horses.length;
     var picks = sumNum(horses, 'entries');
     var beatN = sumNum(horses, 'beatCloseN');
-    var beatOf = sumNum(horses, 'beatCloseOf');
+    var beatMoved = sumNum(horses, 'beatCloseMovedOf');
+    var beatTie = sumNum(horses, 'beatCloseTieN');
     rulesEl.textContent = fmtInt(ruleCount);
     picksEl.textContent = picks === null ? '--' : fmtInt(picks);
-    if (beatN === null || beatOf === null || beatOf < 1) {
+    if (beatN === null || beatMoved === null || beatMoved < 1) {
       beatEl.textContent = '--';
       beatPctEl.textContent = '--';
     } else {
-      beatEl.textContent = fmtInt(beatN) + ' of ' + fmtInt(beatOf);
-      beatPctEl.textContent = ((beatN / beatOf) * 100).toFixed(1) + '%';
+      beatEl.textContent = fmtInt(beatN) + ' of ' + fmtInt(beatMoved);
+      beatPctEl.textContent = ((beatN / beatMoved) * 100).toFixed(1) + '%';
     }
+    beatTieEl.textContent = beatTie === null ? '--' : (fmtInt(beatTie) + " didn't move");
     var racing = standardRacingRules(lab);
     if (!racing) {
       n5El.textContent = '--';
