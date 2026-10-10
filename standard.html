@@ -44,7 +44,7 @@
         <li>and pass <a href="#the-follower-test" class="text-zinc-400 hover:text-white underline underline-offset-2">the follower test</a>.</li>
         <li>Miss any of these and nothing is sold. Pass them all and a model can still be publicly evicted if it stops passing.</li>
         <li>Nothing has cleared. Our first model lost money, 50-50-2 at -9.7%, and that record is <a href="https://pixelforgeplays.github.io/pixel-forge/data/v6_FrozenRecord.json" class="text-zinc-400 hover:text-white underline underline-offset-2">a file you can download</a>.</li>
-        <li>A lab rule can be declared into a pond with no open season. Its count starts from zero on the day it is declared.</li>
+        <li>A lab rule can be declared into a pond with no open season. Its count starts from zero on the day it is declared. From October 10, 2026, a rule frozen on or after that date enters its pond at the freeze instead.</li>
         <li>The standard does not change during a race. We do not delete anything. Watching is free and always will be.</li>
       </ul>
     </section>
@@ -87,7 +87,9 @@
           <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
             <li><a href="#lab-declaration" class="text-zinc-400 hover:text-white underline underline-offset-2">Declaring a lab rule into its pond</a></li>
             <li><a href="#lab-counts" class="text-zinc-400 hover:text-white underline underline-offset-2">What counts for a lab rule</a></li>
+            <li><a href="#lab-freeze-entry" class="text-zinc-400 hover:text-white underline underline-offset-2">Change, October 10, 2026: new rules enter their pond at the freeze</a></li>
             <li><a href="#nhl-declaration" class="text-zinc-400 hover:text-white underline underline-offset-2">Declaration, October 5, 2026: N5 into the NHL moneyline pond</a></li>
+            <li><a href="#nhl-totals-declaration" class="text-zinc-400 hover:text-white underline underline-offset-2">Declaration, October 10, 2026: N2 into the NHL totals pond</a></li>
         </ul></li>
         <li><a href="#rules-and-machines" class="text-zinc-400 hover:text-white underline underline-offset-2">What is a rule and what is a machine</a></li>
         <li><a href="#what-we-do-not-claim" class="text-zinc-400 hover:text-white underline underline-offset-2">What we do not claim</a></li>
@@ -268,6 +270,7 @@
     <p class="text-zinc-300 leading-relaxed mb-4">The two models can also disagree about which side of a game to take. The second model is a recalibration of the first, so it can be less confident on the same game, and less confidence is sometimes enough to move the value from the over to the under. Where that happens, both rows appear in the shadow ledger on opposite sides of the same game.</p>
     <h3 id="season-end" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">When a season ends</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">A pond's season runs from the day that pond opens until its sport's next opening day. For MLB totals, Season 1 runs from September 5, 2026 to MLB's Opening Day in 2027.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Soccer has no single opening day: the lab's soccer rules bet across competitions whose seasons do not share a calendar. So a soccer pond's season ends one year after it opens, to the minute. Added October 10, 2026; no soccer pond has opened.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The 2026 games ended September 27. From then until Opening Day the pond is open and nothing can be decided, so the dashboard labels it 'Games over', not 'Racing'.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">A season does one job: a model may only join a pond at a season boundary.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We considered ending Season 1 with the regular season on September 27. We are not, because a twenty two day season would reopen our field three weeks after we published it, and that would make the rule we just applied to our own model cosmetic.</p>
@@ -299,11 +302,21 @@
     <p class="text-zinc-300 leading-relaxed mb-4">Every decided entry recorded after the declaration date, with a verified close, counts.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The frozen rule's own trigger is its selection. No edge threshold applies to lab rules.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Lab entries recorded before a declaration never count toward the Standard.</p>
+    <h3 id="lab-freeze-entry" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Change, October 10, 2026: new rules enter their pond at the freeze</h3>
+    <p class="text-zinc-300 leading-relaxed mb-4">Changed October 10, 2026. From that date, every rule frozen on or after it enters its pond the moment it is frozen. A rule is frozen at the FreezeUtc written in the lab's lock file. Its count starts with its first entry after the freeze. Nothing before that date changes.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">If its pond has no open season, the freeze opens one. The field is every rule frozen into that pond on that UTC day, and it is fixed from then. If the pond's season is already open, the rule stays in the lab until that season ends, then enters the next one. No model may enter a pond after that pond has opened. That rule stays as it is, for lab rules and models alike. A pond the dashboard marks closed cannot open a season. A rule frozen into a closed pond stays in the lab.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A rule that bets more than one market has more than one pond. It enters none of them at the freeze. It stays in the lab until it is declared into one pond, naming the market, under the paragraphs above.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Rules frozen before October 10, 2026 still count only after they are declared. The paragraphs above apply to them unchanged.</p>
     <h3 id="nhl-declaration" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Declaration, October 5, 2026: N5 into the NHL moneyline pond</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">On October 5, 2026 we declared the lab rule N5 Overnight Move into the NHL moneyline pond. That pond had no open season. The declaration opens its first season at 12:00 UTC on October 6, 2026, and the season runs to the NHL's next opening day, in October 2027.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The field is one rule, N5. Its count starts from zero at the opening instant. Every N5 entry decided after it, with a verified close, counts. Nothing decided before it does.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The bar is the one on this page. Because this season was declared after October 2, 2026, the beat-the-close condition is counted over moved prices, is read only once 50 prices have moved, and shows its tie count beside it.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">N5's rule is held privately. Its hash was published in the lab's lock file before the first entry, the lab runner refuses the rule if the file no longer matches that hash, and every entry, price and close is public on the dashboard. If N5 clears the bar it is the first thing we would sell, under the rules above. If it does not, that is the result, and it stays up.</p>
+    <h3 id="nhl-totals-declaration" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Declaration, October 10, 2026: N2 into the NHL totals pond</h3>
+    <p class="text-zinc-300 leading-relaxed mb-4">On October 10, 2026 we declared the lab rule N2 Tie-Mass Over into the NHL totals pond. That pond had no open season. The declaration opens its first season at 06:52 UTC on October 10, 2026, and the season runs to the NHL's next opening day, in October 2027.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The field is one rule, N2. Its count starts from zero at the opening instant. Every N2 entry decided after it, with a verified close, counts. Nothing decided before it does. Its 41 lab entries before the declaration stay on the dashboard as lab history and never count.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The bar is the one on this page. Because this season was declared after October 2, 2026, the beat-the-close condition is counted over moved prices, is read only once 50 prices have moved, and shows its tie count beside it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">N2's rule is public. It is the file horses/nhl_n2_tie_mass_over.ps1 in the lab repository, frozen at 00:00 UTC on September 27, 2026 at commit 97fa667, SHA-256 6a3632ead92b208049ce197fa5a78906ce0a576efb12933ff625a590ec99acb3, unchanged since. It bets the Over at 6.5 goals only, at the DraftKings price, and nothing else. Every entry, price and close is public on the dashboard. If N2 clears the bar it goes on sale under the rules above. If it does not, that is the result, and it stays up.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
     <h2 id="rules-and-machines" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">What is a rule and what is a machine</h2>
@@ -378,6 +391,8 @@
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Moved pick.</strong> A pick whose closing price is different from the price we recorded. A pick that closed at the same price is a tie: it counts as zero in the mean and, for seasons declared on or after October 2, 2026, it is left out of the beat-the-close percentage and shown beside it as a count.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Capture rate.</strong> The share of picks where we successfully recorded a close.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Pond.</strong> One sport and one market, such as MLB totals.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Market.</strong> One kind of bet on a game: the moneyline (who wins; for soccer the three-way result, home, draw or away), the total (over or under a number), or the spread (the run line in baseball, the puck line in hockey). A rule's market is the one its frozen file bets.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Day.</strong> A calendar date in UTC. An entry belongs to the day it was recorded, not the day its game is played. For the 30-day condition, a day counts when at least one entry that counts was recorded on it.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Field.</strong> The models racing in a pond for one season, fixed and published before that season starts.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Season.</strong> A pond's race, from the day the pond opens until its sport's next opening day. A model may only join at a season boundary.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Declaration.</strong> Naming one or more lab rules into a pond with no open season. It opens that pond's season, and each rule's count starts from zero that day.</p>
@@ -385,7 +400,7 @@
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Lab rule.</strong> A simple betting rule, frozen before its first game, racing in public on the dashboard.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Entry.</strong> A lab rule's recorded selection on a game. A lab entry is not a pick.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
-    <p class="text-zinc-500 text-sm mt-10"><em>Standard last changed: October 6, 2026. Full history: <a href="https://github.com/PixelForgePlays/pixelforgeplays-website/commits/main/standard.html" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">commit log</a>. Shadow ledger: <a href="https://pixelforgeplays.github.io/pixel-forge/data/shadow-ledger.json" class="text-zinc-400 hover:text-white underline underline-offset-2">shadow-ledger.json</a>. Correction, Sep 22, 2026: <a href="https://pixelforgeplays.github.io/pixel-forge/docs/2026-09-22-close-validity-correction.md" class="text-zinc-400 hover:text-white underline underline-offset-2">closing-price correction</a>.</em></p>
+    <p class="text-zinc-500 text-sm mt-10"><em>Standard last changed: October 10, 2026. Full history: <a href="https://github.com/PixelForgePlays/pixelforgeplays-website/commits/main/standard.html" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">commit log</a>. Shadow ledger: <a href="https://pixelforgeplays.github.io/pixel-forge/data/shadow-ledger.json" class="text-zinc-400 hover:text-white underline underline-offset-2">shadow-ledger.json</a>. Correction, Sep 22, 2026: <a href="https://pixelforgeplays.github.io/pixel-forge/docs/2026-09-22-close-validity-correction.md" class="text-zinc-400 hover:text-white underline underline-offset-2">closing-price correction</a>.</em></p>
     <p class="text-zinc-500 text-sm mt-4">Gamble responsibly. 21+. 1-800-GAMBLER, ncpgambling.org</p>
 
   </div>
