@@ -34,6 +34,9 @@
     .live-k{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.68rem;letter-spacing:.08em;text-transform:uppercase;color:#a1a1aa}
     .live-v{margin-top:.4rem;font-size:1.2rem;font-weight:800;line-height:1.2;color:#A8E008;overflow-wrap:break-word}
     .live-s{margin-top:.25rem;font-size:.8rem;line-height:1.3;color:#a1a1aa;overflow-wrap:break-word}
+    a.live-tile{color:inherit;text-decoration:none}
+    a.live-tile:hover{border-color:#8B3DFF}
+    #builders-home{overflow-wrap:break-word}
     @media (min-width:640px){
       .live-lab-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
       .live-k{font-size:.62rem}
@@ -62,6 +65,10 @@
         <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#lab" class="pfp-btn text-black" style="background:#A8E008">See the live race</a>
         <a href="#lab-notes" class="pfp-btn border border-zinc-600 text-white hover:bg-zinc-800">Get the lab notes</a>
       </div>
+      <p id="builders-home" class="mt-4 text-center text-sm leading-snug text-zinc-300" hidden>
+        <span id="builders-home-copy"></span>
+        <a href="/builders" class="whitespace-nowrap text-white underline underline-offset-2">See the builders race</a>
+      </p>
       <section id="live-lab" class="mt-8 text-left" hidden aria-label="Live from the lab">
         <p class="font-mono text-xs uppercase tracking-wider text-zinc-400">Live from the lab</p>
         <p id="live-asof" class="mt-1 text-sm text-zinc-500"></p>
@@ -86,6 +93,11 @@
             <p id="live-n5-detail" class="live-s">--</p>
             <p id="live-n5-status" class="live-s">--</p>
           </div>
+          <a id="live-builders" class="live-tile" href="/builders" hidden>
+            <p class="live-k">Builders racing</p>
+            <p id="live-builders-n" class="live-v"></p>
+            <p id="live-builders-open" class="live-s"></p>
+          </a>
         </div>
       </section>
     </header>
@@ -239,6 +251,41 @@
     if (String(flag).toUpperCase() === 'UNDECIDED') return 'Not decided yet';
     return String(flag);
   }
+  // Brief 1163: both numbers come from lab.json. Missing either one hides the tile and the line.
+  function buildersRace(lab) {
+    if (!lab || !has(lab.buildersActive) || !has(lab.buildersCap)) return null;
+    var active = Number(lab.buildersActive);
+    var cap = Number(lab.buildersCap);
+    if (!isFinite(active) || !isFinite(cap) || active < 0 || cap < 0) return null;
+    var open = cap - active;
+    if (!isFinite(open) || open < 0) return null;
+    return { active: active, cap: cap, open: open };
+  }
+  function buildersSentence(active, open) {
+    var models = active === 1
+      ? '1 outside model is racing next to ours.'
+      : fmtInt(active) + ' outside models are racing next to ours.';
+    var spots = open === 1 ? '1 spot open.' : fmtInt(open) + ' spots open.';
+    return models + ' ' + spots;
+  }
+  function applyBuilders(lab) {
+    var strip = document.getElementById('builders-home');
+    var copy = document.getElementById('builders-home-copy');
+    var tile = document.getElementById('live-builders');
+    var nEl = document.getElementById('live-builders-n');
+    var openEl = document.getElementById('live-builders-open');
+    var race = buildersRace(lab);
+    if (!race) {
+      if (strip) strip.hidden = true;
+      if (tile) tile.hidden = true;
+      return;
+    }
+    if (copy) copy.textContent = buildersSentence(race.active, race.open);
+    if (strip) strip.hidden = false;
+    if (nEl) nEl.textContent = fmtInt(race.active);
+    if (openEl) openEl.textContent = fmtInt(race.open) + ' of ' + fmtInt(race.cap) + ' spots open';
+    if (tile) tile.hidden = false;
+  }
   function fmtClock(iso, options) {
     var d = new Date(iso);
     if (isNaN(d.getTime())) return null;
@@ -330,6 +377,7 @@
       n5StatusEl.textContent = verdict;
     }
     asofEl.textContent = 'As of ' + asof;
+    applyBuilders(lab);
     return true;
   }
 
@@ -348,6 +396,8 @@
     .catch(function () {
       clearTimeout(timer);
       section.hidden = true;
+      var strip = document.getElementById('builders-home');
+      if (strip) strip.hidden = true;
     });
 })();
 </script>
