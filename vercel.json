@@ -1,0 +1,5 @@
+{
+  "redirects": [
+    { "source": "/builders", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 301 }
+  ]
+}
