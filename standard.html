@@ -77,6 +77,7 @@
             <li><a href="#lab-declaration" class="text-zinc-400 hover:text-white underline underline-offset-2">Declaring a lab rule into its pond</a></li>
             <li><a href="#lab-counts" class="text-zinc-400 hover:text-white underline underline-offset-2">What counts for a lab rule</a></li>
             <li><a href="#lab-freeze-entry" class="text-zinc-400 hover:text-white underline underline-offset-2">Change, October 10, 2026: new rules enter their pond at the freeze</a></li>
+            <li><a href="#lab-baselines" class="text-zinc-400 hover:text-white underline underline-offset-2">Change, October 15, 2026: baselines and research rules stay in the lab</a></li>
             <li><a href="#nhl-declaration" class="text-zinc-400 hover:text-white underline underline-offset-2">Declaration, October 5, 2026: N5 into the NHL moneyline pond</a></li>
             <li><a href="#nhl-totals-declaration" class="text-zinc-400 hover:text-white underline underline-offset-2">Declaration, October 10, 2026: N2 into the NHL totals pond</a></li>
             <li><a href="#soccer-declaration" class="text-zinc-400 hover:text-white underline underline-offset-2">Declaration, October 13, 2026: S2 into the soccer moneyline pond</a></li>
@@ -173,9 +174,9 @@
     <p class="text-zinc-300 leading-relaxed mb-4">Miss any of these and nothing is sold. Pass them all and a model can still be publicly evicted if it stops passing.</p>
     <h3 id="the-follower-test" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The follower test</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">Clearing the bar is not enough to sell. A follower also has to be able to get the edge.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The test: entries taken 1 hour after we post must still beat the closing line on average.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The test: picks taken 1 hour after we post must still beat the closing line on average.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">How we measure it: the follower price is the DraftKings price for the same side and line, taken about 1 hour after the entry posts. If the game starts before then, we use the last price before the start.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Missing data never helps a rule. If more than 1 in 5 entries have no 1-hour price, the test fails.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Missing data never helps a rule. If more than 1 in 5 picks have no 1-hour price, the test fails.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">It never stops applying. If a rule that is for sale starts failing the follower test, it is pulled, the same as failing the bar.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">This test counts from October 6, 2026, the day it was published. Nothing before it is counted.</p>
     <h3 id="staying-in" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Staying in</h3>
@@ -195,6 +196,7 @@
     <h3 id="field-size" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Why the field size matters</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">Race enough models and one of them clears any bar by luck alone. That is arithmetic, not cynicism.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">So the size of the field is fixed and published before a season starts, and the bar is set with that number already accounted for. A larger field means a higher bar for everyone in it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The bar on this page is set for a field of up to six rules. If six rules with no real edge raced, the chance that any one of them reached the mean condition by luck alone is under 1 in 100. We checked this against the lab's graded picks on October 15, 2026. A field larger than six raises the mean bar, and the new number is published before that season opens.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Seasons run per pond, not across the whole project. Sports do not share a calendar, so each pond has its own opening day, its own field, and its own bar.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">A pond's field is fixed and published before that pond opens, not before some project-wide start date. This is what the rule always meant: the bar depends on how many models race each other, and models only race each other inside a pond.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">No model may enter a pond after that pond has opened. A model that appears in week three races that pond's next season.</p>
@@ -204,6 +206,7 @@
     <p class="text-zinc-300 leading-relaxed mb-4">Soccer has no single opening day: the lab's soccer rules bet across competitions whose seasons do not share a calendar. So a soccer pond's season ends one year after it opens, to the minute. Added October 10, 2026. The first soccer pond opened on October 13, 2026.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The 2026 games ended September 27. From then until Opening Day the pond is open and nothing can be decided, so the dashboard labels it 'Games over', not 'Racing'.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">A season does one job: a model may only join a pond at a season boundary.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">When a pond's season ends, each rule in its field gets a published result: cleared, or did not clear. A rule that did not clear may race again the next season. Its count starts from zero, like every field. Its earlier result stays on this page and is never restated. Added October 15, 2026.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We considered ending Season 1 with the regular season on September 27. We are not, because a twenty two day season would reopen our field three weeks after we published it, and that would make the rule we just applied to our own model cosmetic.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The cost is ours. Our second model waits roughly seven months for its chance to race. We are writing this down before that becomes inconvenient rather than after.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
@@ -226,6 +229,9 @@
     <p class="text-zinc-300 leading-relaxed mb-4">If its pond has no open season, the freeze opens one. The field is every rule frozen into that pond on that UTC day, and it is fixed from then. If the pond's season is already open, the rule stays in the lab until that season ends, then enters the next one. No model may enter a pond after that pond has opened. That rule stays as it is, for lab rules and models alike. A pond the dashboard marks closed cannot open a season. A rule frozen into a closed pond stays in the lab.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">A rule that bets more than one market has more than one pond. It enters none of them at the freeze. It stays in the lab until it is declared into one pond, naming the market, under the paragraphs above.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Rules frozen before October 10, 2026 still count only after they are declared. The paragraphs above apply to them unchanged.</p>
+    <h3 id="lab-baselines" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Change, October 15, 2026: baselines and research rules stay in the lab</h3>
+    <p class="text-zinc-300 leading-relaxed mb-4">A rule frozen as a baseline, or as research only, never enters a pond. It races in the lab for comparison and can never be sold. It is labelled that way at its freeze.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">This changes no open season.</p>
     <h3 id="nhl-declaration" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Declaration, October 5, 2026: N5 into the NHL moneyline pond</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">On October 5, 2026 we declared the lab rule N5 Overnight Move into the NHL moneyline pond. That pond had no open season. The declaration opens its first season at 12:00 UTC on October 6, 2026, and the season runs to the NHL's next opening day, in October 2027.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The field is one rule, N5. Its count starts from zero at the opening instant. Every N5 entry decided after it, with a verified close, counts. Nothing decided before it does.</p>
@@ -371,6 +377,7 @@
     <hr class="border-zinc-800 my-10">
     <h2 id="corrections" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">Corrections and history</h2>
     <p class="text-zinc-300 leading-relaxed mb-4">October 15, 2026: reorganised this page into plain sections and added how lab rules are graded. No rule or number changed.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">October 15, 2026: baselines and research rules stay in the lab; how the bar accounts for field size; what happens when a season ends; the follower test says picks.</p>
     <h3 id="gate-numbers" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">How the gate numbers were set</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">Before August 20, 2026, the bars above were not final. We were still measuring how much closing line value varies on MLB totals, and we had too few observations to know. The numbers we would have used then were borrowed from moneyline, where we have more data.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">So we wrote the decision down before it happened.</p>
