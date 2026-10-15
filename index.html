@@ -251,6 +251,31 @@
     if (String(flag).toUpperCase() === 'UNDECIDED') return 'Not decided yet';
     return String(flag);
   }
+  // Brief 1163B: wording only. The exported waterLevel is not recalculated.
+  // FAIL reads "Not clearing yet" only when every status-racing rule's season is still racing.
+  function chipWording(lab) {
+    if (!lab || !Array.isArray(lab.ponds)) return '--';
+    var word = null;
+    var allRacing = true;
+    var saw = false;
+    for (var i = 0; i < lab.ponds.length; i++) {
+      var pond = lab.ponds[i];
+      if (!pond) continue;
+      var rules = Array.isArray(pond.rules) ? pond.rules : [];
+      for (var j = 0; j < rules.length; j++) {
+        var rule = rules[j];
+        if (!rule || rule.status !== 'racing') continue;
+        saw = true;
+        if (pond.seasonState !== 'racing') allRacing = false;
+        var next = plainStatus(rule.waterLevel);
+        if (word === null) word = next;
+        else if (next !== word) return '--';
+      }
+    }
+    if (!saw) return '--';
+    if (allRacing && word === 'FAIL') return 'Not clearing yet';
+    return word;
+  }
   // Brief 1163: both numbers come from lab.json. Missing either one hides the tile and the line.
   function buildersRace(lab) {
     if (!lab || !has(lab.buildersActive) || !has(lab.buildersCap)) return null;
@@ -367,14 +392,7 @@
       n5El.textContent = fmtInt(k) + ' ' + (k === 1 ? 'rule' : 'rules');
       var posted = sumNum(racing, 'entries');
       n5DetailEl.textContent = posted === null ? '--' : (fmtInt(posted) + ' ' + (posted === 1 ? 'pick' : 'picks') + ' so far');
-      var verdict = '--';
-      if (k > 0) {
-        verdict = plainStatus(racing[0].waterLevel);
-        for (var ri = 1; ri < racing.length; ri++) {
-          if (plainStatus(racing[ri].waterLevel) !== verdict) { verdict = '--'; break; }
-        }
-      }
-      n5StatusEl.textContent = verdict;
+      n5StatusEl.textContent = chipWording(lab);
     }
     asofEl.textContent = 'As of ' + asof;
     applyBuilders(lab);
