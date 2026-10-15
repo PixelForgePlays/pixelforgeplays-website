@@ -58,6 +58,7 @@
             <li><a href="#what-clv-is" class="text-zinc-400 hover:text-white underline underline-offset-2">What closing line value is</a></li>
             <li><a href="#what-clv-is-not" class="text-zinc-400 hover:text-white underline underline-offset-2">What closing line value is not</a></li>
         </ul></li>
+        <li><a href="#lab-grading" class="text-zinc-400 hover:text-white underline underline-offset-2">How lab rules are graded</a></li>
         <li><a href="#the-bar" class="text-zinc-400 hover:text-white underline underline-offset-2">The bar to sell</a>
           <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
             <li><a href="#ponds" class="text-zinc-400 hover:text-white underline underline-offset-2">Ponds</a></li>
@@ -139,6 +140,17 @@
     <p class="text-zinc-300 leading-relaxed mb-4">It is also not one number. We publish the price we recorded when a pick was posted, which is the price you could have taken at that moment. It is not the price you get if you act three hours later.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We report both, and we do not average away the difference.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Update, Oct 6, 2026:</strong> We do not publish the later price yet. Starting today we record the DraftKings price 15 minutes, 1 hour and 2 hours after every NHL lab entry. We will publish it here once there is enough data to mean something.</p>
+    <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
+    <hr class="border-zinc-800 my-10">
+    <h2 id="lab-grading" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">How lab rules are graded</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">Lab rules are graded at the same sportsbook they were priced at. Today that is DraftKings for every lab rule.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The price is the one the rule recorded when it made the pick.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The close is the last price at that book, on the same side and line, recorded before the game starts.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We grade 15 minutes after the start, so the last price before the start is in.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">If the price did not move, the pick is a tie, counted as described in the entry gate below.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">If the line itself changed, so the close is on a different number, the pick is counted and shown but left out of the average.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Closing line value is the difference in implied probability between our price and the close, in points, using the prices as posted with the bookmaker's margin left in.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">This is different from how our first model, v7, was measured on MLB totals. That method is described in Season 1 below.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
     <h2 id="the-bar" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">The bar to sell</h2>
@@ -250,7 +262,7 @@
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
     <h2 id="mlb-totals-v7" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">Season 1: MLB totals (v7)</h2>
-    <p class="text-zinc-300 leading-relaxed mb-4">This section covers our first model, v7, on MLB totals.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">This section covers our first model, v7, on MLB totals. The ponds racing now are graded as described in 'How lab rules are graded'.</p>
     <h3 id="what-we-score" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">What we score</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">We score every evaluation a model makes at or above the pond's edge threshold, once the game is decided. That includes picks we published and picks we scored but never published.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Our models evaluate far more games than they publish. All of them are logged in advance, timestamped, and scored against the same closes.</p>
@@ -358,7 +370,7 @@
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
     <h2 id="corrections" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">Corrections and history</h2>
-    <p class="text-zinc-300 leading-relaxed mb-4">October 15, 2026: reorganised this page into plain sections. No rule or number changed.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">October 15, 2026: reorganised this page into plain sections and added how lab rules are graded. No rule or number changed.</p>
     <h3 id="gate-numbers" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">How the gate numbers were set</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">Before August 20, 2026, the bars above were not final. We were still measuring how much closing line value varies on MLB totals, and we had too few observations to know. The numbers we would have used then were borrowed from moneyline, where we have more data.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">So we wrote the decision down before it happened.</p>
@@ -409,7 +421,7 @@
     <hr class="border-zinc-800 my-10">
     <h2 id="glossary" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">Glossary</h2>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Pick.</strong> A frozen rule's selection on a game, written down before kickoff and graded against the closing price. Not for sale and not a recommendation to bet. For a model in a pond, we score every evaluation at or above the pond's edge threshold, published or not.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The close (closing line).</strong> The price we record again shortly before the game starts. We aim for within 90 minutes of first pitch; our code accepts up to 120 minutes.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The close (closing line).</strong> For lab rules: the last price at the same sportsbook, on the same side and line, before the game starts. For MLB totals (v7): The price we record again shortly before the game starts. We aim for within 90 minutes of first pitch; our code accepts up to 120 minutes.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Closing line value (CLV).</strong> How much better or worse the price we recorded was than the close. Positive means we beat the close, whether the bet won or lost.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Moved pick.</strong> A pick whose closing price is different from the price we recorded. A pick that closed at the same price is a tie: it counts as zero in the mean and, for seasons declared on or after October 2, 2026, it is left out of the beat-the-close percentage and shown beside it as a count.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Capture rate.</strong> The share of picks where we successfully recorded a close.</p>
