@@ -41,8 +41,7 @@
       <ul class="list-disc pl-5 space-y-2 text-zinc-200 leading-relaxed">
         <li>Pixel Forge Plays is a public lab. We build betting models, run them in the open, and score every one of them against this page, which we wrote down in advance.</li>
         <li>We grade on closing line value: did the price we recorded beat the price the market closed at. Not on wins.</li>
-        <li>To enter a paid pond a model needs all four: 100 decided picks, each with a verified closing price. Mean closing line value of at least +1.5 points. At least 55% of moved picks priced better than the closing line, with ties shown beside the rate. Picks spread over at least 30 distinct days.</li>
-        <li>and pass <a href="#the-follower-test" class="text-zinc-400 hover:text-white underline underline-offset-2">the follower test</a>.</li>
+        <li>To enter a paid pond a model needs all five: 100 decided picks, each with a verified closing price. Mean closing line value of at least +1.5 points. At least 55% of moved picks priced better than the closing line, with ties shown beside the rate. Picks spread over at least 30 distinct days. And <a href="#the-follower-test" class="text-zinc-400 hover:text-white underline underline-offset-2">the follower test</a>: picks taken 1 hour after we post must still beat the close on average.</li>
         <li>Miss any of these and nothing is sold. Pass them all and a model can still be publicly evicted if it stops passing.</li>
         <li>Nothing has cleared. Our first model lost money, 50-50-2 at -9.7%, and that record is <a href="https://pixelforgeplays.github.io/pixel-forge/data/v6_FrozenRecord.json" class="text-zinc-400 hover:text-white underline underline-offset-2">a file you can download</a>.</li>
         <li>A lab rule can be declared into a pond with no open season. Its count starts from zero on the day it is declared. From October 10, 2026, a rule frozen on or after that date enters its pond at the freeze instead.</li>
@@ -53,21 +52,11 @@
       <h2 id="contents-h" class="text-lg font-semibold text-white mb-3">Contents</h2>
       <ol class="list-decimal pl-6 space-y-1 text-zinc-300">
         <li><a href="#what-this-is" class="text-zinc-400 hover:text-white underline underline-offset-2">What this is</a></li>
+        <li><a href="#racing-now" class="text-zinc-400 hover:text-white underline underline-offset-2">What is racing now</a></li>
         <li><a href="#how-we-grade" class="text-zinc-400 hover:text-white underline underline-offset-2">How we grade</a>
           <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
             <li><a href="#what-clv-is" class="text-zinc-400 hover:text-white underline underline-offset-2">What closing line value is</a></li>
             <li><a href="#what-clv-is-not" class="text-zinc-400 hover:text-white underline underline-offset-2">What closing line value is not</a></li>
-            <li><a href="#what-we-score" class="text-zinc-400 hover:text-white underline underline-offset-2">What we score</a></li>
-            <li><a href="#the-one-rule" class="text-zinc-400 hover:text-white underline underline-offset-2">The one rule that removes picks</a></li>
-        </ul></li>
-        <li><a href="#measuring-the-close" class="text-zinc-400 hover:text-white underline underline-offset-2">How we measure the close</a>
-          <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
-            <li><a href="#the-price-we-publish" class="text-zinc-400 hover:text-white underline underline-offset-2">The price we publish</a></li>
-            <li><a href="#the-close" class="text-zinc-400 hover:text-white underline underline-offset-2">The close</a></li>
-            <li><a href="#which-books" class="text-zinc-400 hover:text-white underline underline-offset-2">Which books</a></li>
-            <li><a href="#our-capture-rate" class="text-zinc-400 hover:text-white underline underline-offset-2">Our capture rate</a></li>
-            <li><a href="#coverage-the-number-behind-the-number" class="text-zinc-400 hover:text-white underline underline-offset-2">Coverage: the number behind the number</a></li>
-            <li><a href="#how-we-count" class="text-zinc-400 hover:text-white underline underline-offset-2">How we count</a></li>
         </ul></li>
         <li><a href="#the-bar" class="text-zinc-400 hover:text-white underline underline-offset-2">The bar to sell</a>
           <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
@@ -80,9 +69,7 @@
         <li><a href="#seasons" class="text-zinc-400 hover:text-white underline underline-offset-2">Seasons and fields</a>
           <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
             <li><a href="#field-size" class="text-zinc-400 hover:text-white underline underline-offset-2">Why the field size matters</a></li>
-            <li><a href="#season-1-field" class="text-zinc-400 hover:text-white underline underline-offset-2">The Season 1 field for MLB totals</a></li>
             <li><a href="#season-end" class="text-zinc-400 hover:text-white underline underline-offset-2">When a season ends</a></li>
-            <li><a href="#season-1" class="text-zinc-400 hover:text-white underline underline-offset-2">Season 1</a></li>
         </ul></li>
         <li><a href="#the-lab" class="text-zinc-400 hover:text-white underline underline-offset-2">The lab and the Standard</a>
           <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
@@ -95,10 +82,28 @@
         </ul></li>
         <li><a href="#rules-and-machines" class="text-zinc-400 hover:text-white underline underline-offset-2">What is a rule and what is a machine</a></li>
         <li><a href="#what-we-do-not-claim" class="text-zinc-400 hover:text-white underline underline-offset-2">What we do not claim</a></li>
+        <li><a href="#mlb-totals-v7" class="text-zinc-400 hover:text-white underline underline-offset-2">Season 1: MLB totals (v7)</a>
+          <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
+            <li><a href="#what-we-score" class="text-zinc-400 hover:text-white underline underline-offset-2">What we score</a></li>
+            <li><a href="#the-one-rule" class="text-zinc-400 hover:text-white underline underline-offset-2">The one rule that removes picks</a></li>
+            <li><a href="#measuring-the-close" class="text-zinc-400 hover:text-white underline underline-offset-2">How we measure the close</a>
+              <ul class="list-[circle] pl-6 space-y-1 mt-1">
+                <li><a href="#the-price-we-publish" class="text-zinc-400 hover:text-white underline underline-offset-2">The price we publish</a></li>
+                <li><a href="#the-close" class="text-zinc-400 hover:text-white underline underline-offset-2">The close</a></li>
+                <li><a href="#which-books" class="text-zinc-400 hover:text-white underline underline-offset-2">Which books</a></li>
+                <li><a href="#our-capture-rate" class="text-zinc-400 hover:text-white underline underline-offset-2">Our capture rate</a></li>
+                <li><a href="#coverage-the-number-behind-the-number" class="text-zinc-400 hover:text-white underline underline-offset-2">Coverage: the number behind the number</a></li>
+                <li><a href="#how-we-count" class="text-zinc-400 hover:text-white underline underline-offset-2">How we count</a></li>
+            </ul></li>
+            <li><a href="#season-1-field" class="text-zinc-400 hover:text-white underline underline-offset-2">The Season 1 field for MLB totals</a></li>
+            <li><a href="#season-1" class="text-zinc-400 hover:text-white underline underline-offset-2">Season 1</a></li>
+        </ul></li>
         <li><a href="#corrections" class="text-zinc-400 hover:text-white underline underline-offset-2">Corrections and history</a>
           <ul class="list-disc pl-6 space-y-1 text-zinc-400 text-sm mt-1">
             <li><a href="#gate-numbers" class="text-zinc-400 hover:text-white underline underline-offset-2">How the gate numbers were set</a></li>
             <li><a href="#september-correction" class="text-zinc-400 hover:text-white underline underline-offset-2">A correction to how we measured edge and closing line value, September 2026</a></li>
+            <li><a href="#beat-close-moved-change" class="text-zinc-400 hover:text-white underline underline-offset-2">Change, October 2, 2026: how we count beating the close</a></li>
+            <li><a href="#follower-test-added" class="text-zinc-400 hover:text-white underline underline-offset-2">October 6, 2026: Added the follower test</a></li>
             <li><a href="#order-note" class="text-zinc-400 hover:text-white underline underline-offset-2">A note on the order we did this in</a></li>
         </ul></li>
         <li><a href="#glossary" class="text-zinc-400 hover:text-white underline underline-offset-2">Glossary</a></li>
@@ -115,6 +120,12 @@
     <p class="text-zinc-300 leading-relaxed mb-4">This page lives in a public repository and its full edit history is linked at the bottom. If we ever changed a number in the middle of a race, the commit log would show it, with the date. You do not have to take our word for any of this.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
+    <h2 id="racing-now" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">What is racing now</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">Three lab rules race for the Standard right now, one in each pond: N5 Overnight Move in NHL moneyline (since October 6, 2026), N2 Tie-Mass Over in NHL totals (since October 10, 2026) and S2 Pinnacle Steam in soccer moneyline (since October 13, 2026). Each started from zero. Their live progress is on the <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#race" class="text-zinc-400 hover:text-white underline underline-offset-2">dashboard</a>.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><a href="/builders" class="text-zinc-400 hover:text-white underline underline-offset-2">Outside builders</a> race their own models next to our lab, graded the same way. They are not racing for the Standard this season.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">MLB totals, our first pond, finished its 2026 games on September 27. It reopens on MLB's Opening Day in 2027.</p>
+    <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
+    <hr class="border-zinc-800 my-10">
     <h2 id="how-we-grade" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">How we grade</h2>
     <h3 id="what-clv-is" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">What closing line value is</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">When we publish a pick, we record the price. When the game starts, we record where that price ended up.</p>
@@ -128,89 +139,6 @@
     <p class="text-zinc-300 leading-relaxed mb-4">It is also not one number. We publish the price we recorded when a pick was posted, which is the price you could have taken at that moment. It is not the price you get if you act three hours later.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We report both, and we do not average away the difference.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Update, Oct 6, 2026:</strong> We do not publish the later price yet. Starting today we record the DraftKings price 15 minutes, 1 hour and 2 hours after every NHL lab entry. We will publish it here once there is enough data to mean something.</p>
-    <h3 id="what-we-score" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">What we score</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">We score every evaluation a model makes at or above the pond's edge threshold, once the game is decided. That includes picks we published and picks we scored but never published.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Our models evaluate far more games than they publish. All of them are logged in advance, timestamped, and scored against the same closes.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">This is stricter than scoring only the published picks, not looser. If we graded ourselves solely on what we chose to publish, we would be grading ourselves on a set we selected. Scoring the unpublished ones too makes that impossible.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">One condition applies only to published picks: the price a subscriber could actually have taken. Unpublished evaluations have no subscriber price, so that condition is measured only where it means something. We call this the follower test. It is defined below.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The pond's edge threshold.</strong> The pond's edge threshold for MLB totals is thirteen percent. It is the same floor we use to decide whether a pick is worth publishing.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We chose thirteen percent on June 15, 2026 as the public posting bar. We wrote it here on August 20, 2026 as the scoring bar, before the pond opened. That commit raised the floor from nine percent. We moved it up once, in June, before any of this was a gate, and we are not moving it now.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Evaluations below thirteen percent are logged. They do not count toward a gate.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We named it because we had not named it before, and a scoring set that is not published is not a standard. We are not lowering it.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>What lowering the floor would do.</strong> Here is what lowering it would do, measured on this model's own MLB totals record since we fixed our closing line lookup on July 22, 2026. These figures are as of August 20, 2026. They are a snapshot of a measurement that is still accumulating, and we will restate them rather than quietly let them drift.</p>
-    <ul class="list-disc pl-6 text-zinc-300 leading-relaxed mb-4 space-y-1">
-      <li>Floor 13 percent. Decided 24. Measured 11. Mean CLV +0.70. Beat the close 63.6 percent. Distinct measured days 7.</li>
-      <li>Floor 12 percent. Decided 36. Measured 21. Mean CLV +1.15. Beat the close 61.9 percent. Distinct measured days 13.</li>
-      <li>Floor 9 percent. Decided 89. Measured 53. Mean CLV +0.71. Beat the close 52.8 percent. Distinct measured days 20.</li>
-      <li>Floor 5 percent. Decided 186. Measured 114. Mean CLV +0.97. Beat the close 57.0 percent. Distinct measured days 27.</li>
-      <li>Floor 3 percent. Decided 241. Measured 148. Mean CLV +0.83. Beat the close 55.4 percent. Distinct measured days 28.</li>
-    </ul>
-    <p class="text-zinc-300 leading-relaxed mb-4">At thirteen percent we have eleven measured picks and a mean closing line value of plus 0.70. At three percent we have a hundred and forty eight and a mean of plus 0.83, which is under our own bar of plus 1.5.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Lowering the floor buys sample and costs quality. No floor on that table clears all four of our entry conditions.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We could have chosen three percent, called it a principle, and shown you a hundred and forty eight picks instead of eleven. We are keeping thirteen.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The cost of keeping it is that this model will not reach a hundred measured picks in the 2026 baseball season. Season one is a measurement period, not a race anything can win this year.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>One number we are publishing that does not count.</strong> At a three percent floor, this model has a hundred and forty eight measured picks at a mean closing line value of plus 0.83, with 55.4 percent priced better than the close.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">That is not the gate. It does not count toward one, and no model enters a paid pond on it. It is the largest sample we have of what this model actually does, and it is under our bar. We would rather you see it than not.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>What narrows the count.</strong> One rule removes a pick from scoring, and it is the next section. Three other things narrow what a pond counts, and none of them is a scoring rule:</p>
-    <ul class="list-disc pl-6 text-zinc-300 leading-relaxed mb-4 space-y-1">
-      <li>a pond counts only its own sport and market;</li>
-      <li>our edge cap suppresses publication, but the pick is still scored;</li>
-      <li>where we have found a specific data error we name the pick, as we did with two evaluations in the August 20 count.</li>
-    </ul>
-    <p class="text-zinc-300 leading-relaxed mb-4">We will not add a scoring removal mid-season.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">A lab rule is counted differently, because it has no edge threshold. See "The lab and the Standard".</p>
-    <h3 id="the-one-rule" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The one rule that removes picks</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">When a model's edge on a game comes mainly from a large starting pitcher mismatch, we do not publish that pick and it does not count toward a gate.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We measured that slice before writing this rule. As of August 10, 2026: twenty-three decided picks at roughly minus 43 percent, against plus 0.8 percent for the forty-six other decided picks at the same edge threshold, on a higher average edge. The model's most confident pattern is also its worst one.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Both groups are in the shadow ledger this page links to. The parked group is every decided pick where this rule fired. The comparison group is every other decided pick at or above the same edge threshold, with no window and no trimming.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">An earlier version of this paragraph said plus 3.5 percent. That figure came from the most recent forty-three of those forty-six picks rather than all of them, which flattered the comparison. We changed it before this page was announced.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We would rather say that in public than quietly let it into a paid pond.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Two things about how this rule is applied.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">It is applied by what is recorded on the pick, not by what we meant at the time. Picks published before this rule existed stay in the scoring set. Eighteen picks are in that category. We published them, and a pick cannot be unpublished.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">And the rule is frozen for the season. If we ever change what it excludes, that starts a new season rather than restating an old one. Otherwise the denominator moves under the numbers, and the commit log at the bottom of this page would be worth nothing.</p>
-    <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
-    <hr class="border-zinc-800 my-10">
-    <h2 id="measuring-the-close" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">How we measure the close</h2>
-    <p class="text-zinc-300 leading-relaxed mb-4">This is the part everything else rests on, so here is exactly what we do, including the parts that are imperfect.</p>
-    <h3 id="the-price-we-publish" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The price we publish</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">When a pick goes out we record the price we published it at. That is the best number we could find across the books we track, which includes DraftKings, FanDuel, BetMGM, BetRivers, PointsBet, William Hill and Unibet. It is a price you could have taken at that moment.</p>
-    <h3 id="the-close" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The close</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">We then try to record the price again within 90 minutes of first pitch. The 90 minute window matters: a price taken four hours out is not a closing line, it is just an earlier price.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>What our code does instead.</strong> There is a gap between that sentence and our code, and we found it on September 2, 2026, three days before this pond opened.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">This page says ninety minutes. Our code looks for a close up to 120 minutes before first pitch. We widened that window on August 12, 2026 and never updated this page to match.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Counting every close we can date, 16.8 percent were recorded between ninety and 120 minutes out. The median is 45.8 minutes before first pitch and the furthest out is 119.6 minutes. None is four hours out.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We are not changing the ninety to 120. Widening a published number so that our own records fit inside it is the thing this page exists to prevent. Ninety is what we are aiming at, 120 is what the machine does, and that difference now sits on the page instead of only in our code.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Closes we cannot date.</strong> We also cannot date most of our closes. Of 1304 recorded closes, 673 carry no timestamp for the moment we took them, including every close recorded before July 22, 2026 and every run line close.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">For those we know a close was recorded and we do not know when. Our counts do not filter on this, and none of the numbers on this page has been changed by it.</p>
-    <h3 id="which-books" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Which books</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">The two are not always from the same book. Our closing prices come from DraftKings and FanDuel, because those are the closes we can obtain reliably.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">If a pick was published at the best price across a wider set of books, the comparison is between that price and a DraftKings or FanDuel close. We are telling you this rather than presenting one clean number, because the difference is real and you should know it is there.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Pinnacle.</strong> The same check found a second gap. This page lists the books we quote. Pinnacle is not one of them, because most US bettors cannot use it.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Our code was picking the best price across a wider list that did include Pinnacle. Of 131 picks we have published, 42 carry a Pinnacle price, which is 32.1 percent of them. That price was real and it was the best one available, but it is not a price we can tell you that you could have taken.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We fixed the selection on September 2, 2026. From that commit forward, the price we publish comes only from the books listed on this page. We have not changed any pick already published. Those rows say what they said when they went out.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">One consequence worth stating plainly. When we publish a price from one book and record the close from another, the difference between them is not a number you could have captured yourself. Of the 23 published picks with a recorded close, 20 compare a price at one book against a close at another.</p>
-    <h3 id="our-capture-rate" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Our capture rate</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">We do not always succeed. Some picks never get a close recorded at all. So we publish our capture rate, which is the share of picks where we successfully recorded one.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">That number is the foundation under every other number on this page. A grading system whose measurement is invisible would be the exact thing this page exists to refuse, and the capture rate is how you check ours.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The bug that made it look worse than it is.</strong> As of August 13, 2026, we record a closing price on 143 of 170 attempts for MLB totals and 167 of 178 for MLB moneyline. Over the full life of the project those figures are 143 of 265 and 335 of 360.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The gap between those two pairs is not improvement. It is a bug.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Until July 22, 2026, our code asked our data provider for moneyline prices every time, including when the bet was a total. Every over/under lookup came back empty. Ninety-five attempts, nothing recorded, for three weeks, while moneyline ran above ninety percent on the same connection the entire time.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Commit e8356e4 fixed it. We did not notice for three weeks, and nothing in our alerting caught it.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We report both eras rather than the one that flatters us. The commit is in the public log this page links to, so the boundary is checkable and is not a date we picked after seeing the numbers.</p>
-    <h3 id="coverage-the-number-behind-the-number" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Coverage: the number behind the number</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">The rates above answer a narrow question: when we looked for a close, did we find one. They do not answer the wider one: what share of the picks we score ever got looked at.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">For MLB totals that is currently seven of twenty-five. For moneyline, six of eleven.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The bug fixed the looking. It did not fix the coverage, and coverage is the harder problem. We publish both, because publishing only the first would be publishing the flattering half.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Corrected on August 17, 2026.</strong> This page previously said eleven of twenty-five for totals and six of ten for moneyline. Both were wrong and both were wrong in our favour. The totals figure overstated our coverage by sixteen points. The moneyline denominator was eleven, not ten.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We found this by rebuilding every number on this page from the logs, and we are publishing the method below so anyone can rebuild them too.</p>
-    <h3 id="how-we-count" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">How we count</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">An attempt is one snapshot request written to our logs for a specific pick.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">A recorded close is a snapshot that came back with a price.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Totals are selections of the form OVER or UNDER followed by a number.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The two eras are split at commit e8356e4, July 22, 2026.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The capture rates in this section were counted through August 13, 2026, the day it was published, and are frozen at that date. The coverage figures in the paragraph above were recounted on August 17, 2026.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">These are event counts, not unique picks. A pick that gets snapshotted twice counts twice. Counted as unique picks instead, the post-fix totals figure is 130 of 146 rather than 143 of 170.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We are showing the event count because that is what was published, and we are telling you the difference rather than quietly switching to whichever number reads better.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
     <h2 id="the-bar" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">The bar to sell</h2>
@@ -221,12 +149,12 @@
     <p class="text-zinc-300 leading-relaxed mb-4">Most ponds are empty, and empty is the expected state rather than a stage on the way somewhere.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The standard is deliberately hard to clear. If it were easy, clearing it would not tell you anything. A pond that sits empty for an entire season is the system working, not the system stalling.</p>
     <h3 id="entry-gate" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The entry gate</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">A model enters a pond by clearing four conditions at once. Falling short on any one of them is not clearing.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A model enters a pond by clearing five conditions at once. Falling short on any one of them is not clearing.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">1. Sample. At least 100 decided picks, each with a verified closing price.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">2. Beat the close on average. Mean closing line value of at least +1.5 points.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">3. Beat the close often. At least 55% of moved picks priced better than the closing line. A moved pick is one whose closing price differs from the price we recorded. Picks whose price did not move count toward the sample, the mean and the days, and are shown next to this rate as a tie count, but they are left out of this one percentage. The percentage needs at least 50 moved picks before it is read. This wording applies to seasons declared on or after October 2, 2026; see the dated change below.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">4. Spread across time. At least 30 distinct days. A model cannot qualify on three hot afternoons.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">and pass <a href="#the-follower-test" class="text-zinc-400 hover:text-white underline underline-offset-2">the follower test</a>.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">And <a href="#the-follower-test" class="text-zinc-400 hover:text-white underline underline-offset-2">the follower test</a>: picks taken 1 hour after we post must still beat the close on average.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Condition one means one hundred decided picks each carrying a verified closing price.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">A pick we could not measure does not count toward the hundred, and it does not count toward the other three either. There is no version of this where a model sells picks on a record we could not fully measure.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The fourth condition exists because picks made on the same day are not independent evidence. Twenty picks on one slate tell you far less than twenty picks across twenty days, and a standard that ignored this would be easy to game by accident.</p>
@@ -259,17 +187,6 @@
     <p class="text-zinc-300 leading-relaxed mb-4">A pond's field is fixed and published before that pond opens, not before some project-wide start date. This is what the rule always meant: the bar depends on how many models race each other, and models only race each other inside a pond.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">No model may enter a pond after that pond has opened. A model that appears in week three races that pond's next season.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Letting one in mid-race would make the published bar a fiction, and we would rather lose a good model for a season than publish a number that is not true.</p>
-    <h3 id="season-1-field" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The Season 1 field for MLB totals</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">The field is one model: v7. It has been posting publicly since June, and it is the only model whose picks are scored against this pond's threshold.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We also run a second model in shadow. Its picks appear in our public shadow ledger, labelled with its own model id, so you can find them there without asking us.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">It is not in the Season 1 field, and no model may enter a pond after that pond opens. That is our rule and we are applying it to our own model first.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The reason is worth stating because it does not flatter us. The second model prices on a recalibrated scale, and edge numbers are not comparable across models: a five on one scale is not a five on the other.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Applied as written, our published threshold of thirteen percent sits above anything that model has produced or, on our own historical record, could have produced.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We could have published a second threshold in its units and put it in the field. We are not going to. A second scoring number published after the first one is a change to the bar, whatever we call it.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">A field of one is the weakest version of this. One model measured against a fixed number is not a race between models, and we would rather say so than dress it up. What it is, is a bar published before anything ran, and a model being measured against it where you can watch.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4"><strong>When two models fire on the same game.</strong> More than one model can fire on the same game. When that happens, only the model already racing in the pond is posted. The other model's selection is still recorded, and the gate scores recorded rows, not what we posted.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Today that is a rule we hold ourselves to, not a machine. The second model is blocked from posting anywhere in the code, so the situation cannot arise yet. If a second model ever enters a pond, this is the rule it enters under.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The two models can also disagree about which side of a game to take. The second model is a recalibration of the first, so it can be less confident on the same game, and less confidence is sometimes enough to move the value from the over to the under. Where that happens, both rows appear in the shadow ledger on opposite sides of the same game.</p>
     <h3 id="season-end" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">When a season ends</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">A pond's season runs from the day that pond opens until its sport's next opening day. For MLB totals, Season 1 runs from September 5, 2026 to MLB's Opening Day in 2027.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Soccer has no single opening day: the lab's soccer rules bet across competitions whose seasons do not share a calendar. So a soccer pond's season ends one year after it opens, to the minute. Added October 10, 2026. The first soccer pond opened on October 13, 2026.</p>
@@ -277,18 +194,6 @@
     <p class="text-zinc-300 leading-relaxed mb-4">A season does one job: a model may only join a pond at a season boundary.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We considered ending Season 1 with the regular season on September 27. We are not, because a twenty two day season would reopen our field three weeks after we published it, and that would make the rule we just applied to our own model cosmetic.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The cost is ours. Our second model waits roughly seven months for its chance to race. We are writing this down before that becomes inconvenient rather than after.</p>
-    <h3 id="season-1" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Season 1</h3>
-    <p class="text-zinc-300 leading-relaxed mb-4">The first pond to open is MLB totals. It opened on September 5, 2026. Its field is published above, before that date. The gate numbers on this page are the numbers that field races against.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">MLB moneyline is shown and stays empty. An empty pond is not a gap in the display. It is what the standard looks like when nothing has cleared it.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Other ponds open on their own sports' calendars. We said an NFL pond would open when the NFL season does. As of August 24, 2026, it is not opening.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We are collecting NFL market data and we will keep collecting it. But what we have is an overlay on the bookmaker's own posted line rather than an independent estimate, and we have no way to grade an NFL pick automatically.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">A pond needs a model that disagrees with the market and a way to settle the result. We have neither for NFL yet. We would rather say that now than open a pond we cannot score.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">A pond with a future opening date is not an empty pond. It is a scheduled one.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We would rather run one pond we can measure than four we cannot.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The first verdict will take months, not weeks. The standard requires a real sample spread across real time, and there is no honest way to shorten that.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Nothing has cleared.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">It is entirely possible that nothing clears in Season 1. That outcome would be a result, and we would publish it the same way we would publish a success.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">The eviction list ships empty. It will not stay that way forever.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
     <h2 id="the-lab" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">The lab and the Standard</h2>
@@ -344,7 +249,116 @@
     <p class="text-zinc-300 leading-relaxed mb-4">When we get something wrong in our own numbers, we post the correction rather than quietly fixing it.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
+    <h2 id="mlb-totals-v7" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">Season 1: MLB totals (v7)</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">This section covers our first model, v7, on MLB totals.</p>
+    <h3 id="what-we-score" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">What we score</h3>
+    <p class="text-zinc-300 leading-relaxed mb-4">We score every evaluation a model makes at or above the pond's edge threshold, once the game is decided. That includes picks we published and picks we scored but never published.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Our models evaluate far more games than they publish. All of them are logged in advance, timestamped, and scored against the same closes.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">This is stricter than scoring only the published picks, not looser. If we graded ourselves solely on what we chose to publish, we would be grading ourselves on a set we selected. Scoring the unpublished ones too makes that impossible.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">One condition applies only to published picks: the price a subscriber could actually have taken. Unpublished evaluations have no subscriber price, so that condition is measured only where it means something. We call this the follower test. It is defined below.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The pond's edge threshold.</strong> The pond's edge threshold for MLB totals is thirteen percent. It is the same floor we use to decide whether a pick is worth publishing.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We chose thirteen percent on June 15, 2026 as the public posting bar. We wrote it here on August 20, 2026 as the scoring bar, before the pond opened. That commit raised the floor from nine percent. We moved it up once, in June, before any of this was a gate, and we are not moving it now.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Evaluations below thirteen percent are logged. They do not count toward a gate.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We named it because we had not named it before, and a scoring set that is not published is not a standard. We are not lowering it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>What lowering the floor would do.</strong> Here is what lowering it would do, measured on this model's own MLB totals record since we fixed our closing line lookup on July 22, 2026. These figures are as of August 20, 2026. They are a snapshot of a measurement that is still accumulating, and we will restate them rather than quietly let them drift.</p>
+    <ul class="list-disc pl-6 text-zinc-300 leading-relaxed mb-4 space-y-1">
+      <li>Floor 13 percent. Decided 24. Measured 11. Mean CLV +0.70. Beat the close 63.6 percent. Distinct measured days 7.</li>
+      <li>Floor 12 percent. Decided 36. Measured 21. Mean CLV +1.15. Beat the close 61.9 percent. Distinct measured days 13.</li>
+      <li>Floor 9 percent. Decided 89. Measured 53. Mean CLV +0.71. Beat the close 52.8 percent. Distinct measured days 20.</li>
+      <li>Floor 5 percent. Decided 186. Measured 114. Mean CLV +0.97. Beat the close 57.0 percent. Distinct measured days 27.</li>
+      <li>Floor 3 percent. Decided 241. Measured 148. Mean CLV +0.83. Beat the close 55.4 percent. Distinct measured days 28.</li>
+    </ul>
+    <p class="text-zinc-300 leading-relaxed mb-4">At thirteen percent we have eleven measured picks and a mean closing line value of plus 0.70. At three percent we have a hundred and forty eight and a mean of plus 0.83, which is under our own bar of plus 1.5.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Lowering the floor buys sample and costs quality. No floor on that table clears all four of our entry conditions.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We could have chosen three percent, called it a principle, and shown you a hundred and forty eight picks instead of eleven. We are keeping thirteen.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The cost of keeping it is that this model will not reach a hundred measured picks in the 2026 baseball season. Season one is a measurement period, not a race anything can win this year.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>One number we are publishing that does not count.</strong> At a three percent floor, this model has a hundred and forty eight measured picks at a mean closing line value of plus 0.83, with 55.4 percent priced better than the close.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">That is not the gate. It does not count toward one, and no model enters a paid pond on it. It is the largest sample we have of what this model actually does, and it is under our bar. We would rather you see it than not.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>What narrows the count.</strong> One rule removes a pick from scoring, and it is the next section. Three other things narrow what a pond counts, and none of them is a scoring rule:</p>
+    <ul class="list-disc pl-6 text-zinc-300 leading-relaxed mb-4 space-y-1">
+      <li>a pond counts only its own sport and market;</li>
+      <li>our edge cap suppresses publication, but the pick is still scored;</li>
+      <li>where we have found a specific data error we name the pick, as we did with two evaluations in the August 20 count.</li>
+    </ul>
+    <p class="text-zinc-300 leading-relaxed mb-4">We will not add a scoring removal mid-season.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A lab rule is counted differently, because it has no edge threshold. See "The lab and the Standard".</p>
+    <h3 id="the-one-rule" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The one rule that removes picks</h3>
+    <p class="text-zinc-300 leading-relaxed mb-4">When a model's edge on a game comes mainly from a large starting pitcher mismatch, we do not publish that pick and it does not count toward a gate.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We measured that slice before writing this rule. As of August 10, 2026: twenty-three decided picks at roughly minus 43 percent, against plus 0.8 percent for the forty-six other decided picks at the same edge threshold, on a higher average edge. The model's most confident pattern is also its worst one.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Both groups are in the shadow ledger this page links to. The parked group is every decided pick where this rule fired. The comparison group is every other decided pick at or above the same edge threshold, with no window and no trimming.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">An earlier version of this paragraph said plus 3.5 percent. That figure came from the most recent forty-three of those forty-six picks rather than all of them, which flattered the comparison. We changed it before this page was announced.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We would rather say that in public than quietly let it into a paid pond.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Two things about how this rule is applied.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">It is applied by what is recorded on the pick, not by what we meant at the time. Picks published before this rule existed stay in the scoring set. Eighteen picks are in that category. We published them, and a pick cannot be unpublished.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">And the rule is frozen for the season. If we ever change what it excludes, that starts a new season rather than restating an old one. Otherwise the denominator moves under the numbers, and the commit log at the bottom of this page would be worth nothing.</p>
+    <h3 id="measuring-the-close" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">How we measure the close</h3>
+    <p class="text-zinc-300 leading-relaxed mb-4">This is the part everything else rests on, so here is exactly what we do, including the parts that are imperfect.</p>
+    <h4 id="the-price-we-publish" class="text-base font-semibold text-white mt-6 mb-2 scroll-mt-6">The price we publish</h4>
+    <p class="text-zinc-300 leading-relaxed mb-4">When a pick goes out we record the price we published it at. That is the best number we could find across the books we track, which includes DraftKings, FanDuel, BetMGM, BetRivers, PointsBet, William Hill and Unibet. It is a price you could have taken at that moment.</p>
+    <h4 id="the-close" class="text-base font-semibold text-white mt-6 mb-2 scroll-mt-6">The close</h4>
+    <p class="text-zinc-300 leading-relaxed mb-4">We then try to record the price again within 90 minutes of first pitch. The 90 minute window matters: a price taken four hours out is not a closing line, it is just an earlier price.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>What our code does instead.</strong> There is a gap between that sentence and our code, and we found it on September 2, 2026, three days before this pond opened.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">This page says ninety minutes. Our code looks for a close up to 120 minutes before first pitch. We widened that window on August 12, 2026 and never updated this page to match.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Counting every close we can date, 16.8 percent were recorded between ninety and 120 minutes out. The median is 45.8 minutes before first pitch and the furthest out is 119.6 minutes. None is four hours out.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We are not changing the ninety to 120. Widening a published number so that our own records fit inside it is the thing this page exists to prevent. Ninety is what we are aiming at, 120 is what the machine does, and that difference now sits on the page instead of only in our code.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Closes we cannot date.</strong> We also cannot date most of our closes. Of 1304 recorded closes, 673 carry no timestamp for the moment we took them, including every close recorded before July 22, 2026 and every run line close.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">For those we know a close was recorded and we do not know when. Our counts do not filter on this, and none of the numbers on this page has been changed by it.</p>
+    <h4 id="which-books" class="text-base font-semibold text-white mt-6 mb-2 scroll-mt-6">Which books</h4>
+    <p class="text-zinc-300 leading-relaxed mb-4">The two are not always from the same book. Our closing prices come from DraftKings and FanDuel, because those are the closes we can obtain reliably.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">If a pick was published at the best price across a wider set of books, the comparison is between that price and a DraftKings or FanDuel close. We are telling you this rather than presenting one clean number, because the difference is real and you should know it is there.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Pinnacle.</strong> The same check found a second gap. This page lists the books we quote. Pinnacle is not one of them, because most US bettors cannot use it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Our code was picking the best price across a wider list that did include Pinnacle. Of 131 picks we have published, 42 carry a Pinnacle price, which is 32.1 percent of them. That price was real and it was the best one available, but it is not a price we can tell you that you could have taken.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We fixed the selection on September 2, 2026. From that commit forward, the price we publish comes only from the books listed on this page. We have not changed any pick already published. Those rows say what they said when they went out.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">One consequence worth stating plainly. When we publish a price from one book and record the close from another, the difference between them is not a number you could have captured yourself. Of the 23 published picks with a recorded close, 20 compare a price at one book against a close at another.</p>
+    <h4 id="our-capture-rate" class="text-base font-semibold text-white mt-6 mb-2 scroll-mt-6">Our capture rate</h4>
+    <p class="text-zinc-300 leading-relaxed mb-4">We do not always succeed. Some picks never get a close recorded at all. So we publish our capture rate, which is the share of picks where we successfully recorded one.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">That number is the foundation under every other number on this page. A grading system whose measurement is invisible would be the exact thing this page exists to refuse, and the capture rate is how you check ours.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>The bug that made it look worse than it is.</strong> As of August 13, 2026, we record a closing price on 143 of 170 attempts for MLB totals and 167 of 178 for MLB moneyline. Over the full life of the project those figures are 143 of 265 and 335 of 360.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The gap between those two pairs is not improvement. It is a bug.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Until July 22, 2026, our code asked our data provider for moneyline prices every time, including when the bet was a total. Every over/under lookup came back empty. Ninety-five attempts, nothing recorded, for three weeks, while moneyline ran above ninety percent on the same connection the entire time.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Commit e8356e4 fixed it. We did not notice for three weeks, and nothing in our alerting caught it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We report both eras rather than the one that flatters us. The commit is in the public log this page links to, so the boundary is checkable and is not a date we picked after seeing the numbers.</p>
+    <h4 id="coverage-the-number-behind-the-number" class="text-base font-semibold text-white mt-6 mb-2 scroll-mt-6">Coverage: the number behind the number</h4>
+    <p class="text-zinc-300 leading-relaxed mb-4">The rates above answer a narrow question: when we looked for a close, did we find one. They do not answer the wider one: what share of the picks we score ever got looked at.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">As of August 17, 2026, for MLB totals that was seven of twenty-five. For moneyline, six of eleven.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The bug fixed the looking. It did not fix the coverage, and coverage is the harder problem. We publish both, because publishing only the first would be publishing the flattering half.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>Corrected on August 17, 2026.</strong> This page previously said eleven of twenty-five for totals and six of ten for moneyline. Both were wrong and both were wrong in our favour. The totals figure overstated our coverage by sixteen points. The moneyline denominator was eleven, not ten.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We found this by rebuilding every number on this page from the logs, and we are publishing the method below so anyone can rebuild them too.</p>
+    <h4 id="how-we-count" class="text-base font-semibold text-white mt-6 mb-2 scroll-mt-6">How we count</h4>
+    <p class="text-zinc-300 leading-relaxed mb-4">An attempt is one snapshot request written to our logs for a specific pick.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A recorded close is a snapshot that came back with a price.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Totals are selections of the form OVER or UNDER followed by a number.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The two eras are split at commit e8356e4, July 22, 2026.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The capture rates in this section were counted through August 13, 2026, the day it was published, and are frozen at that date. The coverage figures in the paragraph above were recounted on August 17, 2026.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">These are event counts, not unique picks. A pick that gets snapshotted twice counts twice. Counted as unique picks instead, the post-fix totals figure is 130 of 146 rather than 143 of 170.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We are showing the event count because that is what was published, and we are telling you the difference rather than quietly switching to whichever number reads better.</p>
+    <h3 id="season-1-field" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The Season 1 field for MLB totals</h3>
+    <p class="text-zinc-300 leading-relaxed mb-4">The field is one model: v7. It has been posting publicly since June, and it is the only model whose picks are scored against this pond's threshold.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We also run a second model in shadow. Its picks appear in our public shadow ledger, labelled with its own model id, so you can find them there without asking us.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">It is not in the Season 1 field, and no model may enter a pond after that pond opens. That is our rule and we are applying it to our own model first.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The reason is worth stating because it does not flatter us. The second model prices on a recalibrated scale, and edge numbers are not comparable across models: a five on one scale is not a five on the other.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Applied as written, our published threshold of thirteen percent sits above anything that model has produced or, on our own historical record, could have produced.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We could have published a second threshold in its units and put it in the field. We are not going to. A second scoring number published after the first one is a change to the bar, whatever we call it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A field of one is the weakest version of this. One model measured against a fixed number is not a race between models, and we would rather say so than dress it up. What it is, is a bar published before anything ran, and a model being measured against it where you can watch.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4"><strong>When two models fire on the same game.</strong> More than one model can fire on the same game. When that happens, only the model already racing in the pond is posted. The other model's selection is still recorded, and the gate scores recorded rows, not what we posted.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">As of August 2026, that is a rule we hold ourselves to, not a machine. The second model is blocked from posting anywhere in the code, so the situation cannot arise yet. If a second model ever enters a pond, this is the rule it enters under.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The two models can also disagree about which side of a game to take. The second model is a recalibration of the first, so it can be less confident on the same game, and less confidence is sometimes enough to move the value from the over to the under. Where that happens, both rows appear in the shadow ledger on opposite sides of the same game.</p>
+    <h3 id="season-1" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Season 1</h3>
+    <p class="text-zinc-300 leading-relaxed mb-4">The first pond to open is MLB totals. It opened on September 5, 2026. Its field is published above, before that date. The gate numbers on this page are the numbers that field races against.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">MLB moneyline is shown and stays empty. An empty pond is not a gap in the display. It is what the standard looks like when nothing has cleared it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Other ponds open on their own sports' calendars. We said an NFL pond would open when the NFL season does. As of August 24, 2026, it is not opening.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We are collecting NFL market data and we will keep collecting it. But what we have is an overlay on the bookmaker's own posted line rather than an independent estimate, and we have no way to grade an NFL pick automatically.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A pond needs a model that disagrees with the market and a way to settle the result. We have neither for NFL yet. We would rather say that now than open a pond we cannot score.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">A pond with a future opening date is not an empty pond. It is a scheduled one.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We would rather run one pond we can measure than four we cannot.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The first verdict will take months, not weeks. The standard requires a real sample spread across real time, and there is no honest way to shorten that.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Nothing has cleared.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">It is entirely possible that nothing clears in Season 1. That outcome would be a result, and we would publish it the same way we would publish a success.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The eviction list ships empty. It will not stay that way forever.</p>
+    <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
+    <hr class="border-zinc-800 my-10">
     <h2 id="corrections" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">Corrections and history</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">October 15, 2026: reorganised this page into plain sections. No rule or number changed.</p>
     <h3 id="gate-numbers" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">How the gate numbers were set</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">Before August 20, 2026, the bars above were not final. We were still measuring how much closing line value varies on MLB totals, and we had too few observations to know. The numbers we would have used then were borrowed from moneyline, where we have more data.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">So we wrote the decision down before it happened.</p>
@@ -409,7 +423,7 @@
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Lab rule.</strong> A simple betting rule, frozen before its first game, racing in public on the dashboard.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>Entry.</strong> The same thing as a pick. Older sections of this page say entry; the counting rules are unchanged.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
-    <p class="text-zinc-500 text-sm mt-10"><em>Standard last changed: October 13, 2026. Full history: <a href="https://github.com/PixelForgePlays/pixelforgeplays-website/commits/main/standard.html" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">commit log</a>. Shadow ledger: <a href="https://pixelforgeplays.github.io/pixel-forge/data/shadow-ledger.json" class="text-zinc-400 hover:text-white underline underline-offset-2">shadow-ledger.json</a>. Correction, Sep 22, 2026: <a href="https://pixelforgeplays.github.io/pixel-forge/docs/2026-09-22-close-validity-correction.md" class="text-zinc-400 hover:text-white underline underline-offset-2">closing-price correction</a>.</em></p>
+    <p class="text-zinc-500 text-sm mt-10"><em>Standard last changed: October 15, 2026. Full history: <a href="https://github.com/PixelForgePlays/pixelforgeplays-website/commits/main/standard.html" class="text-zinc-400 hover:text-white underline underline-offset-2" target="_blank" rel="noopener">commit log</a>. Shadow ledger: <a href="https://pixelforgeplays.github.io/pixel-forge/data/shadow-ledger.json" class="text-zinc-400 hover:text-white underline underline-offset-2">shadow-ledger.json</a>. Correction, Sep 22, 2026: <a href="https://pixelforgeplays.github.io/pixel-forge/docs/2026-09-22-close-validity-correction.md" class="text-zinc-400 hover:text-white underline underline-offset-2">closing-price correction</a>.</em></p>
     <p class="text-zinc-500 text-sm mt-4">Gamble responsibly. 21+. 1-800-GAMBLER, ncpgambling.org</p>
 
   </div>
