@@ -23,7 +23,6 @@
   <meta name="twitter:image" content="https://www.pixelforgeplays.com/og-image.png">
   <meta name="twitter:image:alt" content="Pixel Forge Plays: Betting rules, tested in public.">
   <meta name="twitter:site" content="@PixelForgePlays">
-  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     .pfp-glow{background:radial-gradient(60% 50% at 50% 0%,rgba(139,61,255,.28),transparent 70%)}
     .pfp-btn{display:flex;align-items:center;justify-content:center;min-height:48px;padding:0 1.25rem;border-radius:.75rem;font-weight:700;text-align:center;transition:background .15s}
@@ -43,17 +42,18 @@
       .live-v{font-size:1rem}
     }
   </style>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="text-white" style="background:#0B0A10">
   <div class="pfp-glow">
   <div class="max-w-xl mx-auto px-5 pt-10 pb-16">
     <nav aria-label="Pixel Forge Plays sites" class="flex justify-between sm:justify-start sm:gap-7 font-mono text-xs uppercase tracking-wider text-zinc-400 whitespace-nowrap border-b border-zinc-800 pb-3 mb-8">
-      <a href="https://www.pixelforgeplays.com/" class="text-white" aria-current="page">Home</a>
-      <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html" class="hover:text-white">Lab</a>
-      <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html" class="hover:text-white">Builders</a>
-      <a href="https://pixelforgeplays.github.io/pfp-tools/rules/" class="hover:text-white">Rules</a>
-      <a href="https://pixelforgeplays.github.io/pfp-tools/" class="hover:text-white">Tools</a>
-      <a href="https://www.pixelforgeplays.com/standard.html" class="hover:text-white">Standard</a>
+      <a href="https://www.pixelforgeplays.com/" class="py-3 -my-3 text-white" aria-current="page">Home</a>
+      <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html" class="py-3 -my-3 hover:text-white">Lab</a>
+      <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html" class="py-3 -my-3 hover:text-white">Builders</a>
+      <a href="https://pixelforgeplays.github.io/pfp-tools/rules/" class="py-3 -my-3 hover:text-white">Rules</a>
+      <a href="https://pixelforgeplays.github.io/pfp-tools/" class="py-3 -my-3 hover:text-white">Tools</a>
+      <a href="https://www.pixelforgeplays.com/standard.html" class="py-3 -my-3 hover:text-white">Standard</a>
     </nav>
 
     <!-- Hero -->
@@ -123,9 +123,9 @@
       <p id="lab-intro" class="text-zinc-300 mb-6">Short notes when something changes. No rule has passed the Standard yet. If one ever does, you hear first, at founders' pricing. No spam.</p>
 
       <!-- Brief 1137: posts straight to Buttondown (the Lab Notes list), never Formspree. Optional fields are
-           stored on the subscriber as Buttondown metadata (metadata__<key>); the hidden tag marks the source. -->
+           stored on the subscriber as Buttondown metadata (metadata__<key>); the hidden metadata__source marks the source. -->
       <form id="lab-form" action="https://buttondown.com/api/emails/embed-subscribe/pixelforgeplays" method="POST" class="space-y-5">
-        <input type="hidden" name="tag" value="website">
+        <input type="hidden" name="metadata__source" value="website">
 
         <!-- Email -->
         <input type="email" name="email" placeholder="Your email address" required
@@ -414,7 +414,7 @@
       var posted = sumNum(racing, 'entries');
       if (posted === null) setLine(n5DetailEl, '');
       else if (posted < 1) setLine(n5DetailEl, 'No games have matched ' + (k === 1 ? 'it' : 'them') + ' yet');
-      else setLine(n5DetailEl, fmtInt(posted) + ' ' + (posted === 1 ? 'pick' : 'picks') + ' so far');
+      else setLine(n5DetailEl, fmtInt(posted) + ' ' + (posted === 1 ? 'pick' : 'picks') + ' posted so far');
       setLine(n5StatusEl, posted !== null && posted < 1 ? '' : chipWording(lab));
     }
     asofEl.textContent = 'As of ' + asof;
@@ -487,6 +487,18 @@
   });
 })();
 </script>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cc8971f3f9114b059946b39b5b3bf605"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics: production hosts only, so Vercel previews are not counted. -->
+<script>
+(function () {
+  var host = location.hostname;
+  if (host !== 'www.pixelforgeplays.com' && host !== 'pixelforgeplays.com') return;
+  var s = document.createElement('script');
+  s.type = 'module';
+  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  s.setAttribute('data-cf-beacon', '{"token": "cc8971f3f9114b059946b39b5b3bf605"}');
+  document.body.appendChild(s);
+})();
+</script>
+<!-- End Cloudflare Web Analytics -->
 </body>
 </html>

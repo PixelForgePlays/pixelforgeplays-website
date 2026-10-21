@@ -24,17 +24,17 @@
   <meta name="twitter:description" content="How Pixel Forge Plays decides which betting models are worth paying for, and what happens to the ones that are not.">
   <meta name="twitter:image" content="https://www.pixelforgeplays.com/og-image.png">
   <meta name="twitter:image:alt" content="Pixel Forge Plays: Betting rules, tested in public.">
-  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="/styles.css">
 </head>
 <body class="bg-zinc-950 text-white">
   <div id="top" class="max-w-3xl mx-auto px-6 py-16">
     <nav aria-label="Pixel Forge Plays sites" class="flex justify-between sm:justify-start sm:gap-7 font-mono text-xs uppercase tracking-wider text-zinc-400 whitespace-nowrap border-b border-zinc-800 pb-3 mb-8">
-      <a href="https://www.pixelforgeplays.com/" class="hover:text-white">Home</a>
-      <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html" class="hover:text-white">Lab</a>
-      <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html" class="hover:text-white">Builders</a>
-      <a href="https://pixelforgeplays.github.io/pfp-tools/rules/" class="hover:text-white">Rules</a>
-      <a href="https://pixelforgeplays.github.io/pfp-tools/" class="hover:text-white">Tools</a>
-      <a href="https://www.pixelforgeplays.com/standard.html" class="text-white" aria-current="page">Standard</a>
+      <a href="https://www.pixelforgeplays.com/" class="py-3 -my-3 hover:text-white">Home</a>
+      <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html" class="py-3 -my-3 hover:text-white">Lab</a>
+      <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html" class="py-3 -my-3 hover:text-white">Builders</a>
+      <a href="https://pixelforgeplays.github.io/pfp-tools/rules/" class="py-3 -my-3 hover:text-white">Rules</a>
+      <a href="https://pixelforgeplays.github.io/pfp-tools/" class="py-3 -my-3 hover:text-white">Tools</a>
+      <a href="https://www.pixelforgeplays.com/standard.html" class="py-3 -my-3 text-white" aria-current="page">Standard</a>
     </nav>
     <p class="text-sm text-zinc-400 mb-6"><a href="/" class="hover:text-white">&larr; Home</a>
       &middot; <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#race" class="hover:text-white">The race</a>
@@ -473,6 +473,18 @@
     <p class="text-zinc-500 text-sm mt-4">Gamble responsibly. 21+. 1-800-GAMBLER, ncpgambling.org</p>
 
   </div>
-<!-- Cloudflare Web Analytics --><script type='module' src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "cc8971f3f9114b059946b39b5b3bf605"}'></script><!-- End Cloudflare Web Analytics -->
+<!-- Cloudflare Web Analytics: production hosts only, so Vercel previews are not counted. -->
+<script>
+(function () {
+  var host = location.hostname;
+  if (host !== 'www.pixelforgeplays.com' && host !== 'pixelforgeplays.com') return;
+  var s = document.createElement('script');
+  s.type = 'module';
+  s.src = 'https://static.cloudflareinsights.com/beacon.min.js';
+  s.setAttribute('data-cf-beacon', '{"token": "cc8971f3f9114b059946b39b5b3bf605"}');
+  document.body.appendChild(s);
+})();
+</script>
+<!-- End Cloudflare Web Analytics -->
 </body>
 </html>
