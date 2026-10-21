@@ -1,5 +1,14 @@
 {
   "redirects": [
-    { "source": "/builders", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 301 }
+    { "source": "/builders", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 301 },
+    { "source": "/lab", "destination": "https://pixelforgeplays.github.io/pixel-forge/dashboard.html", "statusCode": 307 },
+    { "source": "/race", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 307 },
+    { "source": "/tools", "destination": "https://pixelforgeplays.github.io/pfp-tools/", "statusCode": 307 },
+    { "source": "/rules", "destination": "https://pixelforgeplays.github.io/pfp-tools/rules/", "statusCode": 307 },
+    { "source": "/notes", "destination": "https://pixelforgeplays.github.io/pfp-tools/notes/", "statusCode": 307 },
+    { "source": "/discord", "destination": "https://discord.gg/MXnsWJQVCA", "statusCode": 307 },
+    { "source": "/how-this-started", "destination": "https://pixelforgeplays.github.io/pixel-forge/how-this-started.html", "statusCode": 307 },
+    { "source": "/standard", "destination": "/standard.html", "statusCode": 307 },
+    { "source": "/privacy", "destination": "/privacy.html", "statusCode": 307 }
   ]
 }
