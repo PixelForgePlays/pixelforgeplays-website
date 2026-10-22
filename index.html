@@ -47,12 +47,13 @@
 <body class="text-white" style="background:#0B0A10">
   <div class="pfp-glow">
   <div class="max-w-xl mx-auto px-5 pt-10 pb-16">
-    <nav aria-label="Pixel Forge Plays sites" class="flex justify-between sm:justify-start sm:gap-7 font-mono text-xs uppercase tracking-wider text-zinc-400 whitespace-nowrap border-b border-zinc-800 pb-3 mb-8">
+    <nav aria-label="Pixel Forge Plays sites" class="flex flex-wrap gap-x-5 gap-y-6 sm:flex-nowrap sm:gap-7 font-mono text-xs uppercase tracking-wider text-zinc-400 whitespace-nowrap border-b border-zinc-800 pb-3 mb-8">
       <a href="https://www.pixelforgeplays.com/" class="py-3 -my-3 text-white" aria-current="page">Home</a>
       <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html" class="py-3 -my-3 hover:text-white">Lab</a>
       <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html" class="py-3 -my-3 hover:text-white">Builders</a>
       <a href="https://pixelforgeplays.github.io/pfp-tools/rules/" class="py-3 -my-3 hover:text-white">Rules</a>
       <a href="https://pixelforgeplays.github.io/pfp-tools/" class="py-3 -my-3 hover:text-white">Tools</a>
+      <a href="https://www.pixelforgeplays.com/notes" class="py-3 -my-3 hover:text-white">Notes</a>
       <a href="https://www.pixelforgeplays.com/standard.html" class="py-3 -my-3 hover:text-white">Standard</a>
     </nav>
 
@@ -60,7 +61,7 @@
     <header class="text-center mt-6 mb-14">
       <img src="/apple-touch-icon.png" width="96" height="96" alt="Pixel Forge Plays" class="mx-auto rounded-2xl">
       <h1 class="mt-6 text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.02]">Betting rules, <span style="color:#A8E008">tested</span> <span style="color:#8B3DFF">in public.</span></h1>
-      <p class="mt-5 text-lg text-zinc-300">Every pick is posted before the game starts, then graded against the closing line. We do not know yet whether our rules beat that price. You will see either way.</p>
+      <p class="mt-5 text-lg text-zinc-300">Every pick is posted before the game starts. Then it is graded against the close. The close is the last price before the game starts. We do not know yet whether our rules beat that price. You will see either way.</p>
       <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
         <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#lab" class="pfp-btn text-black" style="background:#A8E008">See the live race</a>
         <a href="#lab-notes" class="pfp-btn border border-zinc-600 text-white hover:bg-zinc-800">Get the lab notes</a>
@@ -104,8 +105,8 @@
     </header>
 
     <!-- Hook -->
-    <p class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-center mb-14">We don't grade ourselves. <span style="color:#8B3DFF">The closing line does.</span></p>
-    <p class="text-lg text-zinc-300 text-center -mt-10 mb-14">The closing line is the last price a sportsbook offers before a game starts. Getting a better price than that one is the sign we look for. It shows up before wins and losses do.</p>
+    <p class="text-3xl sm:text-4xl font-extrabold tracking-tight leading-tight text-center mb-14">We don't grade ourselves. <span style="color:#8B3DFF">The close does.</span></p>
+    <p class="text-lg text-zinc-300 text-center -mt-10 mb-14">The close is also called the closing line. Getting a better price than the close is the sign we look for. It shows up before wins and losses do.</p>
 
     <!-- How it works -->
     <section class="mb-14" aria-labelledby="how">
@@ -113,14 +114,14 @@
       <ol class="space-y-3">
         <li class="pfp-card"><span class="font-bold" style="color:#A8E008">1. Lock the rule.</span> <span class="text-zinc-300">Each rule is frozen before its first game.</span></li>
         <li class="pfp-card"><span class="font-bold" style="color:#A8E008">2. Post every pick.</span> <span class="text-zinc-300">Before the game, losses included.</span></li>
-        <li class="pfp-card"><span class="font-bold" style="color:#A8E008">3. Let the close decide.</span> <span class="text-zinc-300">We only sell a rule's picks if it beats the closing line by the margin we published in advance. Nothing has reached that margin yet.</span></li>
+        <li class="pfp-card"><span class="font-bold" style="color:#A8E008">3. Let the close decide.</span> <span class="text-zinc-300">We only sell a rule's picks if it beats the close by the margin we published in advance. Nothing has reached that margin yet.</span></li>
       </ol>
     </section>
 
     <!-- Form -->
     <div id="lab-notes" class="bg-zinc-900 border border-zinc-800 rounded-2xl p-6 sm:p-8 mb-8 scroll-mt-6" style="border-top:3px solid #8B3DFF">
       <h2 id="lab-title" class="text-2xl font-bold mb-2">Get the lab notes</h2>
-      <p id="lab-intro" class="text-zinc-300 mb-6">Short notes when something changes. No rule has passed the Standard yet. If one ever does, you hear first, at founders' pricing. No spam.</p>
+      <p id="lab-intro" class="text-zinc-300 mb-6">Short notes when something changes. The Standard is the bar a rule must clear before we sell its picks. No rule has cleared it yet. If one ever does, you hear first. No spam.</p>
 
       <!-- Brief 1137: posts straight to Buttondown (the Lab Notes list), never Formspree. Optional fields are
            stored on the subscriber as Buttondown metadata (metadata__<key>); the hidden metadata__source marks the source. -->
@@ -137,10 +138,10 @@
           <select name="metadata__sport" class="w-full bg-zinc-800 border border-zinc-700 rounded-lg px-4 py-3 text-white">
             <option value="">Select one (optional)</option>
             <option value="NHL">NHL</option>
-            <option value="Soccer">Soccer</option>
             <option value="NBA">NBA</option>
-            <option value="College basketball">College basketball</option>
-            <option value="MLB">MLB</option>
+            <option value="Soccer">Soccer</option>
+            <option value="UFC">UFC</option>
+            <option value="MLB">MLB (2027)</option>
             <option value="Other">Other</option>
           </select>
         </div>
