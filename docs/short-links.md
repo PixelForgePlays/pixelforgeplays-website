@@ -10,12 +10,12 @@
 
 ## Adding a name
 
-Add one line to `vercel.json`, **above** the `/b/:path*` catch-all (first match wins), then add a row to the table above:
+Add one line to `vercel.json`, **above** the `/b(/.*)?` catch-all (first match wins), then add a row to the table above:
 
 ```json
-{ "source": "/b/([Dd][Aa][Nn])", "destination": "https://pixelforgeplays.github.io/pixel-forge/builder.html?id=<entrant_id>", "statusCode": 307 },
+{ "source": "/b/([Dd][Aa][Nn]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/builder.html?id=<entrant_id>", "statusCode": 307 },
 ```
 
-Spell the name as one `[Xx]` pair per letter so every capitalization matches (Vercel redirect sources are case-sensitive). Digits and `-` are written as-is.
+Spell the name as one `[Xx]` pair per letter so every capitalization matches (Vercel redirect sources are case-sensitive). Digits and `-` are written as-is. Keep the trailing `/?` inside the parentheses so `/b/<name>/` works too.
 
 All `/b/` links are 307 (temporary) so a target can be changed later without browsers holding a stale cached redirect.
