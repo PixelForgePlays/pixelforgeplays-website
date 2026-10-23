@@ -12,6 +12,7 @@
     { "source": "/privacy", "destination": "/privacy.html", "statusCode": 307 },
     { "source": "/b/([Kk][Rr]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/builder.html?id=kr_nhl", "statusCode": 307 },
     { "source": "/b/([Jj][Pp][Ee][Tt][Bb][Ee][Tt][Ss]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/builder.html?id=jpetbets_nhl", "statusCode": 307 },
+    { "source": "/b/([Oo][Cc][Ee][Ll][Oo][Tt][Aa][Nn][Aa][Ll][Yy][Tt][Ii][Cc][Ss]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/builder.html?id=dan_nhl", "statusCode": 307 },
     { "source": "/b(/.*)?", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 307 }
   ]
 }
