@@ -8,6 +8,7 @@
 |------|--------|------------|
 | `kr` | https://pixelforgeplays.github.io/pixel-forge/builder.html?id=kr_nhl | 2026-10-23 (merged) |
 | `jpetbets` | https://pixelforgeplays.github.io/pixel-forge/builder.html?id=jpetbets_nhl | 2026-10-23 |
+| `ocelotanalytics` | https://pixelforgeplays.github.io/pixel-forge/builder.html?id=dan_nhl | 2026-10-23 |
 
 ## Adding a name
 
