@@ -2,7 +2,13 @@
 
 **Rules:** names are permanent (never reused, never changed once live), lowercase is the canonical form, one name per entrant.
 
-`pixelforgeplays.com/b/<name>` sends a graded entrant to their PFP builder page. Any capitalization works. Any unknown name goes to the builders page (https://pixelforgeplays.github.io/pixel-forge/builders.html).
+`pixelforgeplays.com/b/<name>` sends a graded entrant to their PFP builder page:
+
+- `kr`, `jpetbets` and `ocelotanalytics` work in any capitalization (e.g. `/b/KR`).
+- Any other lowercase name (`a-z`, `0-9`, `-`, up to 32 characters) goes to `https://pixelforgeplays.github.io/pixel-forge/b/<name>.html`. A name with no page there yet shows a GitHub 404 for now.
+- Anything else (mixed case for other names, other characters, longer names, deeper paths, bare `/b`) goes to the builders page (https://pixelforgeplays.github.io/pixel-forge/builders.html).
+
+A trailing slash is accepted in all cases.
 
 | Name | Target | Live since |
 |------|--------|------------|
