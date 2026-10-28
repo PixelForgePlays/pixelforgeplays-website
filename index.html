@@ -35,7 +35,6 @@
     .live-s{margin-top:.25rem;font-size:.8rem;line-height:1.3;color:#a1a1aa;overflow-wrap:break-word}
     a.live-tile{color:inherit;text-decoration:none}
     a.live-tile:hover{border-color:#8B3DFF}
-    #builders-home{overflow-wrap:break-word}
     .pfp-board{border:1px solid #27243a;border-radius:1rem;background:#16141f;overflow:hidden}
     .pfp-board ol{list-style:none;margin:0;padding:0}
     .pfp-board .row{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 14px}
@@ -106,10 +105,6 @@
           <noscript><p class="status">The board needs JavaScript. <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html">See the full board</a>.</p></noscript>
         </div>
       </section>
-      <p id="builders-home" class="mt-4 text-center text-sm leading-snug text-zinc-300" hidden>
-        <span id="builders-home-copy"></span>
-        <a href="/builders" class="whitespace-nowrap text-white underline underline-offset-2">See the builders race</a>
-      </p>
       <section id="live-lab" class="mt-8 text-left" hidden aria-label="Live from the lab">
         <p class="font-mono text-xs uppercase tracking-wider text-zinc-400">Live from the lab</p>
         <p id="live-asof" class="mt-1 text-sm text-zinc-500"></p>
@@ -213,7 +208,6 @@
         <a class="pfp-card" href="standard.html"><span class="font-semibold">The Standard: the bar a rule has to clear before we sell its picks</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span></a>
         <a class="pfp-card" href="https://pixelforgeplays.github.io/pfp-tools/"><span class="font-semibold">Free tools</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span><span class="block text-sm text-zinc-400 mt-1">Is this record luck? Did you beat the close?</span></a>
         <a class="pfp-card" href="https://pixelforgeplays.github.io/pfp-tools/get-graded/" rel="noopener"><span class="font-semibold">Get graded</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span><span class="block text-sm text-zinc-400 mt-1">Post your picks on X like you already do. We grade them against the closing line. No sportsbook login, no app.</span></a>
-        <a class="pfp-card" href="https://www.pixelforgeplays.com/builders"><span class="font-semibold">Race your model against ours</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span></a>
         <a class="pfp-card" href="https://pixelforgeplays.github.io/pixel-forge/how-this-started.html"><span class="font-semibold">How this started</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span></a>
       </div>
     </section>
@@ -478,30 +472,15 @@
     if (!isFinite(open) || open < 0) return null;
     return { active: active, cap: cap, open: open };
   }
-  // The builders page counts cappers on their own, so this line says models,
-  // and it names the cap the way that page does.
-  function buildersSentence(active, open, cap) {
-    var models = active === 1
-      ? '1 outside model is racing next to ours.'
-      : fmtInt(active) + ' outside models are racing next to ours.';
-    var spots = (open === 1 ? '1 of ' : fmtInt(open) + ' of ') + fmtInt(cap)
-      + (open === 1 ? ' model spots is open.' : ' model spots are open.');
-    return models + ' ' + spots;
-  }
   function applyBuilders(lab) {
-    var strip = document.getElementById('builders-home');
-    var copy = document.getElementById('builders-home-copy');
     var tile = document.getElementById('live-builders');
     var nEl = document.getElementById('live-builders-n');
     var openEl = document.getElementById('live-builders-open');
     var race = buildersRace(lab);
     if (!race) {
-      if (strip) strip.hidden = true;
       if (tile) tile.hidden = true;
       return;
     }
-    if (copy) copy.textContent = buildersSentence(race.active, race.open, race.cap);
-    if (strip) strip.hidden = false;
     if (nEl) nEl.textContent = fmtInt(race.active);
     if (openEl) openEl.textContent = fmtInt(race.open) + ' of ' + fmtInt(race.cap) + ' model spots open';
     if (tile) tile.hidden = false;
@@ -613,8 +592,6 @@
     .catch(function () {
       clearTimeout(timer);
       section.hidden = true;
-      var strip = document.getElementById('builders-home');
-      if (strip) strip.hidden = true;
     });
 })();
 </script>
