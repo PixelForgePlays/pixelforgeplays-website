@@ -7,21 +7,21 @@
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <meta name="apple-mobile-web-app-title" content="PFP">
-  <title>Pixel Forge Plays: Betting rules, tested in public.</title>
-  <meta name="description" content="Betting rules, tested in public. Every pick is posted before the game starts, then graded against the closing line.">
-  <meta property="og:title" content="Pixel Forge Plays: Betting rules, tested in public.">
-  <meta property="og:description" content="Every pick is posted before the game starts, then graded against the closing line. We do not know yet whether our rules beat that price. You will see either way.">
+  <title>Pixel Forge Plays: We grade betting picks against the closing line</title>
+  <meta name="description" content="Model builders, cappers and our own rules on one public board. Free, and nobody can pay us for a better grade.">
+  <meta property="og:title" content="Pixel Forge Plays: We grade betting picks against the closing line">
+  <meta property="og:description" content="Model builders, cappers and our own rules on one public board. Free, and nobody can pay us for a better grade.">
   <meta property="og:url" content="https://www.pixelforgeplays.com/">
-  <meta property="og:image" content="https://www.pixelforgeplays.com/og-image.png">
+  <meta property="og:image" content="https://pixelforgeplays.github.io/pfp-tools/get-graded/og.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Pixel Forge Plays: Betting rules, tested in public.">
+  <meta property="og:image:alt" content="Pixel Forge Plays: We grade betting picks against the closing line">
   <meta property="og:type" content="website">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Pixel Forge Plays: Betting rules, tested in public.">
-  <meta name="twitter:description" content="Every pick is posted before the game starts, then graded against the closing line. We do not know yet whether our rules beat that price. You will see either way.">
-  <meta name="twitter:image" content="https://www.pixelforgeplays.com/og-image.png">
-  <meta name="twitter:image:alt" content="Pixel Forge Plays: Betting rules, tested in public.">
+  <meta name="twitter:title" content="Pixel Forge Plays: We grade betting picks against the closing line">
+  <meta name="twitter:description" content="Model builders, cappers and our own rules on one public board. Free, and nobody can pay us for a better grade.">
+  <meta name="twitter:image" content="https://pixelforgeplays.github.io/pfp-tools/get-graded/og.png">
+  <meta name="twitter:image:alt" content="Pixel Forge Plays: We grade betting picks against the closing line">
   <meta name="twitter:site" content="@PixelForgePlays">
   <style>
     .pfp-glow{background:radial-gradient(60% 50% at 50% 0%,rgba(139,61,255,.28),transparent 70%)}
@@ -35,11 +35,40 @@
     .live-s{margin-top:.25rem;font-size:.8rem;line-height:1.3;color:#a1a1aa;overflow-wrap:break-word}
     a.live-tile{color:inherit;text-decoration:none}
     a.live-tile:hover{border-color:#8B3DFF}
-    #builders-home{overflow-wrap:break-word}
+    .pfp-board{border:1px solid #27243a;border-radius:1rem;background:#16141f;overflow:hidden}
+    .pfp-board ol{list-style:none;margin:0;padding:0}
+    .pfp-board .row{display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:10px;align-items:center;padding:12px 14px}
+    .pfp-board .row+.row{border-top:1px solid #22202a}
+    .pfp-board .rank{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem;color:#a1a1aa}
+    .pfp-board .who{display:flex;flex-direction:column;gap:5px;min-width:0}
+    .pfp-board .name{font-weight:700;line-height:1.2;overflow-wrap:anywhere}
+    .pfp-board .meta{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;font-size:.8rem;color:#a1a1aa;min-width:0}
+    .pfp-board .meta a{color:#a1a1aa;overflow-wrap:anywhere}
+    .pfp-board .meta a:hover{color:#fff}
+    .pfp-board .chip{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:.12em;padding:2px 6px;border-radius:3px;border:1px solid currentColor;white-space:nowrap}
+    .pfp-board .chip.rule{color:#B794FF}
+    .pfp-board .chip.builder{color:#1ABC9C;border-color:#1A6B5C;background:rgba(26,188,156,.08)}
+    .pfp-board .chip.capper{color:#FF8C2B;border-color:#7A3E12;background:rgba(255,140,43,.08)}
+    .pfp-board .chip .f{color:#F2C14E;font-weight:700}
+    .pfp-board .score{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right}
+    .pfp-board .clv{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1.15rem;font-weight:700}
+    .pfp-board .n{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:#a1a1aa;white-space:nowrap}
+    .pfp-board .good{color:#A8E008}
+    .pfp-board .bad{color:#FF6B5E}
+    .pfp-board .row.more{display:block;font-size:.95rem}
+    .pfp-board .row.more a{font-weight:600;color:#fff;text-decoration:underline;text-underline-offset:2px}
+    .pfp-board .row.you{background:repeating-linear-gradient(-45deg,#13121a,#13121a 12px,#17151f 12px,#17151f 24px)}
+    .pfp-board .row.you .rank{color:#B794FF}
+    .pfp-board .join{display:inline-flex;align-items:center;min-height:44px;color:#fff;background:#8B3DFF;font-weight:700;padding:0 18px;border-radius:.5rem}
+    .pfp-board .join:hover{background:#7d2bf3}
+    .pfp-board .status{margin:0;padding:16px 14px;color:#d4d4d8}
+    .pfp-board .status a{color:#fff;text-decoration:underline;text-underline-offset:2px}
     @media (min-width:640px){
       .live-lab-grid{grid-template-columns:repeat(4,minmax(0,1fr))}
       .live-k{font-size:.7rem}
       .live-v{font-size:1rem}
+      .pfp-board .row{grid-template-columns:36px minmax(0,1fr) auto;gap:14px;padding:14px 18px}
+      .pfp-board .clv{font-size:1.3rem}
     }
   </style>
   <link rel="stylesheet" href="/styles.css">
@@ -61,17 +90,21 @@
     <!-- Hero -->
     <header class="text-center mt-6 mb-14">
       <img src="/apple-touch-icon.png" width="96" height="96" alt="Pixel Forge Plays" class="mx-auto rounded-2xl">
-      <h1 class="mt-6 text-5xl sm:text-6xl font-extrabold tracking-tight leading-[1.02]">Betting rules, <span style="color:#A8E008">tested</span> <span style="color:#8B3DFF">in public.</span></h1>
-      <p class="mt-5 text-lg text-zinc-300">Every pick is posted before the game starts. Then it is graded against the close. The close is the last price before the game starts. We do not know yet whether our rules beat that price. You will see either way.</p>
-      <p class="mt-4 text-lg text-zinc-300">We grade other people's picks. We never sell them. Nothing we run is for sale until it beats the closing line over a hundred picks. The bar was set before the first one.</p>
+      <h1 class="mt-6 text-4xl sm:text-5xl font-extrabold tracking-tight leading-[1.05]">We grade betting picks against <span style="color:#A8E008">the closing line.</span> <span style="color:#8B3DFF">Ours too.</span></h1>
+      <p class="mt-5 text-lg text-zinc-300">Model builders, cappers and our own rules on one public board. Free, and nobody can pay us for a better grade.</p>
       <div class="mt-7 flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html#lab" class="pfp-btn text-black" style="background:#A8E008">See the live race</a>
-        <a href="#lab-notes" class="pfp-btn border border-zinc-600 text-white hover:bg-zinc-800">Get the lab notes</a>
+        <a href="https://pixelforgeplays.github.io/pfp-tools/get-graded/" class="pfp-btn text-black" style="background:#A8E008">Get graded</a>
+        <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html" class="pfp-btn border border-zinc-600 text-white hover:bg-zinc-800">See the full board</a>
       </div>
-      <p id="builders-home" class="mt-4 text-center text-sm leading-snug text-zinc-300" hidden>
-        <span id="builders-home-copy"></span>
-        <a href="/builders" class="whitespace-nowrap text-white underline underline-offset-2">See the builders race</a>
-      </p>
+      <!-- Brief 1295: the one board, same logic as pfp-tools get-graded.js, filled from lab.json below. -->
+      <section id="home-board" class="mt-8 text-left" aria-label="The board">
+        <p class="font-mono text-xs uppercase tracking-wider text-zinc-400">The board</p>
+        <p id="board-sub" class="mt-1 text-sm text-zinc-500">Ranked by how much better than the close they bet, per pick.</p>
+        <div id="board-body" class="pfp-board mt-3" aria-live="polite">
+          <p class="status">Loading the board...</p>
+          <noscript><p class="status">The board needs JavaScript. <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html">See the full board</a>.</p></noscript>
+        </div>
+      </section>
       <section id="live-lab" class="mt-8 text-left" hidden aria-label="Live from the lab">
         <p class="font-mono text-xs uppercase tracking-wider text-zinc-400">Live from the lab</p>
         <p id="live-asof" class="mt-1 text-sm text-zinc-500"></p>
@@ -118,6 +151,7 @@
         <li class="pfp-card"><span class="font-bold" style="color:#A8E008">2. Post every pick.</span> <span class="text-zinc-300">Before the game, losses included.</span></li>
         <li class="pfp-card"><span class="font-bold" style="color:#A8E008">3. Let the close decide.</span> <span class="text-zinc-300">No rule has cleared the bar yet.</span></li>
       </ol>
+      <p class="mt-4 text-sm text-zinc-400"><a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html" class="text-zinc-300 underline underline-offset-2 hover:text-white">How our own rules are doing</a></p>
     </section>
 
     <!-- Form -->
@@ -174,7 +208,6 @@
         <a class="pfp-card" href="standard.html"><span class="font-semibold">The Standard: the bar a rule has to clear before we sell its picks</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span></a>
         <a class="pfp-card" href="https://pixelforgeplays.github.io/pfp-tools/"><span class="font-semibold">Free tools</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span><span class="block text-sm text-zinc-400 mt-1">Is this record luck? Did you beat the close?</span></a>
         <a class="pfp-card" href="https://pixelforgeplays.github.io/pfp-tools/get-graded/" rel="noopener"><span class="font-semibold">Get graded</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span><span class="block text-sm text-zinc-400 mt-1">Post your picks on X like you already do. We grade them against the closing line. No sportsbook login, no app.</span></a>
-        <a class="pfp-card" href="https://www.pixelforgeplays.com/builders"><span class="font-semibold">Race your model against ours</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span></a>
         <a class="pfp-card" href="https://pixelforgeplays.github.io/pixel-forge/how-this-started.html"><span class="font-semibold">How this started</span><span aria-hidden="true" style="color:#A8E008"> &rarr;</span></a>
       </div>
     </section>
@@ -201,6 +234,139 @@
 
   </div>
   </div>
+<script>
+// Brief 1295: the board, same logic and look as pfp-tools get-graded.js.
+// Lab rules (controls left out), builders and cappers on one list. A row is
+// shown once graded >= minGraded (25 unless the file says otherwise), ranked
+// by clvMean, top 10 only. Every number is printed as lab.json gives it.
+(function () {
+  var body = document.getElementById('board-body');
+  if (!body) return;
+  var DATA_URL = 'https://pixelforgeplays.github.io/pixel-forge/data/lab.json';
+  var BOARD_URL = 'https://pixelforgeplays.github.io/pixel-forge/builders.html';
+  var JOIN_URL = 'https://pixelforgeplays.github.io/pfp-tools/get-graded/';
+  var MIN_GRADED = 25;
+  var TOP = 10;
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+  function isText(x) { return typeof x === 'string' && x.trim() !== ''; }
+  function isNum(x) { return typeof x === 'number' && isFinite(x); }
+  function isCount(x) { return isNum(x) && x >= 0 && Math.floor(x) === x; }
+  // +0.44, -1.24, 0.00.
+  function formatClv(x) {
+    var s = Math.abs(x).toFixed(2);
+    return x > 0 ? '+' + s : (x < 0 ? '-' + s : s);
+  }
+  // "H3 - Favorite" reads "H3 Favorite".
+  function ruleName(s) { return String(s).replace(/\s+-\s+/, ' ').trim(); }
+  function handleOf(b) { return isText(b.handle) ? b.handle.trim().replace(/^@/, '') : ''; }
+  function typeOf(b) {
+    return isText(b.entrantType) && b.entrantType.trim().toLowerCase() === 'capper' ? 'CAPPER' : 'BUILDER';
+  }
+  function minOf(row, data) {
+    if (isCount(row.minGraded) && row.minGraded > 0) return row.minGraded;
+    var builders = Array.isArray(data.builders) ? data.builders : [];
+    for (var i = 0; i < builders.length; i++) {
+      if (builders[i] && isCount(builders[i].minGraded) && builders[i].minGraded > 0) return builders[i].minGraded;
+    }
+    return MIN_GRADED;
+  }
+  function rows(data) {
+    var out = [];
+    (Array.isArray(data.horses) ? data.horses : []).forEach(function (h) {
+      if (!h || h.isControl === true) return;
+      out.push({
+        type: 'RULE',
+        name: ruleName(h.name || h.id),
+        sub: isText(h.sport) ? h.sport.trim() : '',
+        subUrl: null,
+        graded: isCount(h.graded) ? h.graded : 0,
+        n: isCount(h.clvN) ? h.clvN : (isCount(h.graded) ? h.graded : 0),
+        clvMean: isNum(h.clvMean) ? h.clvMean : null,
+        min: minOf(h, data)
+      });
+    });
+    (Array.isArray(data.builders) ? data.builders : []).forEach(function (b) {
+      if (!b) return;
+      var handle = handleOf(b);
+      out.push({
+        type: typeOf(b),
+        founding: b.foundingBuilder === true,
+        name: isText(b.name) ? b.name.trim() : (isText(b.shortName) ? b.shortName.trim() : (handle || b.id)),
+        sub: handle ? '@' + handle : '',
+        subUrl: handle ? 'https://x.com/' + encodeURIComponent(handle) : null,
+        graded: isCount(b.graded) ? b.graded : 0,
+        n: isCount(b.clvN) ? b.clvN : (isCount(b.graded) ? b.graded : 0),
+        clvMean: isNum(b.clvMean) ? b.clvMean : null,
+        min: minOf(b, data)
+      });
+    });
+    return out.filter(function (r) {
+      return r.graded > 0 && r.graded >= r.min && r.clvMean !== null;
+    }).sort(function (a, b) {
+      return b.clvMean - a.clvMean || b.n - a.n || (a.name < b.name ? -1 : 1);
+    }).slice(0, TOP);
+  }
+  // buildersOpen is a count beside buildersCap, or { cap, open }.
+  function spots(data) {
+    var o = data.buildersOpen;
+    if (o && typeof o === 'object' && isCount(o.open) && isCount(o.cap)) return { open: o.open, cap: o.cap };
+    if (isCount(o) && isCount(data.buildersCap)) return { open: o, cap: data.buildersCap };
+    if (isCount(data.buildersActive) && isCount(data.buildersCap) && data.buildersCap >= data.buildersActive) {
+      return { open: data.buildersCap - data.buildersActive, cap: data.buildersCap };
+    }
+    return null;
+  }
+  function chip(r) {
+    var cls = 'chip ' + r.type.toLowerCase();
+    if (r.founding) return '<span class="' + cls + '"><b class="f">FOUNDING</b> ' + r.type + '</span>';
+    return '<span class="' + cls + '">' + r.type + '</span>';
+  }
+  function render(data) {
+    if (!data || typeof data !== 'object' || !Array.isArray(data.horses)) return false;
+    var list = rows(data);
+    var html = list.map(function (r, i) {
+      var sub = r.sub ? (r.subUrl
+        ? '<a href="' + esc(r.subUrl) + '" rel="noopener">' + esc(r.sub) + '</a>'
+        : '<span>' + esc(r.sub) + '</span>') : '';
+      return '<li class="row"><span class="rank">' + (i + 1) + '</span>' +
+        '<span class="who"><span class="name">' + esc(r.name) + '</span>' +
+        '<span class="meta">' + chip(r) + sub + '</span></span>' +
+        '<span class="score"><span class="clv ' + (r.clvMean > 0 ? 'good' : (r.clvMean < 0 ? 'bad' : '')) + '">' +
+        formatClv(r.clvMean) + '</span><span class="n">n = ' + r.n + '</span></span></li>';
+    }).join('');
+    if (!list.length) {
+      html = '<li class="row more">Nobody has ' + minOf({}, data) + ' graded picks yet.</li>';
+    }
+    var s = spots(data);
+    html += '<li class="row more"><a href="' + BOARD_URL + '">See the full board</a></li>' +
+      '<li class="row you"><span class="rank">?</span>' +
+      '<span class="who"><span class="name">You</span><span class="meta"><span>' +
+      (s ? s.open + ' of ' + s.cap + ' builder spots open' : 'Builder spots on the full board') +
+      '</span></span></span>' +
+      '<span class="score"><a class="join" href="' + JOIN_URL + '">Join</a></span></li>';
+    body.innerHTML = '<ol>' + html + '</ol>';
+    var sub = document.getElementById('board-sub');
+    if (sub) sub.textContent = 'Ranked by how much better than the close they bet, per pick. ' + minOf({}, data) + ' graded picks to get a rank. Top ' + TOP + ' shown.';
+    return true;
+  }
+  // On failure the board shows no numbers at all, never old ones.
+  function fail() {
+    body.innerHTML = '<p class="status">Board loading failed, see the <a href="' + BOARD_URL + '">full board</a>.</p>';
+  }
+  if (typeof fetch !== 'function') return fail();
+  fetch(DATA_URL, { cache: 'no-store' })
+    .then(function (res) {
+      if (!res.ok) throw new Error('status');
+      return res.json();
+    })
+    .then(function (data) { if (!render(data)) fail(); })
+    .catch(fail);
+})();
+</script>
 <script>
 (function () {
   var section = document.getElementById('live-lab');
@@ -306,30 +472,15 @@
     if (!isFinite(open) || open < 0) return null;
     return { active: active, cap: cap, open: open };
   }
-  // The builders page counts cappers on their own, so this line says models,
-  // and it names the cap the way that page does.
-  function buildersSentence(active, open, cap) {
-    var models = active === 1
-      ? '1 outside model is racing next to ours.'
-      : fmtInt(active) + ' outside models are racing next to ours.';
-    var spots = (open === 1 ? '1 of ' : fmtInt(open) + ' of ') + fmtInt(cap)
-      + (open === 1 ? ' model spots is open.' : ' model spots are open.');
-    return models + ' ' + spots;
-  }
   function applyBuilders(lab) {
-    var strip = document.getElementById('builders-home');
-    var copy = document.getElementById('builders-home-copy');
     var tile = document.getElementById('live-builders');
     var nEl = document.getElementById('live-builders-n');
     var openEl = document.getElementById('live-builders-open');
     var race = buildersRace(lab);
     if (!race) {
-      if (strip) strip.hidden = true;
       if (tile) tile.hidden = true;
       return;
     }
-    if (copy) copy.textContent = buildersSentence(race.active, race.open, race.cap);
-    if (strip) strip.hidden = false;
     if (nEl) nEl.textContent = fmtInt(race.active);
     if (openEl) openEl.textContent = fmtInt(race.open) + ' of ' + fmtInt(race.cap) + ' model spots open';
     if (tile) tile.hidden = false;
@@ -441,8 +592,6 @@
     .catch(function () {
       clearTimeout(timer);
       section.hidden = true;
-      var strip = document.getElementById('builders-home');
-      if (strip) strip.hidden = true;
     });
 })();
 </script>
