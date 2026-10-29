@@ -235,6 +235,31 @@
   </div>
   </div>
 <script>
+// Brief 1313: "3 builders and 1 capper graded so far", from lab.json builders[].
+// Active builders and active cappers with at least one graded pick, same as
+// pfp-tools get-graded.js. Empty when there is nobody yet.
+(function () {
+  var INACTIVE = ['inactive', 'retired', 'removed', 'withdrawn', 'paused', 'left'];
+  function isText(x) { return typeof x === 'string' && x.trim() !== ''; }
+  function plural(n, word) { return n + ' ' + word + (n === 1 ? '' : 's'); }
+  window.pfpCountText = function (data) {
+    var builders = 0;
+    var cappers = 0;
+    (data && Array.isArray(data.builders) ? data.builders : []).forEach(function (b) {
+      if (!b || b.active === false) return;
+      if (isText(b.status) && INACTIVE.indexOf(b.status.trim().toLowerCase()) !== -1) return;
+      if (typeof b.graded !== 'number' || !(b.graded >= 1)) return;
+      if (isText(b.entrantType) && b.entrantType.trim().toLowerCase() === 'capper') cappers++;
+      else builders++;
+    });
+    var parts = [];
+    if (builders) parts.push(plural(builders, 'builder'));
+    if (cappers) parts.push(plural(cappers, 'capper'));
+    return parts.length ? parts.join(' and ') + ' graded so far' : '';
+  };
+})();
+</script>
+<script>
 // Brief 1295: the board, same logic and look as pfp-tools get-graded.js.
 // Lab rules (controls left out), builders and cappers on one list. A row is
 // shown once graded >= minGraded (25 unless the file says otherwise), ranked
@@ -247,6 +272,10 @@
   var JOIN_URL = 'https://pixelforgeplays.github.io/pfp-tools/get-graded/';
   var MIN_GRADED = 25;
   var TOP = 10;
+  // Founding is closed: KR and Dan, the first two builders. Same list as pfp-tools get-graded.js.
+  var FOUNDING_IDS = ['kr_nhl', 'ocelotanalytics'];
+  var FOUNDING_HANDLES = ['yaboi_kr', 'ocelotanalytics'];
+  var FOUNDING_TITLE = 'Founding builder, one of the first two';
 
   function esc(s) {
     return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
@@ -265,6 +294,11 @@
   function handleOf(b) { return isText(b.handle) ? b.handle.trim().replace(/^@/, '') : ''; }
   function typeOf(b) {
     return isText(b.entrantType) && b.entrantType.trim().toLowerCase() === 'capper' ? 'CAPPER' : 'BUILDER';
+  }
+  function isFounding(b) {
+    if (!b || b.foundingBuilder !== true || typeOf(b) !== 'BUILDER') return false;
+    var id = isText(b.id) ? b.id.trim().toLowerCase() : '';
+    return FOUNDING_IDS.indexOf(id) !== -1 || FOUNDING_HANDLES.indexOf(handleOf(b).toLowerCase()) !== -1;
   }
   function minOf(row, data) {
     if (isCount(row.minGraded) && row.minGraded > 0) return row.minGraded;
@@ -294,7 +328,7 @@
       var handle = handleOf(b);
       out.push({
         type: typeOf(b),
-        founding: b.foundingBuilder === true,
+        founding: isFounding(b),
         name: isText(b.name) ? b.name.trim() : (isText(b.shortName) ? b.shortName.trim() : (handle || b.id)),
         sub: handle ? '@' + handle : '',
         subUrl: handle ? 'https://x.com/' + encodeURIComponent(handle) : null,
@@ -310,19 +344,12 @@
       return b.clvMean - a.clvMean || b.n - a.n || (a.name < b.name ? -1 : 1);
     }).slice(0, TOP);
   }
-  // buildersOpen is a count beside buildersCap, or { cap, open }.
-  function spots(data) {
-    var o = data.buildersOpen;
-    if (o && typeof o === 'object' && isCount(o.open) && isCount(o.cap)) return { open: o.open, cap: o.cap };
-    if (isCount(o) && isCount(data.buildersCap)) return { open: o, cap: data.buildersCap };
-    if (isCount(data.buildersActive) && isCount(data.buildersCap) && data.buildersCap >= data.buildersActive) {
-      return { open: data.buildersCap - data.buildersActive, cap: data.buildersCap };
-    }
-    return null;
-  }
   function chip(r) {
     var cls = 'chip ' + r.type.toLowerCase();
-    if (r.founding) return '<span class="' + cls + '"><b class="f">FOUNDING</b> ' + r.type + '</span>';
+    if (r.founding) {
+      return '<span class="' + cls + '" title="' + FOUNDING_TITLE + '" aria-label="' + FOUNDING_TITLE + '">' +
+        '<b class="f">FOUNDING</b> ' + r.type + '</span>';
+    }
     return '<span class="' + cls + '">' + r.type + '</span>';
   }
   function render(data) {
@@ -341,11 +368,11 @@
     if (!list.length) {
       html = '<li class="row more">Nobody has ' + minOf({}, data) + ' graded picks yet.</li>';
     }
-    var s = spots(data);
+    var count = window.pfpCountText(data);
     html += '<li class="row more"><a href="' + BOARD_URL + '">See the full board</a></li>' +
       '<li class="row you"><span class="rank">?</span>' +
       '<span class="who"><span class="name">You</span><span class="meta"><span>' +
-      (s ? s.open + ' of ' + s.cap + ' builder spots open' : 'Builder spots on the full board') +
+      esc(count || 'Free to join') +
       '</span></span></span>' +
       '<span class="score"><a class="join" href="' + JOIN_URL + '">Join</a></span></li>';
     body.innerHTML = '<ol>' + html + '</ol>';
@@ -462,27 +489,19 @@
     if (allRacing && word === 'FAIL') return 'Not clearing yet';
     return word;
   }
-  // Brief 1163: both numbers come from lab.json. Missing either one hides the tile and the line.
-  function buildersRace(lab) {
-    if (!lab || !has(lab.buildersActive) || !has(lab.buildersCap)) return null;
-    var active = Number(lab.buildersActive);
-    var cap = Number(lab.buildersCap);
-    if (!isFinite(active) || !isFinite(cap) || active < 0 || cap < 0) return null;
-    var open = cap - active;
-    if (!isFinite(open) || open < 0) return null;
-    return { active: active, cap: cap, open: open };
-  }
+  // Brief 1163: buildersActive from lab.json. Missing it hides the tile.
+  // Brief 1313: the line under it is the plain count, no spots.
   function applyBuilders(lab) {
     var tile = document.getElementById('live-builders');
     var nEl = document.getElementById('live-builders-n');
     var openEl = document.getElementById('live-builders-open');
-    var race = buildersRace(lab);
-    if (!race) {
+    var active = lab && has(lab.buildersActive) ? Number(lab.buildersActive) : NaN;
+    if (!isFinite(active) || active < 0) {
       if (tile) tile.hidden = true;
       return;
     }
-    if (nEl) nEl.textContent = fmtInt(race.active);
-    if (openEl) openEl.textContent = fmtInt(race.open) + ' of ' + fmtInt(race.cap) + ' model spots open';
+    if (nEl) nEl.textContent = fmtInt(active);
+    setLine(openEl, window.pfpCountText ? window.pfpCountText(lab) : '');
     if (tile) tile.hidden = false;
   }
   function fmtClock(iso, options) {
