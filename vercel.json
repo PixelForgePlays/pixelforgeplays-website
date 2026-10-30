@@ -1,6 +1,7 @@
 {
   "redirects": [
     { "source": "/builders", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 301 },
+    { "source": "/tonight", "destination": "https://pixelforgeplays.github.io/pixel-forge/tonight.html", "statusCode": 307 },
     { "source": "/lab", "destination": "https://pixelforgeplays.github.io/pixel-forge/dashboard.html", "statusCode": 307 },
     { "source": "/race", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 307 },
     { "source": "/tools", "destination": "https://pixelforgeplays.github.io/pfp-tools/", "statusCode": 307 },
