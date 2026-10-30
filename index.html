@@ -51,7 +51,7 @@
     .pfp-board .chip.capper{color:#FF8C2B;border-color:#7A3E12;background:rgba(255,140,43,.08)}
     .pfp-board .chip .f{color:#F2C14E;font-weight:700}
     .pfp-board .score{display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right}
-    .pfp-board .clv{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1.15rem;font-weight:700}
+    .pfp-board .clv{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:1.15rem;font-weight:700;white-space:nowrap}
     .pfp-board .n{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:#a1a1aa;white-space:nowrap}
     .pfp-board .good{color:#A8E008}
     .pfp-board .bad{color:#FF6B5E}
@@ -366,7 +366,7 @@
         '<span class="who"><span class="name">' + esc(r.name) + '</span>' +
         '<span class="meta">' + chip(r) + sub + '</span></span>' +
         '<span class="score"><span class="clv ' + (r.clvMean > 0 ? 'good' : (r.clvMean < 0 ? 'bad' : '')) + '">' +
-        formatClv(r.clvMean) + '</span><span class="n">n = ' + r.n + '</span></span></li>';
+        formatClv(r.clvMean) + ' pts</span><span class="n">' + r.n + ' picks</span></span></li>';
     }).join('');
     if (!list.length) {
       html = '<li class="row more">Nobody has ' + minOf({}, data) + ' graded picks yet.</li>';
