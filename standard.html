@@ -10,7 +10,7 @@
   <title>The Standard | Pixel Forge Plays</title>
   <meta name="description" content="The bar we published before we needed it, and how every rule is graded against it.">
   <meta property="og:title" content="The Standard | Pixel Forge Plays">
-  <meta property="og:description" content="How Pixel Forge Plays decides which betting models are worth paying for, and what happens to the ones that are not. Published before any model races against it.">
+  <meta property="og:description" content="How Pixel Forge Plays decides which betting models have earned a paid pond, and what happens to the ones that have not. Published before any model races against it.">
   <meta property="og:url" content="https://www.pixelforgeplays.com/standard.html">
   <meta property="og:image" content="https://www.pixelforgeplays.com/og-image.png">
   <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Standard | Pixel Forge Plays">
   <meta name="twitter:site" content="@PixelForgePlays">
-  <meta name="twitter:description" content="How Pixel Forge Plays decides which betting models are worth paying for, and what happens to the ones that are not.">
+  <meta name="twitter:description" content="How Pixel Forge Plays decides which betting models have earned a paid pond, and what happens to the ones that have not.">
   <meta name="twitter:image" content="https://www.pixelforgeplays.com/og-image.png">
   <meta name="twitter:image:alt" content="Pixel Forge Plays: Betting rules, tested in public.">
   <link rel="stylesheet" href="/styles.css">
@@ -52,7 +52,7 @@
         <li>Pixel Forge Plays is a public lab. We build betting models, run them in the open, and score every one of them against this page, which we wrote down in advance.</li>
         <li>We grade on closing line value: did the price we recorded beat the price the market closed at. Not on wins.</li>
         <li>A paid pond is one sport and one market, such as NHL moneyline. To enter one, a model needs all five: 100 decided picks, each with a verified closing price. An average closing line value of at least +1.5 points, where a point is one percentage point of win chance. At least 55% of moved picks priced better than the closing line, with ties shown beside the rate. A moved pick is one whose price changed before the game. Picks spread over at least 30 separate days. And <a href="#the-follower-test" class="text-zinc-400 hover:text-white underline underline-offset-2">the follower test</a>: picks taken 1 hour after we post must still beat the close on average.</li>
-        <li>Miss any of these and nothing is sold. Pass them all and a model can still be publicly evicted if it stops passing.</li>
+        <li>Miss any of these and that model's picks are not sold. Pass them all and a model can still be publicly evicted if it stops passing.</li>
         <li>Nothing has cleared. Our first model lost money, 50-50-2 at -9.7%, and that record is <a href="https://pixelforgeplays.github.io/pixel-forge/data/v6_FrozenRecord.json" class="text-zinc-400 hover:text-white underline underline-offset-2">a file you can download</a>.</li>
         <li>A lab rule can be declared into a pond with no open season. Its count starts from zero on the day it is declared. From October 10, 2026, a rule frozen on or after that date enters its pond at the freeze instead.</li>
         <li>The standard does not change during a race. We do not delete anything. Watching is free and always will be.</li>
@@ -123,13 +123,13 @@
       </ol>
     </nav>
     <h2 id="what-this-is" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">What this is</h2>
-    <p class="text-zinc-300 leading-relaxed mb-4">This page explains how Pixel Forge Plays decides which betting models are worth paying for, and what happens to the ones that are not.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">This page explains how Pixel Forge Plays decides which betting models have earned a paid pond, and what happens to the ones that have not.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Pixel Forge Plays is a public lab. We build betting models, run them in the open, and score every one of them against a standard we wrote down in advance.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">We publish the bar before any model races it, measure in public, and only sell picks from a model that has cleared it.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">We publish the bar before any model races it and measure in public. We sell a model's picks only after it clears the bar.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The standard below is published before any model races against it, and it does not change during a race.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Models move against the standard constantly. The standard itself does not move.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We do not know yet whether we have an edge. That is the honest answer, and it is the reason the lab exists rather than a sales page.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Watching is free and always will be. The only thing we sell is the picks of a model that has cleared the standard below.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Watching is free and always will be. Every lab pick is posted free on the public pages. We sell a model's picks only after it clears the standard below.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">This page lives in a public repository and its full edit history is linked at the bottom. If we ever changed a number in the middle of a race, the commit log would show it, with the date. You do not have to take our word for any of this.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
@@ -190,7 +190,7 @@
     <p class="text-zinc-300 leading-relaxed mb-4">Condition one means one hundred decided picks each carrying a verified closing price.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">A pick we could not measure does not count toward the hundred, and it does not count toward the other three either. There is no version of this where a model sells picks on a record we could not fully measure.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The fourth condition exists because picks made on the same day are not independent evidence. Twenty picks on one day's games tell you far less than twenty picks across twenty days, and a standard that ignored this would be easy to game by accident.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">Miss any of these and nothing is sold. Pass them all and a model can still be publicly evicted if it stops passing.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">Miss any of these and that model's picks are not sold. Pass them all and a model can still be publicly evicted if it stops passing.</p>
     <h3 id="the-follower-test" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">The follower test</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">Clearing the bar is not enough to sell. A follower also has to be able to get the edge.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The test: picks taken 1 hour after we post must still beat the closing line on average.</p>
@@ -231,7 +231,7 @@
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
     <h2 id="the-lab" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">The lab and the Standard</h2>
-    <p class="text-zinc-300 leading-relaxed mb-4">The lab is a set of simple betting rules. Each one was written down and frozen before its first game, and it races in public on the dashboard. Nothing in the lab is for sale, including its picks.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">The lab is a set of simple betting rules. Each one was written down and frozen before its first game, and it races in public on the dashboard. No rule in the lab has cleared the bar. Every lab pick is posted free and graded in public.</p>
     <h3 id="lab-declaration" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Declaring a lab rule into its pond</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">A lab rule that looks promising can be declared into its pond. Its pond is its own sport and market.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">A lab rule can be declared only into a pond with no open season. The declaration opens that pond's season.</p>
@@ -255,7 +255,7 @@
     <p class="text-zinc-300 leading-relaxed mb-4">On October 5, 2026 we declared the lab rule N5 Overnight Move into the NHL moneyline pond. That pond had no open season. The declaration opens its first season at 12:00 UTC on October 6, 2026, and the season runs to the NHL's next opening day, in October 2027.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The field is one rule, N5. Its count starts from zero at the opening instant. Every N5 entry decided after it, with a verified close, counts. Nothing decided before it does.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The bar is the one on this page. Because this season was declared after October 2, 2026, the beat-the-close condition is counted over moved prices, is read only once 50 prices have moved, and shows its tie count beside it.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">N5's rule is held privately. Its hash was published in the lab's lock file before the first entry, the lab runner refuses the rule if the file no longer matches that hash, and every entry, price and close is public on the dashboard. If N5 clears the bar it is the first thing we would sell, under the rules above. If it does not, that is the result, and it stays up.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">N5's rule is held privately. Its hash was published in the lab's lock file before the first entry, the lab runner refuses the rule if the file no longer matches that hash, and every entry, price and close is public on the dashboard. If N5 clears the bar, its picks are the first picks we would sell, under the rules above. If it does not, that is the result, and it stays up.</p>
     <h3 id="nhl-totals-declaration" class="text-lg font-semibold text-white mt-8 mb-3 scroll-mt-6">Declaration, October 10, 2026: N2 into the NHL totals pond</h3>
     <p class="text-zinc-300 leading-relaxed mb-4">On October 10, 2026 we declared the lab rule N2 Tie-Mass Over into the NHL totals pond. That pond had no open season. The declaration opens its first season at 06:52 UTC on October 10, 2026, and the season runs to the NHL's next opening day, in October 2027.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">The field is one rule, N2. Its count starts from zero at the opening instant. Every N2 entry decided after it, with a verified close, counts. Nothing decided before it does. Its 41 lab entries before the declaration stay on the dashboard as lab history and never count.</p>
@@ -283,6 +283,10 @@
     <p class="text-zinc-300 leading-relaxed mb-4">As pieces get automated we will say so here, and the commit log will show when.</p>
     <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
     <hr class="border-zinc-800 my-10">
+    <h2 id="lab-pass-note" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">Note added [DATE]</h2>
+    <p class="text-zinc-300 leading-relaxed mb-4">The Lab Pass is a paid membership in the lab. It is not a subscription to a rule that cleared the bar. Every lab pick is still posted free on the public pages, usually within minutes, and graded the same way. Holders get a ping when a rule fires and a private room. Nothing about the pass says a pick will win. Selling a cleared rule's picks still needs the bar, exactly as written above.</p>
+    <p class="text-sm mb-4"><a href="#top" class="text-zinc-400 hover:text-white underline underline-offset-2">Back to top</a></p>
+    <hr class="border-zinc-800 my-10">
     <h2 id="what-we-do-not-claim" class="text-xl sm:text-2xl font-semibold text-white mt-12 mb-4 scroll-mt-6">What we do not claim</h2>
     <p class="text-zinc-300 leading-relaxed mb-4">We do not claim our models win.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We do not claim past results predict future ones.</p>
@@ -298,7 +302,7 @@
     <p class="text-zinc-300 leading-relaxed mb-4">We score every call a model makes at or above that threshold, once the game is decided. That includes picks we published and picks we scored but never published.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Our models evaluate far more games than they publish. All of them are logged in advance, timestamped, and scored against the same closes.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">This is stricter than scoring only the published picks, not looser. If we graded ourselves solely on what we chose to publish, we would be grading ourselves on a set we selected. Scoring the unpublished ones too makes that impossible.</p>
-    <p class="text-zinc-300 leading-relaxed mb-4">One condition applies only to published picks: the price a subscriber could actually have taken. Unpublished evaluations have no subscriber price, so that condition is measured only where it means something. We call this the follower test. It is defined below.</p>
+    <p class="text-zinc-300 leading-relaxed mb-4">One condition applies only to published picks: the price a follower could actually have taken. Unpublished evaluations have no follower price, so that condition is measured only where it means something. We call this the follower test. It is defined below.</p>
     <p class="text-zinc-300 leading-relaxed mb-4"><strong>The pond's edge threshold.</strong> The pond's edge threshold for MLB totals is thirteen percent. It is the same floor we use to decide whether a pick is worth publishing.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">We chose thirteen percent on June 15, 2026 as the public posting bar. We wrote it here on August 20, 2026 as the scoring bar, before the pond opened. That commit raised the floor from nine percent. We moved it up once, in June, before any of this was a gate, and we are not moving it now.</p>
     <p class="text-zinc-300 leading-relaxed mb-4">Evaluations below thirteen percent are logged. They do not count toward a gate.</p>
