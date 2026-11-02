@@ -42,6 +42,7 @@
     .pfp-board .rank{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.9rem;color:#a1a1aa}
     .pfp-board .who{display:flex;flex-direction:column;gap:5px;min-width:0}
     .pfp-board .name{font-weight:700;line-height:1.2;overflow-wrap:anywhere}
+    .pfp-board .name .badge{display:inline-block;width:16px;height:16px;margin-left:6px;vertical-align:-2px;image-rendering:pixelated}
     .pfp-board .meta{display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center;font-size:.8rem;color:#a1a1aa;min-width:0}
     .pfp-board .meta a{color:#a1a1aa;overflow-wrap:anywhere}
     .pfp-board .meta a:hover{color:#fff}
@@ -377,7 +378,7 @@
         ? '<a href="' + esc(r.subUrl) + '" rel="noopener">' + esc(r.sub) + '</a>'
         : '<span>' + esc(r.sub) + '</span>') : '';
       return '<li class="row"><span class="rank">' + (i + 1) + '</span>' +
-        '<span class="who"><span class="name">' + esc(r.name) + '</span>' +
+        '<span class="who"><span class="name">' + esc(r.name) + (r.type === 'BUILDER' ? '<img class="badge" src="/pfp-builder-badge.svg" width="16" height="16" alt="" aria-hidden="true">' : '') + '</span>' +
         '<span class="meta">' + chip(r) + (r.sport ? '<span>' + esc(r.sport) + '</span>' : '') + sub + '</span></span>' +
         '<span class="score"><span class="clv ' + (r.clvMean > 0 ? 'good' : (r.clvMean < 0 ? 'bad' : '')) + '">' +
         formatClv(r.clvMean) + ' pts</span><span class="n">' + r.n + ' picks</span></span></li>';
