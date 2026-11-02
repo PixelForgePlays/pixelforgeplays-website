@@ -345,6 +345,7 @@
         type: typeOf(b),
         founding: isFounding(b),
         name: isText(b.name) ? b.name.trim() : (isText(b.shortName) ? b.shortName.trim() : (handle || b.id)),
+        sport: isText(b.sport) ? b.sport.trim() : '',
         sub: handle ? '@' + handle : '',
         subUrl: handle ? 'https://x.com/' + encodeURIComponent(handle) : null,
         graded: isCount(b.graded) ? b.graded : 0,
@@ -361,6 +362,7 @@
   }
   function chip(r) {
     var cls = 'chip ' + r.type.toLowerCase();
+    if (r.type === 'RULE') return '<span class="' + cls + '">PFP RULE</span>';
     if (r.founding) {
       return '<span class="' + cls + '" title="' + FOUNDING_TITLE + '" aria-label="' + FOUNDING_TITLE + '">' +
         '<b class="f">FOUNDING</b> ' + r.type + '</span>';
@@ -376,7 +378,7 @@
         : '<span>' + esc(r.sub) + '</span>') : '';
       return '<li class="row"><span class="rank">' + (i + 1) + '</span>' +
         '<span class="who"><span class="name">' + esc(r.name) + '</span>' +
-        '<span class="meta">' + chip(r) + sub + '</span></span>' +
+        '<span class="meta">' + chip(r) + (r.sport ? '<span>' + esc(r.sport) + '</span>' : '') + sub + '</span></span>' +
         '<span class="score"><span class="clv ' + (r.clvMean > 0 ? 'good' : (r.clvMean < 0 ? 'bad' : '')) + '">' +
         formatClv(r.clvMean) + ' pts</span><span class="n">' + r.n + ' picks</span></span></li>';
     }).join('');
