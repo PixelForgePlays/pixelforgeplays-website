@@ -111,9 +111,13 @@
     .steps p{margin:8px 0 0;color:var(--soft);line-height:1.5}
     .rules-link{margin:16px 0 0;font-size:14px;color:var(--muted)}
     @media (max-width:760px){.steps{grid-template-columns:1fr}}
-    /* Tonight + lab notes */
-    .split{display:grid;grid-template-columns:1.1fr .9fr;gap:16px;margin-top:56px;align-items:start}
-    @media (max-width:760px){.split{grid-template-columns:1fr}}
+    /* Tonight band + lab notes panel. The .flow column holds the board through the lab notes: under 900px the band and
+       the notes come after How it works (the phone order); from 900px the band sits right under the board and the
+       notes panel is two columns (copy left, form right). */
+    .tonight-sec{margin-top:56px}
+    .notes-sec{margin-top:16px}
+    @media (max-width:899.98px){.flow{display:flex;flex-direction:column}.flow>*{min-width:0}.tonight-sec{order:1}.notes-sec{order:2}}
+    @media (min-width:900px){.tonight-sec{margin-top:16px}.notes-sec{margin-top:56px}}
     .tonight{display:block;text-decoration:none;color:var(--ink);border-radius:16px;border:1px solid #3A2A66;background:linear-gradient(150deg,rgba(139,61,255,.22) 0%,#0D0D14 70%);padding:26px}
     .tonight:hover{color:var(--ink);border-color:var(--brand)}
     .tonight .k{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:12px;font-weight:700;letter-spacing:1.5px;color:var(--link);text-transform:uppercase}
@@ -121,8 +125,10 @@
     .tonight h2{margin:12px 0 0;font-family:var(--head);font-weight:900;font-size:38px;text-transform:uppercase;line-height:1;letter-spacing:.5px}
     .tonight p{margin:10px 0 0;color:var(--soft);line-height:1.5}
     .tonight .go{display:inline-block;margin-top:16px;color:var(--link);font-weight:700}
+    @media (min-width:900px){.tonight{display:flex;align-items:center;justify-content:space-between;gap:20px 40px;padding:26px 30px}.tonight h2{font-size:40px}.tonight p{max-width:560px}.tonight .go{flex:none;margin-top:0;display:inline-flex;align-items:center;min-height:44px;white-space:nowrap}}
     .notes{border-radius:16px;border:1px solid #22222C;background:#0D0D14;padding:26px;border-top:3px solid var(--brand)}
     .notes h2{margin:0;font-size:22px;font-weight:700}
+    @media (min-width:900px){.notes{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px 48px;align-items:start;padding:30px}.notes h2{font-size:26px}.notes .notes-form .field:first-child{margin-top:0}#lab-thanks{grid-column:1/-1;max-width:600px}}
     .notes p{color:var(--soft)}
     .notes label{display:block;font-size:14px;color:var(--muted);margin-bottom:6px}
     .notes input,.notes select,.notes textarea{width:100%;box-sizing:border-box;background:var(--ground);border:1px solid var(--chip-line);color:var(--ink);border-radius:8px;padding:12px;font:15px var(--body);min-height:46px}
@@ -205,6 +211,7 @@
       <p class="build">No model yet? <a href="/build">Build your first one with AI</a>.</p>
     </section>
 
+    <div class="flow">
     <!-- The Board, top 3. Rows come from the shared board-mini.js (pfp-tools), the same file the Get graded page uses. -->
     <section class="panel" aria-labelledby="hb">
       <div class="sec-head">
@@ -218,6 +225,18 @@
         <p class="status">Loading the board...</p>
         <noscript><p class="status">The board needs JavaScript. <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html">See the full board</a>.</p></noscript>
       </div>
+    </section>
+
+    <!-- Tonight in the lab: a full-width band under the board. The heading becomes "N picks pending" from the same lab.json. -->
+    <section class="tonight-sec" aria-label="Tonight in the lab">
+      <a class="tonight" id="tonight-card" href="https://pixelforgeplays.github.io/pixel-forge/tonight.html">
+        <div class="tonight-txt">
+        <div class="k"><svg class="moon" viewBox="0 0 16 16" width="18" height="18" shape-rendering="crispEdges" aria-hidden="true"><rect x="6" y="1" width="1" height="1" fill="#8B3DFF"/><rect x="4" y="2" width="3" height="1" fill="#8B3DFF"/><rect x="3" y="3" width="3" height="1" fill="#8B3DFF"/><rect x="2" y="4" width="3" height="1" fill="#8B3DFF"/><rect x="1" y="5" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="6" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="7" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="8" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="9" width="5" height="1" fill="#8B3DFF"/><rect x="1" y="10" width="5" height="1" fill="#8B3DFF"/><rect x="1" y="11" width="7" height="1" fill="#8B3DFF"/><rect x="2" y="12" width="11" height="1" fill="#8B3DFF"/><rect x="3" y="13" width="9" height="1" fill="#8B3DFF"/><rect x="4" y="14" width="7" height="1" fill="#8B3DFF"/><rect x="12" y="2" width="1" height="1" fill="#30E502"/><rect x="15" y="6" width="1" height="1" fill="#30E502"/><rect x="11" y="8" width="1" height="1" fill="#30E502"/></svg>Tonight in the lab</div>
+        <h2 id="tonight-h">Tonight's picks</h2>
+        <p>Every pick our rules took tonight. Graded by morning.</p>
+        </div>
+        <span class="go">See tonight's picks &rarr;</span>
+      </a>
     </section>
 
     <!-- Hook -->
@@ -270,17 +289,14 @@
       <p class="rules-link"><a href="https://pixelforgeplays.github.io/pixel-forge/dashboard.html">How our own rules are doing</a></p>
     </section>
 
-    <!-- Tonight in the lab + the lab notes form -->
-    <section class="split" aria-label="Tonight and the lab notes">
-      <a class="tonight" id="tonight-card" href="https://pixelforgeplays.github.io/pixel-forge/tonight.html">
-        <div class="k"><svg class="moon" viewBox="0 0 16 16" width="18" height="18" shape-rendering="crispEdges" aria-hidden="true"><rect x="6" y="1" width="1" height="1" fill="#8B3DFF"/><rect x="4" y="2" width="3" height="1" fill="#8B3DFF"/><rect x="3" y="3" width="3" height="1" fill="#8B3DFF"/><rect x="2" y="4" width="3" height="1" fill="#8B3DFF"/><rect x="1" y="5" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="6" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="7" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="8" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="9" width="5" height="1" fill="#8B3DFF"/><rect x="1" y="10" width="5" height="1" fill="#8B3DFF"/><rect x="1" y="11" width="7" height="1" fill="#8B3DFF"/><rect x="2" y="12" width="11" height="1" fill="#8B3DFF"/><rect x="3" y="13" width="9" height="1" fill="#8B3DFF"/><rect x="4" y="14" width="7" height="1" fill="#8B3DFF"/><rect x="12" y="2" width="1" height="1" fill="#30E502"/><rect x="15" y="6" width="1" height="1" fill="#30E502"/><rect x="11" y="8" width="1" height="1" fill="#30E502"/></svg>Tonight in the lab</div>
-        <h2 id="tonight-h">Tonight's picks</h2>
-        <p>Every pick our rules took tonight. Graded by morning.</p>
-        <span class="go">See tonight's picks &rarr;</span>
-      </a>
+    <!-- The lab notes form, its own full-width panel (copy left, form right from 900px) -->
+    <section class="notes-sec" aria-label="The lab notes">
       <div id="lab-notes" class="notes">
+        <div class="notes-copy" id="lab-copy">
         <h2 id="lab-title">Get the lab notes</h2>
         <p id="lab-intro" style="margin:8px 0 0">Short notes when something changes. The Standard is the bar a rule must clear before we sell its picks. No rule has cleared it yet. If one ever does, you hear first. No spam.</p>
+        </div>
+        <div class="notes-form" id="lab-form-wrap">
         <!-- Posts straight to Buttondown (the Lab Notes list). Optional fields are stored on the subscriber as metadata (metadata__<key>); the hidden metadata__source marks the source. -->
         <form id="lab-form" action="https://buttondown.com/api/emails/embed-subscribe/pixelforgeplays" method="POST">
           <input type="hidden" name="metadata__source" value="website">
@@ -304,6 +320,7 @@
           <button type="submit">Get the lab notes</button>
           <p id="lab-error" role="alert" hidden>That didn't go through. Try again in a minute.</p>
         </form>
+        </div>
         <div id="lab-thanks" hidden>
           <h2 id="lab-thanks-title" tabindex="-1">You're in.</h2>
           <p>We'll write when something changes. Until then, the race is live.</p>
@@ -311,6 +328,7 @@
         </div>
       </div>
     </section>
+    </div>
 
     <!-- Explore -->
     <section class="sec" aria-label="Explore">
@@ -670,8 +688,8 @@
       var finalUrl = String(res.url || '');
       var confirmed = res.ok && finalUrl.indexOf('state=confirmed_subscription') !== -1;
       if (!confirmed) { nativeSubmit(); return; }
-      document.getElementById('lab-title').hidden = true;
-      document.getElementById('lab-intro').hidden = true;
+      document.getElementById('lab-copy').hidden = true;
+      document.getElementById('lab-form-wrap').hidden = true;
       form.hidden = true;
       document.getElementById('lab-thanks').hidden = false;
       document.getElementById('lab-thanks-title').focus();
