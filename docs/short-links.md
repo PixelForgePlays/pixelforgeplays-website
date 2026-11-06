@@ -24,4 +24,4 @@ Names are claimed in `builders.lock.json` in the bot repo, not here. The table a
 
 Mixed-case links (e.g. `/b/KR`) only work for the three names with literal rules: `kr`, `jpetbets` and `ocelotanalytics`. A mixed-case link for any other name doesn't match the generic rule and falls back to the builders page.
 
-All `/b/` links are 307 (temporary) so a target can be changed later without browsers holding a stale cached redirect.
+All `/b/` links are 308 (permanent), like the other page short links, so search engines pass the link on to the target page. A browser caches a 308, so a `/b/<name>` that pointed at a page that did not exist yet keeps going there in that browser until its cache clears.
