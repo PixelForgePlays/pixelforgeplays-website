@@ -1,22 +1,22 @@
 {
   "redirects": [
     { "source": "/builders", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 301 },
-    { "source": "/tonight", "destination": "https://pixelforgeplays.github.io/pixel-forge/tonight.html", "statusCode": 307 },
-    { "source": "/build", "destination": "https://pixelforgeplays.github.io/pfp-tools/build/", "statusCode": 307 },
+    { "source": "/tonight", "destination": "https://pixelforgeplays.github.io/pixel-forge/tonight.html", "statusCode": 308 },
+    { "source": "/build", "destination": "https://pixelforgeplays.github.io/pfp-tools/build/", "statusCode": 308 },
     { "source": "/shop", "destination": "https://pixel-forge-plays-llc-shop.fourthwall.com/", "permanent": false },
-    { "source": "/lab", "destination": "https://pixelforgeplays.github.io/pixel-forge/dashboard.html", "statusCode": 307 },
-    { "source": "/race", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 307 },
-    { "source": "/tools", "destination": "https://pixelforgeplays.github.io/pfp-tools/", "statusCode": 307 },
-    { "source": "/rules", "destination": "https://pixelforgeplays.github.io/pfp-tools/rules/", "statusCode": 307 },
-    { "source": "/notes", "destination": "https://pixelforgeplays.github.io/pfp-tools/notes/", "statusCode": 307 },
+    { "source": "/lab", "destination": "https://pixelforgeplays.github.io/pixel-forge/dashboard.html", "statusCode": 308 },
+    { "source": "/race", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 308 },
+    { "source": "/tools", "destination": "https://pixelforgeplays.github.io/pfp-tools/", "statusCode": 308 },
+    { "source": "/rules", "destination": "https://pixelforgeplays.github.io/pfp-tools/rules/", "statusCode": 308 },
+    { "source": "/notes", "destination": "https://pixelforgeplays.github.io/pfp-tools/notes/", "statusCode": 308 },
     { "source": "/discord", "destination": "https://discord.gg/MXnsWJQVCA", "statusCode": 307 },
-    { "source": "/how-this-started", "destination": "https://pixelforgeplays.github.io/pixel-forge/how-this-started.html", "statusCode": 307 },
+    { "source": "/how-this-started", "destination": "https://pixelforgeplays.github.io/pixel-forge/how-this-started.html", "statusCode": 308 },
     { "source": "/standard", "destination": "/standard.html", "statusCode": 307 },
     { "source": "/privacy", "destination": "/privacy.html", "statusCode": 307 },
-    { "source": "/b/([Kk][Rr]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/b/kr.html", "statusCode": 307 },
-    { "source": "/b/([Jj][Pp][Ee][Tt][Bb][Ee][Tt][Ss]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/b/jpetbets.html", "statusCode": 307 },
-    { "source": "/b/([Oo][Cc][Ee][Ll][Oo][Tt][Aa][Nn][Aa][Ll][Yy][Tt][Ii][Cc][Ss]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/b/ocelotanalytics.html", "statusCode": 307 },
-    { "source": "/b/:name([a-z0-9-]{1,32}){/}?", "destination": "https://pixelforgeplays.github.io/pixel-forge/b/:name.html", "statusCode": 307 },
-    { "source": "/b(/.*)?", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 307 }
+    { "source": "/b/([Kk][Rr]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/b/kr.html", "statusCode": 308 },
+    { "source": "/b/([Jj][Pp][Ee][Tt][Bb][Ee][Tt][Ss]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/b/jpetbets.html", "statusCode": 308 },
+    { "source": "/b/([Oo][Cc][Ee][Ll][Oo][Tt][Aa][Nn][Aa][Ll][Yy][Tt][Ii][Cc][Ss]/?)", "destination": "https://pixelforgeplays.github.io/pixel-forge/b/ocelotanalytics.html", "statusCode": 308 },
+    { "source": "/b/:name([a-z0-9-]{1,32}){/}?", "destination": "https://pixelforgeplays.github.io/pixel-forge/b/:name.html", "statusCode": 308 },
+    { "source": "/b(/.*)?", "destination": "https://pixelforgeplays.github.io/pixel-forge/builders.html", "statusCode": 308 }
   ]
 }
