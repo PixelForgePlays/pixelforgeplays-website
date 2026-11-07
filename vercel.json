@@ -9,6 +9,8 @@
     { "source": "/tools", "destination": "https://pixelforgeplays.github.io/pfp-tools/", "statusCode": 308 },
     { "source": "/rules", "destination": "https://pixelforgeplays.github.io/pfp-tools/rules/", "statusCode": 308 },
     { "source": "/notes", "destination": "https://pixelforgeplays.github.io/pfp-tools/notes/", "statusCode": 308 },
+    { "source": "/get-graded", "destination": "https://pixelforgeplays.github.io/pfp-tools/get-graded/", "statusCode": 308 },
+    { "source": "/get-graded/", "destination": "https://pixelforgeplays.github.io/pfp-tools/get-graded/", "statusCode": 308 },
     { "source": "/discord", "destination": "https://discord.gg/MXnsWJQVCA", "statusCode": 307 },
     { "source": "/how-this-started", "destination": "https://pixelforgeplays.github.io/pixel-forge/how-this-started.html", "statusCode": 308 },
     { "source": "/standard", "destination": "/standard.html", "statusCode": 307 },
