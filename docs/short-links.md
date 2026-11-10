@@ -25,3 +25,7 @@ Names are claimed in `builders.lock.json` in the bot repo, not here. The table a
 Mixed-case links (e.g. `/b/KR`) only work for the three names with literal rules: `kr`, `jpetbets` and `ocelotanalytics`. A mixed-case link for any other name doesn't match the generic rule and falls back to the builders page.
 
 All `/b/` links are 308 (permanent), like the other page short links, so search engines pass the link on to the target page. A browser caches a 308, so a `/b/<name>` that pointed at a page that did not exist yet keeps going there in that browser until its cache clears.
+
+## Since Brief 1461 (same-domain targets)
+
+Every short link now lands on www.pixelforgeplays.com, not github.io. vercel.json rewrites `/pixel-forge/*` and `/pfp-tools/*` to the same paths on pixelforgeplays.github.io (a proxy, the address bar stays on www), and each short link is a same-domain redirect onto that mirror, e.g. `/b/kr` -> `/pixel-forge/b/kr.html`. Wherever this page says `https://pixelforgeplays.github.io/pixel-forge/...`, the live target is now `https://www.pixelforgeplays.com/pixel-forge/...`. `/sitemap.xml` is built per request by `api/sitemap.js` from the published builders.lock.json.
