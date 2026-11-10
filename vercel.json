@@ -28,6 +28,9 @@
   ],
   "rewrites": [
     { "source": "/sitemap.xml", "destination": "/api/sitemap" },
+    { "source": "/pfp-tools/", "destination": "https://pixelforgeplays.github.io/pfp-tools/index.html" },
+    { "source": "/pfp-tools/:dir([a-z0-9-]+)/", "destination": "https://pixelforgeplays.github.io/pfp-tools/:dir/index.html" },
+    { "source": "/pixel-forge/", "destination": "https://pixelforgeplays.github.io/pixel-forge/index.html" },
     { "source": "/pixel-forge/:path*", "destination": "https://pixelforgeplays.github.io/pixel-forge/:path*" },
     { "source": "/pfp-tools/:path*", "destination": "https://pixelforgeplays.github.io/pfp-tools/:path*" }
   ]
