@@ -73,6 +73,41 @@
     .hero .build a{color:var(--soft);text-decoration:underline;text-underline-offset:2px}
     .hero .build a:hover{color:var(--ink)}
     @media (max-width:760px){.hero{padding:40px 0 28px}.hero .ctas .btn{flex:1 1 auto}}
+    /* Three big buttons under the headline (Brief 1476). Phones (up to 640px): one plain sentence, the buttons stacked,
+       everything else inside a closed "How this works". From 641px: the buttons in a row and the long page open. */
+    .hero-sentence{display:none}
+    .big-btns{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:28px}
+    .big-item{min-width:0}
+    .big-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px;box-sizing:border-box;padding:0 18px;border-radius:10px;font-weight:700;font-size:18px;line-height:1.2;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid #4A4757;transition:background .15s,border-color .15s}
+    .big-btn:hover{color:var(--ink);border-color:var(--brand)}
+    .big-btn .arr{flex:none;color:var(--green)}
+    .big-btn.go-green{background:var(--green);border-color:var(--green);color:var(--ground)}
+    .big-btn.go-green:hover{background:#5BFF2E;color:var(--ground)}
+    .big-btn.go-green .arr{color:var(--ground)}
+    .big-cap{margin:6px 2px 0;font-size:14px;line-height:1.35;color:var(--muted)}
+    .hero-rest{max-width:860px;padding-bottom:36px}
+    .hero-rest .lede{margin:28px 0 0;font-size:20px;line-height:1.5;color:var(--soft);max-width:680px}
+    .hero-rest .ctas{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+    .hero-rest .build{margin:16px 0 0;font-size:14px;color:var(--muted)}
+    .hero-rest .build a{color:var(--soft);text-decoration:underline;text-underline-offset:2px}
+    .hero-rest .build a:hover{color:var(--ink)}
+    .hero.has-big{padding-bottom:0}
+    details.hiw>summary{display:none}
+    @media (max-width:760px){.hero-rest{padding-bottom:28px}.hero-rest .ctas .btn{flex:1 1 auto}}
+    @media (max-width:640px){
+      .hero.has-big{padding:20px 0 0}
+      .hero h1{font-size:40px}
+      .hero h1{margin-top:10px}
+      .hero-sentence{display:block;margin:12px 0 0;font-size:17px;line-height:1.45;color:var(--soft)}
+      .big-btns{grid-template-columns:1fr;gap:10px;margin-top:16px}
+      .big-cap{margin-top:4px;font-size:13px}
+      details.hiw{margin-top:24px;border-top:1px solid #26262F}
+      details.hiw>summary{display:flex;align-items:center;justify-content:space-between;min-height:56px;cursor:pointer;list-style:none;font-weight:700;font-size:17px;color:var(--ink)}
+      details.hiw>summary::-webkit-details-marker{display:none}
+      details.hiw>summary::after{content:"+";font-family:var(--mono);font-size:22px;color:var(--green)}
+      details.hiw[open]>summary::after{content:"-"}
+      .hero-rest .lede{margin-top:8px}
+    }
     /* Cards and sections */
     .card{background:#0D0D14;border:1px solid #22222C;border-radius:14px;padding:22px}
     .panel{border:1px solid #26262F;border-radius:18px;background:#0D0D14;padding:26px clamp(14px,3vw,28px)}
@@ -202,16 +237,38 @@
 
   <main class="wrap">
     <!-- Hero -->
-    <section class="hero" aria-label="Intro">
+    <section class="hero has-big" aria-label="Intro">
       <p class="eyebrow">Cappers &middot; Model builders &middot; Our own rules</p>
       <h1>We grade betting picks against the closing line. <span class="ours">Ours too.</span></h1>
+      <p class="hero-sentence">We check if a pick got a better price than where the line closed. That is the best sign of real skill.</p>
+      <div class="big-btns">
+        <div class="big-item">
+          <a class="big-btn go-green" href="https://pixelforgeplays.github.io/pixel-forge/tonight.html">Tonight's picks<span class="arr" aria-hidden="true">&rarr;</span></a>
+          <p class="big-cap">Every pick our own rules made tonight.</p>
+        </div>
+        <div class="big-item">
+          <a class="big-btn" href="https://pixelforgeplays.github.io/pixel-forge/builders.html">Who's actually good<span class="arr" aria-hidden="true">&rarr;</span></a>
+          <p class="big-cap">Ranked by how much they beat the close, after 25 graded picks.</p>
+        </div>
+        <div class="big-item">
+          <a class="big-btn" href="https://pixelforgeplays.github.io/pfp-tools/get-graded/">Get your picks graded<span class="arr" aria-hidden="true">&rarr;</span></a>
+          <p class="big-cap">Free. Every pick, graded in public.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The rest of the homepage. Closed on phones (up to 640px), open and with no summary bar from 641px. -->
+    <details class="hiw">
+      <summary>How this works</summary>
+      <script>(function () { var d = document.currentScript && document.currentScript.parentNode; if (!d) return; var phone = window.matchMedia && window.matchMedia('(max-width:640px)').matches; if (!phone) d.open = true; })();</script>
+    <div class="hero-rest">
       <p class="lede">Model builders, cappers and our own rules on one public board. Free, and nobody can pay us for a better grade.</p>
       <div class="ctas">
         <a href="https://pixelforgeplays.github.io/pixel-forge/builders.html" class="btn btn-green">See the board</a>
         <a href="https://pixelforgeplays.github.io/pfp-tools/get-graded/" class="btn btn-ghost">Get graded free</a>
       </div>
       <p class="build">No model yet? <a href="/build">Build your first one with AI</a>.</p>
-    </section>
+    </div>
 
     <div class="flow">
     <!-- The Board, top 3. Rows come from the shared board-mini.js (pfp-tools), the same file the Get graded page uses. -->
@@ -394,6 +451,7 @@
     </div>
 
     <p class="runby">Run by Casey in Denver, CO.</p>
+    </details>
 
     <footer>
       <div class="row">
@@ -408,6 +466,30 @@
     </footer>
   </main>
 
+<script>
+// "How this works": opens when the window grows past 640px, and when a link lands on an anchor inside it.
+(function () {
+  var d = document.querySelector('details.hiw');
+  if (!d) return;
+  function reveal() {
+    var id = location.hash ? location.hash.slice(1) : '';
+    if (!id) return;
+    var el = null;
+    try { el = document.getElementById(decodeURIComponent(id)); } catch (e) { el = null; }
+    if (!el || !d.contains(el) || d.open) return;
+    d.open = true;
+    el.scrollIntoView();
+  }
+  if (window.matchMedia) {
+    var mq = window.matchMedia('(max-width:640px)');
+    var wide = function () { if (!mq.matches) d.open = true; };
+    if (mq.addEventListener) mq.addEventListener('change', wide);
+    else if (mq.addListener) mq.addListener(wide);
+  }
+  window.addEventListener('hashchange', reveal);
+  reveal();
+})();
+</script>
 <!-- The shared mini-board (top 3, counts, tonight). One file for the homepage and the Get graded page. -->
 <script src="https://pixelforgeplays.github.io/pfp-tools/board-mini.js" defer></script>
 <script>
