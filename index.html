@@ -95,6 +95,10 @@
     .big-btn{display:flex;align-items:center;justify-content:space-between;gap:10px;min-height:56px;box-sizing:border-box;padding:0 18px;border-radius:10px;font-weight:700;font-size:18px;line-height:1.2;text-decoration:none;color:var(--ink);background:var(--surface);border:1px solid #4A4757;transition:background .15s,border-color .15s}
     .big-btn:hover{color:var(--ink);border-color:var(--brand)}
     .big-btn .arr{flex:none;color:var(--green)}
+    /* Tonight moon (Brief 1486): the same pixel moon as the nav Tonight link, sized to the 18px label. It sits before the
+       words, so the arrow takes the free space instead of the label floating to the middle. */
+    .big-btn .moon{display:block;flex:none;image-rendering:pixelated;margin-right:-2px}
+    .big-btn .moon~.arr{margin-left:auto}
     .big-btn.go-green{background:var(--green);border-color:var(--green);color:var(--ground)}
     .big-btn.go-green:hover{background:#5BFF2E;color:var(--ground)}
     .big-btn.go-green .arr{color:var(--ground)}
@@ -277,7 +281,7 @@
           <p class="big-cap">Free. Every pick, graded in public.</p>
         </div>
         <div class="big-item">
-          <a class="big-btn" href="https://pixelforgeplays.github.io/pixel-forge/tonight.html">Our own rules tonight<span class="arr" aria-hidden="true">&rarr;</span></a>
+          <a class="big-btn" href="https://pixelforgeplays.github.io/pixel-forge/tonight.html"><svg class="moon" viewBox="0 0 16 16" width="18" height="18" shape-rendering="crispEdges" aria-hidden="true"><rect x="6" y="1" width="1" height="1" fill="#8B3DFF"/><rect x="4" y="2" width="3" height="1" fill="#8B3DFF"/><rect x="3" y="3" width="3" height="1" fill="#8B3DFF"/><rect x="2" y="4" width="3" height="1" fill="#8B3DFF"/><rect x="1" y="5" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="6" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="7" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="8" width="4" height="1" fill="#8B3DFF"/><rect x="1" y="9" width="5" height="1" fill="#8B3DFF"/><rect x="1" y="10" width="5" height="1" fill="#8B3DFF"/><rect x="1" y="11" width="7" height="1" fill="#8B3DFF"/><rect x="2" y="12" width="11" height="1" fill="#8B3DFF"/><rect x="3" y="13" width="9" height="1" fill="#8B3DFF"/><rect x="4" y="14" width="7" height="1" fill="#8B3DFF"/><rect x="12" y="2" width="1" height="1" fill="#30E502"/><rect x="15" y="6" width="1" height="1" fill="#30E502"/><rect x="11" y="8" width="1" height="1" fill="#30E502"/></svg>Our own rules tonight<span class="arr" aria-hidden="true">&rarr;</span></a>
           <p class="big-cap">Every pick our own rules made tonight.</p>
         </div>
       </div>
