@@ -20,6 +20,7 @@ const STATIC_PATHS = [
   '/',
   '/standard.html',
   '/privacy.html',
+  '/terms.html',
   '/pixel-forge/tonight.html',
   '/pixel-forge/builders.html',
   '/pixel-forge/dashboard.html',
