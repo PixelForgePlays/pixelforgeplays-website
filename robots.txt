@@ -1,4 +1,8 @@
+# Automated bulk copying is not permitted. See /terms.html
 User-agent: *
 Allow: /
+Disallow: /pixel-forge/data/
+Disallow: /pixel-forge/builders.lock.json
+Disallow: /pixel-forge/horses.lock.json
 
 Sitemap: https://www.pixelforgeplays.com/sitemap.xml
